@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="Artworks">
+		<interface name="Manuscript">
+			<generalizations>
+				<generalization type="tl.element:Attributed"/>
+			</generalizations>
+			<attributes>
+				<property name="year"
+					type="tl.core:Integer"
+				/>
+				<property name="title"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</interface>
+		<class name="Article">
+			<generalizations>
+				<generalization type="Manuscript"/>
+			</generalizations>
+			<attributes>
+				<property name="volume"
+					type="tl.core:String"
+				/>
+				<property name="number"
+					type="tl.core:String"
+				/>
+				<property name="abstract"
+					type="tl.core:String"
+				/>
+				<property name="doi"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</class>
+		<class name="Book">
+			<generalizations>
+				<generalization type="Manuscript"/>
+			</generalizations>
+			<attributes>
+				<property name="edition"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</class>
+	</module>
+</model>
