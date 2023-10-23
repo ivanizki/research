@@ -8,28 +8,10 @@
 				interface-package="ivanizki.research.model"
 			/>
 		</annotations>
-		<types>
-
-			<!-- Put your application types here, for example: -->
-			<!-- 
-			<class name="A">
-				<attributes>
-					<property name="name" type="tl.core:String" mandatory="true"/>
-				</attributes>
-			</class>
-			
-			<class name="B">
-				<generalizations>
-					<generalization type="A"/>
-				</generalizations>
-				
-				<attributes>
-					<property name="x" type="tl.core:Integer"/>
-					<reference name="others" type="A" multiple="true"/>
-				</attributes>
-			</class>
-		 -->
-
-		</types>
+		<interface name="DataItem">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+		</interface>
 	</module>
 </model>

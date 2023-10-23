@@ -4,7 +4,7 @@
 	<module name="Artworks">
 		<interface name="Manuscript">
 			<generalizations>
-				<generalization type="tl.element:Attributed"/>
+				<generalization type="research:DataItem"/>
 			</generalizations>
 			<attributes>
 				<property name="year"
@@ -12,6 +12,14 @@
 				/>
 				<property name="title"
 					type="tl.core:String"
+				/>
+				<reference name="authors"
+					inverse-reference="manuscripts"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="Humans:Author"
 				/>
 			</attributes>
 		</interface>
@@ -31,6 +39,11 @@
 				/>
 				<property name="doi"
 					type="tl.core:String"
+				/>
+				<reference name="journal"
+					kind="forwards"
+					navigate="true"
+					type="Humans:Journal"
 				/>
 			</attributes>
 		</class>

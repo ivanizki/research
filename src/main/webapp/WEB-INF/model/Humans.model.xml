@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="Humans">
+		<interface name="Human">
+			<generalizations>
+				<generalization type="research:DataItem"/>
+			</generalizations>
+			<attributes>
+				<property name="name"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</interface>
+		<class name="Author">
+			<generalizations>
+				<generalization type="Human"/>
+			</generalizations>
+			<attributes>
+				<reference name="manuscripts"
+					inverse-reference="authors"
+					kind="backwards"
+					multiple="true"
+					navigate="true"
+					type="Artworks:Manuscript"
+				/>
+			</attributes>
+		</class>
+		<interface name="Organization">
+			<generalizations>
+				<generalization type="research:DataItem"/>
+			</generalizations>
+		</interface>
+		<class name="Journal">
+			<generalizations>
+				<generalization type="Organization"/>
+			</generalizations>
+			<attributes>
+				<property name="name"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</class>
+	</module>
+</model>
