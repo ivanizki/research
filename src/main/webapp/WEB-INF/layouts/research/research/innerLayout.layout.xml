@@ -3,12 +3,13 @@
 <config:template-call
 	xmlns:config="http://www.top-logic.com/ns/config/6.0"
 	final="true"
-	template="com.top_logic/maintabbar.template.xml"
+	template="com.top_logic/contentLayout.template.xml"
 >
 	<arguments>
 		<components>
-			<layout-reference resource="research/research/tabLayout.layout.xml"/>
-			<layout-reference resource="admin/index.layout.xml"/>
+			<layout-reference resource="research/research/tabbar.layout.xml">
+				<layoutInfo/>
+			</layout-reference>
 		</components>
 	</arguments>
 </config:template-call>

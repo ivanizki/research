@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments
+		helpID="ID_532af334_f566_492a_8278_b529392a3759"
+		tabIcon="css:fas fa-atom"
+	>
+		<tabLabel key="dynamic.4cc0a6d3-7a1e-4355-b556-fd822efba389">
+			<en>Research</en>
+			<de>Research</de>
+		</tabLabel>
+		<components>
+			<layout-reference resource="research/research/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

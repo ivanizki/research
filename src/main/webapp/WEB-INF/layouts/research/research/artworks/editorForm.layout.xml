@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments
+		model="selection(research/research/artworks/manuscriptsTable.layout.xml#Table)"
+		type="Artworks:Manuscript"
+	>
+		<name key="dynamic.b0f7eded-b570-4db9-86c5-e956f6e13334">
+			<en>Editor</en>
+			<de>Editor</de>
+		</name>
+		<forms>
+			<form type="Artworks:Article">
+				<formDefinition>
+					<field
+						attribute="year"
+						fullQualifiedName="Artworks:Manuscript#year"
+						type="tl.core:Integer"
+					/>
+					<field
+						attribute="authors"
+						fullQualifiedName="Artworks:Manuscript#authors"
+						type="Humans:Author"
+					/>
+					<field
+						attribute="title"
+						fullQualifiedName="Artworks:Manuscript#title"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="abstract"
+						fullQualifiedName="Artworks:Article#abstract"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="doi"
+						fullQualifiedName="Artworks:Article#doi"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="journal"
+						fullQualifiedName="Artworks:Article#journal"
+						type="Humans:Journal"
+					/>
+					<field
+						attribute="volume"
+						fullQualifiedName="Artworks:Article#volume"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="number"
+						fullQualifiedName="Artworks:Article#number"
+						type="tl.core:String"
+					/>
+				</formDefinition>
+			</form>
+		</forms>
+	</arguments>
+</config:template-call>
