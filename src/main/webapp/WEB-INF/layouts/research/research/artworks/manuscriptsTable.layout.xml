@@ -21,6 +21,11 @@
 			<button id="exportExcel"
 				class="com.top_logic.layout.table.export.ExcelExportHandler"
 			/>
+			<button id="exportData"
+				class="ivanizki.research.data.DataExportHandler"
+				image="css:tl-icon save"
+				resourceKey="class.ivanizki.research.data.I18NConstants.DATA_EXPORT_HANDLER_LABEL"
+			/>
 		</buttons>
 	</arguments>
 </config:template-call>
