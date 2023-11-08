@@ -40,6 +40,10 @@ import ivanizki.research.data.types.Text;
  */
 public class DataExportHandler extends AbstractCommandHandler {
 
+	private static final String RELEVANT_MODULE_NAME = "research";
+
+	private static final String RELEVANT_TYPE_NAME = "DataItem";
+
 	/**
 	 * Creates a new {@link DataExportHandler}.
 	 */
@@ -50,7 +54,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 	@Override
 	public HandlerResult handleCommand(DisplayContext context, LayoutComponent component, Object model, Map<String, Object> someArguments) {
 		Composition<HTMLCompatible> data = new Composition<>();
-		for (TLClass type : getExportTypes()) {
+		for (TLClass type : getRelevantTypes()) {
 			Table table = new Table();
 			List<TLStructuredTypePart> attributes = getRelevantAttributes(type);
 			table.add(createHeaderRow(attributes));
@@ -85,15 +89,22 @@ public class DataExportHandler extends AbstractCommandHandler {
 	}
 
 	private List<TLStructuredTypePart> getRelevantAttributes(TLClass type) {
-		List<TLStructuredTypePart> attributes = new ArrayList<>(type.getAllParts());
+		List<TLStructuredTypePart> attributes = getOwnAttributes(type);
 		attributes.removeIf(attribute -> !isRelevantAttribute(attribute));
 		return attributes;
 	}
 
-	private boolean isRelevantAttribute(TLStructuredTypePart attribute) {
-		if ("tType".equals(attribute.getName())) {
-			return false;
+	private List<TLStructuredTypePart> getOwnAttributes(TLClass type) {
+		List<TLStructuredTypePart> attributes = new ArrayList<>();
+		for (TLStructuredTypePart attribute : type.getAllParts()) {
+			if (MetaElementUtil.isSubtype(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME, (TLClass) attribute.getOwner())) {
+				attributes.add(attribute);
+			}
 		}
+		return attributes;
+	}
+
+	private boolean isRelevantAttribute(TLStructuredTypePart attribute) {
 		if (attribute instanceof TLReference) {
 			if (((TLReference) attribute).isDerived()) {
 				return false;
@@ -111,8 +122,8 @@ public class DataExportHandler extends AbstractCommandHandler {
 		return row;
 	}
 
-	private Set<TLClass> getExportTypes() {
-		TLClass generalType = (TLClass) TLModelUtil.findType("research", "DataItem");
+	private Set<TLClass> getRelevantTypes() {
+		TLClass generalType = (TLClass) TLModelUtil.findType(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME);
 		return TLModelUtil.getConcreteSpecializations(generalType);
 	}
 
