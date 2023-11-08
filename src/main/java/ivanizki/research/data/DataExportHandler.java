@@ -1,8 +1,5 @@
 package ivanizki.research.data;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +21,7 @@ import com.top_logic.model.util.TLModelUtil;
 import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
 
-import ivanizki.research.DummyLogger;
+import ivanizki.research.data.file.FileUtil;
 import ivanizki.research.data.file.html.HTMLCompatible;
 import ivanizki.research.data.types.Composition;
 import ivanizki.research.data.types.Link;
@@ -53,39 +50,27 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 	@Override
 	public HandlerResult handleCommand(DisplayContext context, LayoutComponent component, Object model, Map<String, Object> someArguments) {
+		FileUtil.writeStringToFile("tmp\\data.htm", getData().toHTML());
+		return HandlerResult.DEFAULT_RESULT;
+	}
+
+	private Composition<HTMLCompatible> getData() {
 		Composition<HTMLCompatible> data = new Composition<>();
 		for (TLClass type : getRelevantTypes()) {
 			Table table = new Table();
 			List<TLStructuredTypePart> attributes = getRelevantAttributes(type);
-			table.add(createHeaderRow(attributes));
-			for (Wrapper wrapper : MetaElementUtil.getAllDirectInstancesOf(type, Wrapper.class)) {
-				TableRow row = new TableRow();
-				row.add(new TableCell(new Link(wrapper.tId().toString())));
-				for (TLStructuredTypePart attribute : attributes) {
-					Object value = wrapper.tValue(attribute);
-					if (attribute instanceof TLProperty) {
-						row.add(new TableCell(new Text(StringServices.toString(value))));
-					} else if (attribute instanceof TLReference) {
-						Composition<Link> links = new Composition<>();
-						for (Wrapper referredWrapper : CollectionUtil.dynamicCastView(Wrapper.class, CollectionUtil.asList(value))) {
-							links.add(new Link(referredWrapper.tId().toString(), MetaLabelProvider.INSTANCE.getLabel(referredWrapper)));
-						}
-						row.add(new TableCell(links));
-					} else {
-						DummyLogger.error(attribute.tType().toString());
-					}
-				}
-				table.add(row);
+			table.add(createHeader(attributes));
+			for (Wrapper wrapper : getInstances(type)) {
+				table.add(createRow(wrapper, attributes));
 			}
 			data.add(table);
 		}
-		try (FileWriter writer = new FileWriter("tmp\\data.htm", StandardCharsets.UTF_8)) {
-			writer.write(data.toHTML());
-			writer.close();
-		} catch (IOException e) {
-			DummyLogger.error(e);
-		}
-		return HandlerResult.DEFAULT_RESULT;
+		return data;
+	}
+
+	private Set<TLClass> getRelevantTypes() {
+		TLClass generalType = (TLClass) TLModelUtil.findType(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME);
+		return TLModelUtil.getConcreteSpecializations(generalType);
 	}
 
 	private List<TLStructuredTypePart> getRelevantAttributes(TLClass type) {
@@ -113,7 +98,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 		return true;
 	}
 
-	private TableRow createHeaderRow(List<? extends TLStructuredTypePart> attributes) {
+	private TableRow createHeader(List<? extends TLStructuredTypePart> attributes) {
 		TableRow row = new TableRow();
 		row.add(new TableCell(new Text("id")));
 		for (TLStructuredTypePart attribute : attributes) {
@@ -122,9 +107,51 @@ public class DataExportHandler extends AbstractCommandHandler {
 		return row;
 	}
 
-	private Set<TLClass> getRelevantTypes() {
-		TLClass generalType = (TLClass) TLModelUtil.findType(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME);
-		return TLModelUtil.getConcreteSpecializations(generalType);
+	private List<Wrapper> getInstances(TLClass type) {
+		return MetaElementUtil.getAllDirectInstancesOf(type, Wrapper.class);
 	}
 
+	private TableRow createRow(Wrapper wrapper, List<TLStructuredTypePart> attributes) {
+		TableRow row = new TableRow();
+		row.add(createUidCell(wrapper));
+		for (TLStructuredTypePart attribute : attributes) {
+			row.add(createValueCell(wrapper.tValue(attribute), attribute));
+		}
+		return row;
+	}
+
+	private TableCell createUidCell(Wrapper wrapper) {
+		return new TableCell(new Link(getUid(wrapper)));
+	}
+
+	private String getUid(Wrapper wrapper) {
+		return wrapper.tId().toString();
+	}
+
+	private TableCell createValueCell(Object value, TLStructuredTypePart attribute) {
+		if (attribute instanceof TLProperty) {
+			return createPropertyValueCell(value);
+		}
+		return createReferenceValueCell(value);
+	}
+
+	private TableCell createPropertyValueCell(Object value) {
+		return new TableCell(new Text(StringServices.toString(value)));
+	}
+
+	private TableCell createReferenceValueCell(Object value) {
+		Composition<Link> links = new Composition<>();
+		for (Wrapper referredWrapper : getReferredWrappers(value)) {
+			links.add(new Link(getUid(referredWrapper), getLabel(referredWrapper)));
+		}
+		return new TableCell(links);
+	}
+
+	private List<Wrapper> getReferredWrappers(Object value) {
+		return CollectionUtil.dynamicCastView(Wrapper.class, CollectionUtil.asList(value));
+	}
+
+	private String getLabel(Wrapper wrapper) {
+		return MetaLabelProvider.INSTANCE.getLabel(wrapper);
+	}
 }
