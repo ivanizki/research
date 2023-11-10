@@ -7,6 +7,7 @@
 >
 	<arguments
 		defaultColumns="year,authors,title"
+		model="selection(research/research/artworks/topicsTree.layout.xml#Tree)"
 		type="Artworks:Manuscript"
 	>
 		<name key="dynamic.5ed9a82e-cf2b-4525-a5c7-adb3d943584a">
@@ -14,7 +15,7 @@
 			<de>Manuscripts</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
-			elements="model->all(`Artworks:Manuscript`)"
+			elements="topic->$topic.get(`Topics:Topic#dataItems`).filter(item->$item.instanceOf(`Artworks:Manuscript`))"
 			supportsElement="element->$element.instanceOf(`Artworks:Manuscript`)"
 		/>
 		<buttons>

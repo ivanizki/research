@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/tree.template.xml"
+>
+	<arguments rootVisible="false">
+		<name key="dynamic.d9c5ab7a-f04a-4a85-94b4-dd70937ec2b5">
+			<en>Topics</en>
+			<de>Topics</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
+			children="node->$node.get(`Topics:Topic#children`)"
+			nodePredicate="node->$node.instanceOf(`Topics:Topic`)"
+			parents="node->$node.referers(`Topics:Topic#children`)"
+			rootNode="`Topics#ROOT`"
+		/>
+	</arguments>
+</config:template-call>
