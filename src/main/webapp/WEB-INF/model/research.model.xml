@@ -12,6 +12,15 @@
 			<generalizations>
 				<generalization type="tl.model:TLObject"/>
 			</generalizations>
+			<attributes>
+				<reference name="topics"
+					inverse-reference="dataItems"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="Topics:Topic"
+				/>
+			</attributes>
 		</interface>
 	</module>
 </model>

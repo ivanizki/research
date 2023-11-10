@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="Topics">
+		<annotations>
+			<singletons>
+				<singleton type="Topic"/>
+			</singletons>
+		</annotations>
+		<class name="Topic">
+			<generalizations>
+				<generalization type="research:DataItem"/>
+			</generalizations>
+			<attributes>
+				<reference name="children"
+					inverse-reference="parent"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="Topic"
+				/>
+				<reference name="parent"
+					inverse-reference="children"
+					kind="backwards"
+					multiple="true"
+					navigate="true"
+					type="Topic"
+				/>
+				<property name="name"
+					type="tl.core:String"
+				/>
+				<reference name="dataItems"
+					inverse-reference="topics"
+					kind="backwards"
+					multiple="true"
+					navigate="true"
+					type="research:DataItem"
+				/>
+			</attributes>
+		</class>
+	</module>
+</model>
