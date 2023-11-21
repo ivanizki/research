@@ -27,6 +27,12 @@
 					>
 						<implementation class="ivanizki.research.layout.TopicResourceProvider"/>
 					</provider>
+					<provider
+						kind="MODEL"
+						type="Artworks:Manuscript"
+					>
+						<implementation class="ivanizki.research.layout.ManuscriptResourceProvider"/>
+					</provider>
 				</resource-providers>
 			</instance>
 		</config>
