@@ -13,13 +13,13 @@
 			</generalizations>
 			<attributes>
 				<reference name="children"
-					inverse-reference="parent"
+					inverse-reference="parents"
 					kind="forwards"
 					multiple="true"
 					navigate="true"
 					type="Topic"
 				/>
-				<reference name="parent"
+				<reference name="parents"
 					inverse-reference="children"
 					kind="backwards"
 					multiple="true"

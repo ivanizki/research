@@ -14,6 +14,10 @@ public interface ASCII {
 
 	public static final String EQUAL = "=";
 
+	public static final String GREATER = ">";
+
+	public static final String LESS = "<";
+
 	public static final String MINUS = "-";
 
 	public static final String NEWLINE = "\n";

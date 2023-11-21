@@ -17,6 +17,19 @@
 				</modules>
 			</instance>
 		</config>
+		
+		<config service-class="com.top_logic.layout.provider.LabelProviderService">
+			<instance class="com.top_logic.layout.provider.LabelProviderService">
+				<resource-providers>
+					<provider
+						kind="MODEL"
+						type="Topics:Topic"
+					>
+						<implementation class="ivanizki.research.layout.TopicResourceProvider"/>
+					</provider>
+				</resource-providers>
+			</instance>
+		</config>
 	</services>
 
 	<configs>
