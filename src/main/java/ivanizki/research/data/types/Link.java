@@ -1,14 +1,17 @@
 package ivanizki.research.data.types;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import com.top_logic.basic.StringServices;
 
 import ivanizki.research.data.ASCII;
+import ivanizki.research.data.Data;
 import ivanizki.research.data.file.html.HTML;
-import ivanizki.research.data.file.html.HTMLCompatible;
 import ivanizki.research.data.file.html.HTMLUtil;
 
 /**
- * A {@link HTMLCompatible} link.
+ * A link.
  * 
  * <p>
  * This link is loose, that is, a link definition does not require a reference to it.
@@ -16,7 +19,7 @@ import ivanizki.research.data.file.html.HTMLUtil;
  *
  * @author ivanizki
  */
-public class Link implements HTMLCompatible {
+public class Link implements Data {
 
 	private String _uid;
 
@@ -46,16 +49,14 @@ public class Link implements HTMLCompatible {
 	}
 
 	@Override
-	public String toHTML() {
+	public void writeToHTML(Writer writer) throws IOException {
 		String uid = StringServices.replace(_uid, ASCII.COLON, ASCII.UNDERSCORE);
-		return _label == null ?
-			new StringBuilder()
-				.append(HTMLUtil.tag(HTML.A, HTMLUtil.attribute(HTML.NAME, uid)))
-				.toString()
-			: new StringBuilder()
-				.append(HTMLUtil.begin(HTML.A, HTMLUtil.attribute(HTML.HREF, ASCII.SHARP + uid)))
-				.append(_label)
-				.append(HTMLUtil.end(HTML.A))
-				.toString();
+		if (_label == null) {
+			writer.write(HTMLUtil.tag(HTML.A, HTMLUtil.attribute(HTML.NAME, uid)));
+		} else {
+			writer.write(HTMLUtil.begin(HTML.A, HTMLUtil.attribute(HTML.HREF, ASCII.SHARP + uid)));
+			writer.write(_label);
+			writer.write(HTMLUtil.end(HTML.A));
+		}
 	}
 }

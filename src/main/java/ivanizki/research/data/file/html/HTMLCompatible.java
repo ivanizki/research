@@ -1,5 +1,8 @@
 package ivanizki.research.data.file.html;
 
+import java.io.IOException;
+import java.io.Writer;
+
 /**
  * Interface for {@link Object}s compatible with {@link HTML}.
  *
@@ -8,7 +11,7 @@ package ivanizki.research.data.file.html;
 public interface HTMLCompatible {
 
 	/**
-	 * @return A representation of this {@link Object} as an {@link HTML}-{@link String}.
+	 * Writes an {@link HTML}-representation of this {@link Object} via the given {@link Writer}.
 	 */
-	public String toHTML();
+	public void writeToHTML(Writer writer) throws IOException;
 }

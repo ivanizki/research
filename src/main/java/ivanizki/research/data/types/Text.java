@@ -1,13 +1,16 @@
 package ivanizki.research.data.types;
 
-import ivanizki.research.data.file.html.HTMLCompatible;
+import java.io.IOException;
+import java.io.Writer;
+
+import ivanizki.research.data.Data;
 
 /**
- * A {@link HTMLCompatible} {@link String}.
+ * A text.
  *
  * @author ivanizki
  */
-public class Text implements HTMLCompatible {
+public class Text implements Data {
 
 	private String _string;
 
@@ -19,7 +22,8 @@ public class Text implements HTMLCompatible {
 	}
 
 	@Override
-	public String toHTML() {
-		return _string;
+	public void writeToHTML(Writer writer) throws IOException {
+		writer.write(_string);
 	}
+
 }

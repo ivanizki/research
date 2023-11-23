@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import com.top_logic.basic.StringServices;
 
 import ivanizki.research.DummyLogger;
+import ivanizki.research.data.Data;
 
 /**
  * Utilities to work with files.
@@ -30,11 +31,11 @@ public class FileUtil {
 	}
 
 	/**
-	 * Writes the given {@link String} to the specified file.
+	 * Writes the given {@link Data} to the specified file.
 	 */
-	public static void writeStringToFile(String filename, String string) {
+	public static void writeToHTML(String filename, Data data) {
 		try (FileWriter writer = new FileWriter(filename, StandardCharsets.UTF_8)) {
-			writer.write(string);
+			data.writeToHTML(writer);
 			writer.close();
 		} catch (IOException e) {
 			DummyLogger.error(e);

@@ -1,31 +1,32 @@
 package ivanizki.research.data.types;
 
+import java.io.IOException;
+import java.io.Writer;
+
+import ivanizki.research.data.Data;
 import ivanizki.research.data.file.html.HTML;
-import ivanizki.research.data.file.html.HTMLCompatible;
 import ivanizki.research.data.file.html.HTMLUtil;
 
 /**
- * A {@link HTMLCompatible} table cell.
+ * A table cell.
  *
  * @author ivanizki
  */
-public class TableCell implements HTMLCompatible {
+public class TableCell implements Data {
 
-	private HTMLCompatible _cell;
+	private Data _cell;
 
 	/**
-	 * Creates a new {@link TableCell} from the given {@link HTMLCompatible}.
+	 * Creates a new {@link TableCell} from the given {@link Data}.
 	 */
-	public TableCell(HTMLCompatible cell) {
+	public TableCell(Data cell) {
 		_cell = cell;
 	}
 
 	@Override
-	public String toHTML() {
-		return new StringBuilder()
-			.append(HTMLUtil.begin(HTML.TD))
-			.append(_cell.toHTML())
-			.append(HTMLUtil.end(HTML.TD))
-			.toString();
+	public void writeToHTML(Writer writer) throws IOException {
+		writer.write(HTMLUtil.begin(HTML.TD));
+		_cell.writeToHTML(writer);
+		writer.write(HTMLUtil.end(HTML.TD));
 	}
 }

@@ -1,18 +1,20 @@
 package ivanizki.research.data.types;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
 import ivanizki.research.data.Addable;
 import ivanizki.research.data.Composite;
-import ivanizki.research.data.file.html.HTMLCompatible;
+import ivanizki.research.data.Data;
 
 /**
- * A {@link HTMLCompatible} composition.
+ * A composition.
  *
  * @author ivanizki
  */
-public class Composition<T extends HTMLCompatible> implements Addable<T>, Composite<T>, HTMLCompatible {
+public class Composition<T extends Data> implements Addable<T>, Composite<T>, Data {
 
 	private ArrayList<T> _parts;
 
@@ -34,12 +36,10 @@ public class Composition<T extends HTMLCompatible> implements Addable<T>, Compos
 	}
 
 	@Override
-	public String toHTML() {
-		StringBuilder sb = new StringBuilder();
+	public void writeToHTML(Writer writer) throws IOException {
 		for (T part : _parts) {
-			sb.append(part.toHTML());
+			part.writeToHTML(writer);
 		}
-		return sb.toString();
 	}
 
 }

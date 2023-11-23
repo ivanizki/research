@@ -1,12 +1,14 @@
 package ivanizki.research.data.types;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
 import ivanizki.research.data.file.html.HTML;
 import ivanizki.research.data.file.html.HTMLUtil;
 
 /**
- * {@link Composition} representing a row of a {@link Table}.
+ * A table row.
  *
  * @author ivanizki
  */
@@ -27,14 +29,10 @@ public class TableRow extends Composition<TableCell> {
 	}
 
 	@Override
-	public String toHTML() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(HTMLUtil.begin(HTML.TR));
-		for (TableCell cell : getCells()) {
-			sb.append(cell.toHTML());
-		}
-		sb.append(HTMLUtil.end(HTML.TR));
-		return sb.toString();
+	public void writeToHTML(Writer writer) throws IOException {
+		writer.write(HTMLUtil.begin(HTML.TR));
+		super.writeToHTML(writer);
+		writer.write(HTMLUtil.end(HTML.TR));
 	}
 
 }
