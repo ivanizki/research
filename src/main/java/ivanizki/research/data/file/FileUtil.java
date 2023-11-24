@@ -1,5 +1,7 @@
 package ivanizki.research.data.file;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,6 +12,8 @@ import com.top_logic.basic.StringServices;
 
 import ivanizki.research.DummyLogger;
 import ivanizki.research.data.Data;
+import ivanizki.research.data.types.Text;
+import ivanizki.research.data.types.TextLine;
 
 /**
  * Utilities to work with files.
@@ -28,6 +32,24 @@ public class FileUtil {
 			DummyLogger.error(e);
 		}
 		return StringServices.EMPTY_STRING;
+	}
+
+	/**
+	 * Reads {@link Text} from the specified file.
+	 */
+	public static Text readText(String filename) {
+		Text text = new Text();
+		try (BufferedReader reader = new BufferedReader(new FileReader(filename, StandardCharsets.UTF_8))) {
+			String line = reader.readLine();
+			while (line != null) {
+				text.add(new TextLine(line));
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			DummyLogger.error(e);
+		}
+		return text;
 	}
 
 	/**

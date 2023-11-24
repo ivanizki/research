@@ -27,7 +27,7 @@ import ivanizki.research.data.types.Link;
 import ivanizki.research.data.types.Table;
 import ivanizki.research.data.types.TableCell;
 import ivanizki.research.data.types.TableRow;
-import ivanizki.research.data.types.Text;
+import ivanizki.research.data.types.TextLine;
 
 /**
  * {@link AbstractCommandHandler} to export the entire database.
@@ -99,9 +99,9 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 	private TableRow createHeader(List<? extends TLStructuredTypePart> attributes) {
 		TableRow row = new TableRow();
-		row.add(new TableCell(new Text("id")));
+		row.add(new TableCell(new TextLine("id")));
 		for (TLStructuredTypePart attribute : attributes) {
-			row.add(new TableCell(new Text(attribute.getName())));
+			row.add(new TableCell(new TextLine(attribute.getName())));
 		}
 		return row;
 	}
@@ -135,7 +135,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 	}
 
 	private TableCell createPropertyValueCell(Object value) {
-		return new TableCell(new Text(StringServices.toString(value)));
+		return new TableCell(new TextLine(StringServices.toString(value)));
 	}
 
 	private TableCell createReferenceValueCell(Object value) {
