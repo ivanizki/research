@@ -1,4 +1,4 @@
-package ivanizki.research.data;
+package ivanizki.research.data.types;
 
 import ivanizki.research.data.file.html.HTMLCompatible;
 

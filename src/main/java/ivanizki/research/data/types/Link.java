@@ -6,7 +6,6 @@ import java.io.Writer;
 import com.top_logic.basic.StringServices;
 
 import ivanizki.research.data.ASCII;
-import ivanizki.research.data.Data;
 import ivanizki.research.data.file.html.HTML;
 import ivanizki.research.data.file.html.HTMLUtil;
 
@@ -19,9 +18,7 @@ import ivanizki.research.data.file.html.HTMLUtil;
  *
  * @author ivanizki
  */
-public class Link implements Data {
-
-	private String _uid;
+public class Link extends Container<String> {
 
 	private String _label;
 
@@ -44,13 +41,21 @@ public class Link implements Data {
 	 *        The {@link String} representation of this {@link Link}.
 	 */
 	public Link(String uid, String label) {
-		_uid = uid;
+		super();
+		setContent(uid);
 		_label = label;
+	}
+
+	/**
+	 * @return The UID of this {@link Link}.
+	 */
+	public String getUid() {
+		return getContent();
 	}
 
 	@Override
 	public void writeToHTML(Writer writer) throws IOException {
-		String uid = StringServices.replace(_uid, ASCII.COLON, ASCII.UNDERSCORE);
+		String uid = StringServices.replace(getUid(), ASCII.COLON, ASCII.UNDERSCORE);
 		if (_label == null) {
 			writer.write(HTMLUtil.tag(HTML.A, HTMLUtil.attribute(HTML.NAME, uid)));
 		} else {

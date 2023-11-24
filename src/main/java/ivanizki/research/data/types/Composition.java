@@ -7,37 +7,34 @@ import java.util.List;
 
 import ivanizki.research.data.Addable;
 import ivanizki.research.data.Composite;
-import ivanizki.research.data.Data;
 
 /**
  * A composition.
  *
  * @author ivanizki
  */
-public class Composition<T extends Data> implements Addable<T>, Composite<T>, Data {
-
-	private ArrayList<T> _parts;
+public class Composition<T extends Data> extends Container<List<T>> implements Addable<T>, Composite<T> {
 
 	/**
 	 * Creates a new {@link Composition}.
 	 */
 	public Composition() {
-		_parts = new ArrayList<>();
+		setContent(new ArrayList<>());
 	}
 
 	@Override
 	public List<T> getParts() {
-		return _parts;
+		return getContent();
 	}
 
 	@Override
 	public boolean add(T addendum) {
-		return _parts.add(addendum);
+		return getParts().add(addendum);
 	}
 
 	@Override
 	public void writeToHTML(Writer writer) throws IOException {
-		for (T part : _parts) {
+		for (T part : getParts()) {
 			part.writeToHTML(writer);
 		}
 	}

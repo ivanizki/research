@@ -3,7 +3,6 @@ package ivanizki.research.data.types;
 import java.io.IOException;
 import java.io.Writer;
 
-import ivanizki.research.data.Data;
 import ivanizki.research.data.file.html.HTML;
 import ivanizki.research.data.file.html.HTMLUtil;
 

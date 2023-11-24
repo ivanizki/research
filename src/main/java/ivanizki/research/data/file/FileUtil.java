@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import com.top_logic.basic.StringServices;
 
 import ivanizki.research.DummyLogger;
-import ivanizki.research.data.Data;
+import ivanizki.research.data.types.Data;
 import ivanizki.research.data.types.Text;
 import ivanizki.research.data.types.TextLine;
 
