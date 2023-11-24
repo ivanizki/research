@@ -7,23 +7,23 @@ import ivanizki.research.data.file.html.HTML;
 import ivanizki.research.data.file.html.HTMLUtil;
 
 /**
- * A table cell.
+ * A list item.
  *
  * @author ivanizki
  */
-public class TableCell extends DataContainer {
+public class ListItem extends DataContainer {
 
 	/**
-	 * Creates a new {@link TableCell} from the given {@link Data}.
+	 * Creates a new {@link ListItem} from the given {@link Data}.
 	 */
-	public TableCell(Data data) {
+	public ListItem(Data data) {
 		super(data);
 	}
 
 	@Override
 	public void writeToHTML(Writer writer) throws IOException {
-		writer.write(HTMLUtil.begin(HTML.TD));
+		writer.write(HTMLUtil.begin(HTML.LI));
 		super.writeToHTML(writer);
-		writer.write(HTMLUtil.end(HTML.TD));
+		writer.write(HTMLUtil.end(HTML.LI));
 	}
 }

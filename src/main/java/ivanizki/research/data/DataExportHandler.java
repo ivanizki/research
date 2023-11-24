@@ -25,10 +25,12 @@ import ivanizki.research.data.file.FileUtil;
 import ivanizki.research.data.types.Composition;
 import ivanizki.research.data.types.Data;
 import ivanizki.research.data.types.Link;
+import ivanizki.research.data.types.ListItem;
 import ivanizki.research.data.types.Table;
 import ivanizki.research.data.types.TableCell;
 import ivanizki.research.data.types.TableRow;
 import ivanizki.research.data.types.TextLine;
+import ivanizki.research.data.types.UnorderedList;
 
 /**
  * {@link AbstractCommandHandler} to export the entire database.
@@ -54,16 +56,19 @@ public class DataExportHandler extends AbstractCommandHandler {
 		return HandlerResult.DEFAULT_RESULT;
 	}
 
-	private Composition<Data> getData() {
-		Composition<Data> data = new Composition<>();
+	private Data getData() {
+		UnorderedList data = new UnorderedList();
 		for (TLClass type : getRelevantTypes()) {
+			Composition<Data> item = new Composition<>();
+			item.add(new TextLine(type.getName()));
 			Table table = new Table();
 			List<TLStructuredTypePart> attributes = getRelevantAttributes(type);
 			table.add(createHeader(attributes));
 			for (Wrapper wrapper : getInstances(type)) {
 				table.add(createRow(wrapper, attributes));
 			}
-			data.add(table);
+			item.add(table);
+			data.add(new ListItem(item));
 		}
 		return data;
 	}

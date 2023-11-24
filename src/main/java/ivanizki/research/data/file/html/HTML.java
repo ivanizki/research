@@ -18,6 +18,8 @@ public interface HTML {
 	
 	public static final String HREF = "href";
 
+	public static final String LI = "li";
+
 	public static final String NAME = "name";
 
 	public static final String TABLE = "table";
@@ -25,5 +27,7 @@ public interface HTML {
 	public static final String TD = "td";
 	
 	public static final String TR = "tr";
+
+	public static final String UL = "ul";
 
 }
