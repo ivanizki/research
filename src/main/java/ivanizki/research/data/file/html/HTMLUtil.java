@@ -14,6 +14,7 @@ public class HTMLUtil implements HTML {
 	 */
 	public static String begin(String tagName, String... attributes) {
 		StringBuilder sb = new StringBuilder();
+		sb.append(ASCII.NEWLINE);
 		sb.append(BEGIN_TAG);
 		sb.append(tagName);
 		for (String attribute : attributes) {
@@ -27,7 +28,7 @@ public class HTMLUtil implements HTML {
 	 * @return The ending tag with the given name.
 	 */
 	public static String end(String tagName) {
-		return BEGIN_TAG + TAG_CLOSURE + tagName + END_TAG;
+		return ASCII.NEWLINE + BEGIN_TAG + TAG_CLOSURE + tagName + END_TAG;
 	}
 	
 	/**
@@ -35,6 +36,7 @@ public class HTMLUtil implements HTML {
 	 */
 	public static String tag(String tagName, String... attributes) {
 		StringBuilder sb = new StringBuilder();
+		sb.append(ASCII.NEWLINE);
 		sb.append(BEGIN_TAG);
 		sb.append(tagName);
 		for (String attribute : attributes) {
