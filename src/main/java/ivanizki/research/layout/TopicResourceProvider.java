@@ -21,7 +21,7 @@ import ivanizki.research.model.ValueProviderUtil;
  */
 public class TopicResourceProvider extends AbstractResourceProvider {
 
-	private static final String SEPARATOR = ASCII.SPACE + ASCII.GREATER + ASCII.SPACE;
+	private static final String SEPARATOR = new String(new char[] { ASCII.SPACE, ASCII.GREATER, ASCII.SPACE });
 
 	@Override
 	public String getLabel(Object object) {

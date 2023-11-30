@@ -8,11 +8,11 @@ package ivanizki.research.data.file.html;
 @SuppressWarnings("javadoc")
 public interface HTML {
 
-	public static final String BEGIN_TAG = "<";
+	public static final char BEGIN_TAG = '<';
 	
-	public static final String END_TAG = ">";
+	public static final char END_TAG = '>';
 	
-	public static final String TAG_CLOSURE = "/";
+	public static final char TAG_CLOSURE = '/';
 
 	public static final String A = "a";
 	

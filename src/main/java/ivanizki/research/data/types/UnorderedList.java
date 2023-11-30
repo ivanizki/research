@@ -1,6 +1,7 @@
 package ivanizki.research.data.types;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 
@@ -33,5 +34,16 @@ public class UnorderedList extends Composition<ListItem> {
 		writer.write(HTMLUtil.begin(HTML.UL));
 		super.writeToHTML(writer);
 		writer.write(HTMLUtil.end(HTML.UL));
+	}
+
+	@Override
+	public int readFromHTML(Reader reader) throws IOException {
+		String begin = HTMLUtil.readBegin(reader);
+		if (!begin.contains(Character.toString(HTML.TAG_CLOSURE))) {
+			super.readFromHTML(reader);
+			String end = HTMLUtil.readEnd(reader);
+			return end.charAt(end.length() - 1);
+		}
+		return begin.charAt(begin.length() - 1);
 	}
 }

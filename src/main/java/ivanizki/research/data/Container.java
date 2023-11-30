@@ -1,11 +1,11 @@
-package ivanizki.research.data.types;
+package ivanizki.research.data;
 
 /**
  * A container.
  *
  * @author ivanizki
  */
-public abstract class Container<T> implements Data {
+public abstract class Container<T> {
 
 	T _content;
 
@@ -22,4 +22,5 @@ public abstract class Container<T> implements Data {
 	protected void setContent(T content) {
 		_content = content;
 	}
+
 }

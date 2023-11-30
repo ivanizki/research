@@ -21,7 +21,7 @@ import com.top_logic.model.util.TLModelUtil;
 import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
 
-import ivanizki.research.data.file.FileUtil;
+import ivanizki.research.data.file.html.HTMLUtil;
 import ivanizki.research.data.types.Composition;
 import ivanizki.research.data.types.Data;
 import ivanizki.research.data.types.Link;
@@ -52,7 +52,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 	@Override
 	public HandlerResult handleCommand(DisplayContext context, LayoutComponent component, Object model, Map<String, Object> someArguments) {
-		FileUtil.writeToHTML("tmp\\data.htm", getData());
+		HTMLUtil.writeToHTML("tmp\\data.htm", getData());
 		return HandlerResult.DEFAULT_RESULT;
 	}
 

@@ -2,7 +2,6 @@ package ivanizki.research.data.file;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,7 +10,6 @@ import java.nio.file.Paths;
 import com.top_logic.basic.StringServices;
 
 import ivanizki.research.DummyLogger;
-import ivanizki.research.data.types.Data;
 import ivanizki.research.data.types.Text;
 import ivanizki.research.data.types.TextLine;
 
@@ -51,17 +49,5 @@ public class FileUtil {
 		}
 		return text;
 	}
-
-	/**
-	 * Writes the given {@link Data} to the specified file.
-	 */
-	public static void writeToHTML(String filename, Data data) {
-		try (FileWriter writer = new FileWriter(filename, StandardCharsets.UTF_8)) {
-			data.writeToHTML(writer);
-			writer.close();
-		} catch (IOException e) {
-			DummyLogger.error(e);
-		}
-	}
-
+	
 }
