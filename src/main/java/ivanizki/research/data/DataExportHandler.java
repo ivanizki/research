@@ -1,6 +1,7 @@
 package ivanizki.research.data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,6 +15,7 @@ import com.top_logic.layout.DisplayContext;
 import com.top_logic.layout.provider.MetaLabelProvider;
 import com.top_logic.mig.html.layout.LayoutComponent;
 import com.top_logic.model.TLClass;
+import com.top_logic.model.TLModuleSingleton;
 import com.top_logic.model.TLProperty;
 import com.top_logic.model.TLReference;
 import com.top_logic.model.TLStructuredTypePart;
@@ -39,10 +41,6 @@ import ivanizki.research.data.types.UnorderedList;
  */
 public class DataExportHandler extends AbstractCommandHandler {
 
-	private static final String RELEVANT_MODULE_NAME = "research";
-
-	private static final String RELEVANT_TYPE_NAME = "DataItem";
-
 	/**
 	 * Creates a new {@link DataExportHandler}.
 	 */
@@ -52,111 +50,155 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 	@Override
 	public HandlerResult handleCommand(DisplayContext context, LayoutComponent component, Object model, Map<String, Object> someArguments) {
-		HTMLUtil.writeToHTML("tmp\\data.htm", getData());
+		HTMLUtil.writeToHTML("tmp\\data.htm", new RelevantDataCollector().getData());
 		return HandlerResult.DEFAULT_RESULT;
 	}
 
-	private Data getData() {
-		UnorderedList data = new UnorderedList();
-		for (TLClass type : getRelevantTypes()) {
-			Composition<Data> item = new Composition<>();
-			item.add(new TextLine(type.getName()));
-			Table table = new Table();
-			List<TLStructuredTypePart> attributes = getRelevantAttributes(type);
-			table.add(createHeader(attributes));
-			for (Wrapper wrapper : getInstances(type)) {
-				table.add(createRow(wrapper, attributes));
+	private static class RelevantDataCollector {
+
+		private static final String RELEVANT_MODULE_NAME = "research";
+
+		private static final String RELEVANT_TYPE_NAME = "DataItem";
+
+		private static final boolean SINGLETON = true;
+
+		private static final String SINGLETON_SUFFIX = "singleton";
+
+		private Set<TLClass> _types;
+
+		private Map<TLClass, Wrapper> _singletons;
+
+		public RelevantDataCollector() {
+			_types = initRelevantTypes();
+			_singletons = initRelevantSingletons(_types);
+		}
+
+		private Set<TLClass> initRelevantTypes() {
+			TLClass generalType = (TLClass) TLModelUtil.findType(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME);
+			return TLModelUtil.getConcreteSpecializations(generalType);
+		}
+
+		private Map<TLClass, Wrapper> initRelevantSingletons(Set<TLClass> relevantTypes) {
+			Map<TLClass, Wrapper> singletons = new HashMap<>();
+			for (TLClass type : relevantTypes) {
+				for (TLModuleSingleton singleton : type.getModule().getSingletons()) {
+					Wrapper wrapper = (Wrapper) singleton.getSingleton();
+					TLClass singletonType = (TLClass) wrapper.tType();
+					singletons.put(singletonType, wrapper);
+				}
 			}
-			item.add(table);
-			data.add(new ListItem(item));
+			return singletons;
 		}
-		return data;
-	}
 
-	private Set<TLClass> getRelevantTypes() {
-		TLClass generalType = (TLClass) TLModelUtil.findType(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME);
-		return TLModelUtil.getConcreteSpecializations(generalType);
-	}
-
-	private List<TLStructuredTypePart> getRelevantAttributes(TLClass type) {
-		List<TLStructuredTypePart> attributes = getOwnAttributes(type);
-		attributes.removeIf(attribute -> !isRelevantAttribute(attribute));
-		return attributes;
-	}
-
-	private List<TLStructuredTypePart> getOwnAttributes(TLClass type) {
-		List<TLStructuredTypePart> attributes = new ArrayList<>();
-		for (TLStructuredTypePart attribute : type.getAllParts()) {
-			if (MetaElementUtil.isSubtype(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME, (TLClass) attribute.getOwner())) {
-				attributes.add(attribute);
+		private Data getData() {
+			UnorderedList data = new UnorderedList();
+			for (TLClass type : _types) {
+				Composition<Data> item = new Composition<>();
+				item.add(new TextLine(type.getName()));
+				Table table = new Table();
+				List<TLStructuredTypePart> attributes = getRelevantAttributes(type);
+				table.add(createHeader(attributes));
+				List<Wrapper> nonSingletons = getInstances(type);
+				Wrapper singleton = _singletons.get(type);
+				if (singleton != null) {
+					table.add(createRow(singleton, attributes, SINGLETON));
+					nonSingletons.remove(singleton);
+				}
+				for (Wrapper wrapper : nonSingletons) {
+					table.add(createRow(wrapper, attributes, !SINGLETON));
+				}
+				item.add(table);
+				data.add(new ListItem(item));
 			}
+			return data;
 		}
-		return attributes;
-	}
 
-	private boolean isRelevantAttribute(TLStructuredTypePart attribute) {
-		if (attribute instanceof TLReference) {
-			if (((TLReference) attribute).isDerived()) {
-				return false;
+		private List<TLStructuredTypePart> getRelevantAttributes(TLClass type) {
+			List<TLStructuredTypePart> attributes = getOwnAttributes(type);
+			attributes.removeIf(attribute -> !isRelevantAttribute(attribute));
+			return attributes;
+		}
+
+		private List<TLStructuredTypePart> getOwnAttributes(TLClass type) {
+			List<TLStructuredTypePart> attributes = new ArrayList<>();
+			for (TLStructuredTypePart attribute : type.getAllParts()) {
+				if (MetaElementUtil.isSubtype(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME,
+					(TLClass) attribute.getOwner())) {
+					attributes.add(attribute);
+				}
 			}
+			return attributes;
 		}
-		return true;
-	}
 
-	private TableRow createHeader(List<? extends TLStructuredTypePart> attributes) {
-		TableRow row = new TableRow();
-		row.add(new TableCell(new TextLine("id")));
-		for (TLStructuredTypePart attribute : attributes) {
-			row.add(new TableCell(new TextLine(attribute.getName())));
+		private boolean isRelevantAttribute(TLStructuredTypePart attribute) {
+			if (attribute instanceof TLReference) {
+				if (((TLReference) attribute).isDerived()) {
+					return false;
+				}
+			}
+			return true;
 		}
-		return row;
-	}
 
-	private List<Wrapper> getInstances(TLClass type) {
-		return MetaElementUtil.getAllDirectInstancesOf(type, Wrapper.class);
-	}
-
-	private TableRow createRow(Wrapper wrapper, List<TLStructuredTypePart> attributes) {
-		TableRow row = new TableRow();
-		row.add(createUidCell(wrapper));
-		for (TLStructuredTypePart attribute : attributes) {
-			row.add(createValueCell(wrapper.tValue(attribute), attribute));
+		private TableRow createHeader(List<? extends TLStructuredTypePart> attributes) {
+			TableRow row = new TableRow();
+			row.add(new TableCell(new TextLine("id")));
+			for (TLStructuredTypePart attribute : attributes) {
+				row.add(new TableCell(new TextLine(attribute.getName())));
+			}
+			return row;
 		}
-		return row;
-	}
 
-	private TableCell createUidCell(Wrapper wrapper) {
-		return new TableCell(new Link(getUid(wrapper)));
-	}
-
-	private String getUid(Wrapper wrapper) {
-		return wrapper.tId().toString();
-	}
-
-	private TableCell createValueCell(Object value, TLStructuredTypePart attribute) {
-		if (attribute instanceof TLProperty) {
-			return createPropertyValueCell(value);
+		private List<Wrapper> getInstances(TLClass type) {
+			return MetaElementUtil.getAllDirectInstancesOf(type, Wrapper.class);
 		}
-		return createReferenceValueCell(value);
-	}
 
-	private TableCell createPropertyValueCell(Object value) {
-		return new TableCell(new TextLine(StringServices.toString(value)));
-	}
-
-	private TableCell createReferenceValueCell(Object value) {
-		Composition<Link> links = new Composition<>();
-		for (Wrapper referredWrapper : getReferredWrappers(value)) {
-			links.add(new Link(getUid(referredWrapper), getLabel(referredWrapper)));
+		private TableRow createRow(Wrapper wrapper, List<TLStructuredTypePart> attributes, boolean isSingleton) {
+			TableRow row = new TableRow();
+			row.add(createUidCell(wrapper, isSingleton));
+			for (TLStructuredTypePart attribute : attributes) {
+				row.add(createValueCell(wrapper.tValue(attribute), attribute));
+			}
+			return row;
 		}
-		return new TableCell(links);
-	}
 
-	private List<Wrapper> getReferredWrappers(Object value) {
-		return CollectionUtil.dynamicCastView(Wrapper.class, CollectionUtil.asList(value));
-	}
+		private TableCell createUidCell(Wrapper wrapper, boolean isSingleton) {
+			return new TableCell(new Link(getUid(wrapper, isSingleton)));
+		}
 
-	private String getLabel(Wrapper wrapper) {
-		return MetaLabelProvider.INSTANCE.getLabel(wrapper);
+		private String getUid(Wrapper wrapper, boolean isSingleton) {
+			String uid = wrapper.tId().toString();
+			return isSingleton ? uid + SINGLETON_SUFFIX : uid;
+		}
+
+		private TableCell createValueCell(Object value, TLStructuredTypePart attribute) {
+			if (attribute instanceof TLProperty) {
+				return createPropertyValueCell(value);
+			}
+			return createReferenceValueCell(value);
+		}
+
+		private TableCell createPropertyValueCell(Object value) {
+			return new TableCell(new TextLine(StringServices.toString(value)));
+		}
+
+		private TableCell createReferenceValueCell(Object value) {
+			Composition<Link> links = new Composition<>();
+			for (Wrapper referredWrapper : getReferredWrappers(value)) {
+				links.add(new Link(getUid(referredWrapper, isSingleton(referredWrapper)), getLabel(referredWrapper)));
+			}
+			return new TableCell(links);
+		}
+
+		private List<Wrapper> getReferredWrappers(Object value) {
+			return CollectionUtil.dynamicCastView(Wrapper.class, CollectionUtil.asList(value));
+		}
+
+		private boolean isSingleton(Wrapper wrapper) {
+			return _singletons.containsValue(wrapper);
+		}
+
+		private String getLabel(Wrapper wrapper) {
+			return MetaLabelProvider.INSTANCE.getLabel(wrapper);
+		}
 	}
 }
