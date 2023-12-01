@@ -15,8 +15,11 @@ public class ManuscriptResourceProvider extends AbstractResourceProvider {
 
 	@Override
 	public String getLabel(Object object) {
-		String title = (String) ValueProviderUtil.getValue(object, Manuscript.TITLE);
-		return ASCII.QUOTE + title + ASCII.QUOTE;
+		return new StringBuilder()
+			.append(ASCII.QUOTE)
+			.append((String) ValueProviderUtil.getValue(object, Manuscript.TITLE))
+			.append(ASCII.QUOTE)
+			.toString();
 	}
 
 }

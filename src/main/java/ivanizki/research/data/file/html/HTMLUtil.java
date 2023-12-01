@@ -29,6 +29,14 @@ public class HTMLUtil implements HTML {
 
 	private static final String END_OF_FILE = "End of file.";
 
+	private static final String FAILED_TO_READ_TAG_BEGIN = "Failed to read tag begin.";
+
+	private static final String FAILED_TO_READ_TAG_END = "Failed to read tag end.";
+
+	private static final String FAILED_TO_READ_TAG_NAME = "Failed to read tag name.";
+
+	private static final String UNKNOWN_TAG = "Unknown tag";
+
 	/**
 	 * @return The beginning tag with the given name.
 	 */
@@ -48,7 +56,13 @@ public class HTMLUtil implements HTML {
 	 * @return The ending tag with the given name.
 	 */
 	public static String end(String tagName) {
-		return ASCII.NEWLINE + BEGIN_TAG + TAG_CLOSURE + tagName + END_TAG;
+		return new StringBuilder()
+			.append(ASCII.NEWLINE)
+			.append(BEGIN_TAG)
+			.append(TAG_CLOSURE)
+			.append(tagName)
+			.append(END_TAG)
+			.toString();
 	}
 	
 	/**
@@ -157,10 +171,21 @@ public class HTMLUtil implements HTML {
 			} else if (c == TAG_CLOSURE) {
 				return c;
 			} else {
-				throw new IOException("Failed to read tag name: Unknown tag \"" + tagName.toString() + "\".");
+				throw new IOException(new StringBuilder()
+					.append(FAILED_TO_READ_TAG_NAME).append(ASCII.SPACE)
+					.append(UNKNOWN_TAG)
+					.append(ASCII.QUOTE)
+					.append(tagName.toString())
+					.append(ASCII.QUOTE)
+					.append(ASCII.DOT)
+					.toString());
 			}
 		}
-		throw new IOException("Failed to read tag name." + " " + END_OF_FILE);
+		throw new IOException(new StringBuilder()
+			.append(FAILED_TO_READ_TAG_NAME)
+			.append(ASCII.SPACE)
+			.append(END_OF_FILE)
+			.toString());
 	}
 
 	private static Data toData(String tagName) {
@@ -195,14 +220,14 @@ public class HTMLUtil implements HTML {
 	 * @return The {@link String} containing the {@link #begin}.
 	 */
 	public static String readBegin(Reader reader) throws IOException {
-		return readUntilEndTag(reader, "Failed to read tag begin.");
+		return readUntilEndTag(reader, FAILED_TO_READ_TAG_BEGIN);
 	}
 
 	/**
 	 * @return The {@link String} containing the {@link #end}.
 	 */
 	public static String readEnd(Reader reader) throws IOException {
-		return readUntilEndTag(reader, "Failed to read tag end.");
+		return readUntilEndTag(reader, FAILED_TO_READ_TAG_END);
 	}
 
 	/**
@@ -220,7 +245,11 @@ public class HTMLUtil implements HTML {
 			begin.append(END_TAG);
 			return begin.toString();
 		}
-		throw new IOException(eofMessagePrefix + " " + END_OF_FILE);
+		throw new IOException(new StringBuilder()
+			.append(eofMessagePrefix)
+			.append(ASCII.SPACE)
+			.append(END_OF_FILE)
+			.toString());
 	}
 
 	private static void readAttributes(String begin, Map<String, String> attributes) {
