@@ -24,8 +24,13 @@
 			/>
 			<button id="exportData"
 				class="ivanizki.research.data.DataExportHandler"
-				image="css:tl-icon save"
+				image="css:fas fa-file-download"
 				resourceKey="class.ivanizki.research.data.I18NConstants.DATA_EXPORT_HANDLER_LABEL"
+			/>
+			<button id="importData"
+				image="css:fas fa-file-upload"
+				class="ivanizki.research.data.DataImportHandler"
+				resourceKey="class.ivanizki.research.data.I18NConstants.DATA_IMPORT_HANDLER_LABEL"
 			/>
 		</buttons>
 	</arguments>

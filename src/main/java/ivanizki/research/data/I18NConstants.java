@@ -13,6 +13,8 @@ public class I18NConstants extends I18NConstantsBase {
 
 	public static ResKey DATA_EXPORT_HANDLER_LABEL;
 
+	public static ResKey DATA_IMPORT_HANDLER_LABEL;
+
 	static {
 		initConstants(I18NConstants.class);
 	}

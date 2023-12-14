@@ -1,7 +1,6 @@
 package ivanizki.research.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,11 +14,10 @@ import com.top_logic.layout.DisplayContext;
 import com.top_logic.layout.provider.MetaLabelProvider;
 import com.top_logic.mig.html.layout.LayoutComponent;
 import com.top_logic.model.TLClass;
-import com.top_logic.model.TLModuleSingleton;
 import com.top_logic.model.TLProperty;
 import com.top_logic.model.TLReference;
 import com.top_logic.model.TLStructuredTypePart;
-import com.top_logic.model.util.TLModelUtil;
+import com.top_logic.model.impl.generated.TLModuleSingletonsBase;
 import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
 
@@ -56,38 +54,15 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 	private static class RelevantDataCollector {
 
-		private static final String RELEVANT_MODULE_NAME = "research";
-
-		private static final String RELEVANT_TYPE_NAME = "DataItem";
-
 		private static final boolean SINGLETON = true;
-
-		private static final String SINGLETON_SUFFIX = "singleton";
 
 		private Set<TLClass> _types;
 
 		private Map<TLClass, Wrapper> _singletons;
 
 		public RelevantDataCollector() {
-			_types = initRelevantTypes();
-			_singletons = initRelevantSingletons(_types);
-		}
-
-		private Set<TLClass> initRelevantTypes() {
-			TLClass generalType = (TLClass) TLModelUtil.findType(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME);
-			return TLModelUtil.getConcreteSpecializations(generalType);
-		}
-
-		private Map<TLClass, Wrapper> initRelevantSingletons(Set<TLClass> relevantTypes) {
-			Map<TLClass, Wrapper> singletons = new HashMap<>();
-			for (TLClass type : relevantTypes) {
-				for (TLModuleSingleton singleton : type.getModule().getSingletons()) {
-					Wrapper wrapper = (Wrapper) singleton.getSingleton();
-					TLClass singletonType = (TLClass) wrapper.tType();
-					singletons.put(singletonType, wrapper);
-				}
-			}
-			return singletons;
+			_types = DataUtil.getRelevantTypes();
+			_singletons = DataUtil.getRelevantSingletons(_types);
 		}
 
 		private Data getData() {
@@ -122,8 +97,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 		private List<TLStructuredTypePart> getOwnAttributes(TLClass type) {
 			List<TLStructuredTypePart> attributes = new ArrayList<>();
 			for (TLStructuredTypePart attribute : type.getAllParts()) {
-				if (MetaElementUtil.isSubtype(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME,
-					(TLClass) attribute.getOwner())) {
+				if (DataUtil.isRelevantType((TLClass) attribute.getOwner())) {
 					attributes.add(attribute);
 				}
 			}
@@ -141,7 +115,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 		private TableRow createHeader(List<? extends TLStructuredTypePart> attributes) {
 			TableRow row = new TableRow();
-			row.add(new TableCell(new TextLine("id")));
+			row.add(new TableCell(new TextLine(DataUtil.ID)));
 			for (TLStructuredTypePart attribute : attributes) {
 				row.add(new TableCell(new TextLine(attribute.getName())));
 			}
@@ -167,7 +141,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 		private String getUid(Wrapper wrapper, boolean isSingleton) {
 			String uid = wrapper.tId().toString();
-			return isSingleton ? uid + SINGLETON_SUFFIX : uid;
+			return isSingleton ? uid + TLModuleSingletonsBase.SINGLETON_ATTR : uid;
 		}
 
 		private TableCell createValueCell(Object value, TLStructuredTypePart attribute) {
