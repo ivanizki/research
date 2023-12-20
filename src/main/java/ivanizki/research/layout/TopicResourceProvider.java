@@ -11,11 +11,12 @@ import com.top_logic.knowledge.wrap.Wrapper;
 import com.top_logic.layout.AbstractResourceProvider;
 
 import ivanizki.research.data.ASCII;
-import ivanizki.research.model.Topic;
-import ivanizki.research.model.ValueProviderUtil;
+import ivanizki.research.model.ModelUtil;
+import ivanizki.research.model.Model;
+import ivanizki.research.model.ModelType;
 
 /**
- * {@link AbstractResourceProvider} for {@link Topic}s.
+ * {@link AbstractResourceProvider} for {@link ModelType#TOPIC}s.
  *
  * @author ivanizki
  */
@@ -34,7 +35,7 @@ public class TopicResourceProvider extends AbstractResourceProvider {
 		names.add(getName(object));
 		boolean escape = false;
 		while (!escape) {
-			Collection<?> parents = ValueProviderUtil.getValues(object, Topic.PARENTS);
+			Collection<?> parents = ModelUtil.getValues(object, Model.PARENTS);
 			if (parents.size() == 1) {
 				object = CollectionUtil.getFirst(parents);
 				names.add(getName(object));

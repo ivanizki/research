@@ -33,6 +33,8 @@ import ivanizki.research.data.types.TableCell;
 import ivanizki.research.data.types.TableRow;
 import ivanizki.research.data.types.TextLine;
 import ivanizki.research.data.types.UnorderedList;
+import ivanizki.research.model.ModelUtil;
+import ivanizki.research.model.Model;
 
 /**
  * {@link AbstractCommandHandler} to import the entire database.
@@ -72,8 +74,8 @@ public class DataImportHandler extends AbstractCommandHandler {
 		private Map<String, Wrapper> _wrappers;
 
 		public Importer() {
-			_types = MapUtil.createValueMap(DataUtil.getRelevantTypes(), type -> type.getName());
-			_singletons = DataUtil.getRelevantSingletons(_types.values());
+			_types = MapUtil.createValueMap(ModelUtil.getRelevantTypes(), type -> type.getName());
+			_singletons = ModelUtil.getRelevantSingletons(_types.values());
 		}
 
 		private void importData(Data data) {
@@ -143,7 +145,7 @@ public class DataImportHandler extends AbstractCommandHandler {
 				Data content = cell.getContent();
 				if (content instanceof TextLine) {
 					String attributeName = ((TextLine) content).getString();
-					if (!DataUtil.ID.equals(attributeName)) {
+					if (!Model.ID.equals(attributeName)) {
 						attributeNames.add(type.getPart(attributeName));
 					}
 				}
@@ -154,7 +156,7 @@ public class DataImportHandler extends AbstractCommandHandler {
 		private boolean isHeader(TableRow row) {
 			Data firstCellContent = getFirstCellContent(row);
 			return firstCellContent instanceof TextLine
-				&& DataUtil.ID.equals(((TextLine) firstCellContent).getString());
+				&& Model.ID.equals(((TextLine) firstCellContent).getString());
 		}
 
 		private void importWrapper(Wrapper wrapper, List<TLStructuredTypePart> attributes, TableRow row) {
@@ -178,7 +180,7 @@ public class DataImportHandler extends AbstractCommandHandler {
 		private Object importPropertyValue(TLStructuredTypePart attribute, TableCell cell) {
 			Data content = cell.getContent();
 			if (content instanceof TextLine) {
-				return DataUtil.parse(attribute.getType(), ((TextLine) content).getString());
+				return ModelUtil.parse(attribute.getType(), ((TextLine) content).getString());
 			}
 			return null;
 		}

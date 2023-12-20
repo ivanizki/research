@@ -1,13 +1,15 @@
-package ivanizki.research.data;
+package ivanizki.research.model;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.top_logic.basic.CollectionUtil;
 import com.top_logic.basic.StringServices;
 import com.top_logic.element.meta.MetaElementUtil;
 import com.top_logic.element.meta.TypeSpec;
+import com.top_logic.knowledge.wrap.ValueProvider;
 import com.top_logic.knowledge.wrap.Wrapper;
 import com.top_logic.model.TLClass;
 import com.top_logic.model.TLModuleSingleton;
@@ -15,32 +17,27 @@ import com.top_logic.model.TLType;
 import com.top_logic.model.util.TLModelUtil;
 
 /**
- * Utilities to work with database.
+ * Utilities to work with {@link Model}, {@link ModelType} and {@link ModelModule}.
  *
  * @author ivanizki
  */
-public class DataUtil {
-
-	/** ID column. */
-	public static final String ID = "id";
-
-	private static final String RELEVANT_MODULE_NAME = "research";
-
-	private static final String RELEVANT_TYPE_NAME = "DataItem";
+public class ModelUtil {
 
 	/**
-	 * @return All {@link TLClass type}s in the database that are relevant.
+	 * @return All {@link TLClass type}s in the database that are {@link #isRelevantType(TLClass)
+	 *         relevant}.
 	 */
 	public static Set<TLClass> getRelevantTypes() {
-		TLClass generalType = (TLClass) TLModelUtil.findType(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME);
+		TLClass generalType = (TLClass) TLModelUtil.findType(ModelModule.RESEARCH, ModelType.DATA_ITEM);
 		return TLModelUtil.getConcreteSpecializations(generalType);
 	}
 
 	/**
-	 * @return Whether the given {@link TLClass type} is relevant.
+	 * @return Whether the given {@link TLClass type} is relevant, that is, instance of
+	 *         {@link ModelType#DATA_ITEM}.
 	 */
 	public static boolean isRelevantType(TLClass type) {
-		return MetaElementUtil.isSubtype(RELEVANT_MODULE_NAME, RELEVANT_TYPE_NAME, type);
+		return MetaElementUtil.isSubtype(ModelModule.RESEARCH, ModelType.DATA_ITEM, type);
 	}
 
 	/**
@@ -78,5 +75,26 @@ public class DataUtil {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @return The attribute value.
+	 */
+	public static Object getValue(Object valueProvider, String attributeName) {
+		return ((ValueProvider) valueProvider).getValue(attributeName);
+	}
+
+	/**
+	 * @return The attribute values as a collection.
+	 */
+	public static Collection<?> getValues(Object valueProvider, String attributeName) {
+		return (Collection<?>) getValue(valueProvider, attributeName);
+	}
+
+	/**
+	 * @return The attribute values as a collection of {@link ValueProvider}s.
+	 */
+	public static Collection<ValueProvider> getValueProviders(Object valueProvider, String attributeName) {
+		return CollectionUtil.dynamicCastView(ValueProvider.class, getValues(valueProvider, attributeName));
 	}
 }

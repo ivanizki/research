@@ -31,6 +31,8 @@ import ivanizki.research.data.types.TableCell;
 import ivanizki.research.data.types.TableRow;
 import ivanizki.research.data.types.TextLine;
 import ivanizki.research.data.types.UnorderedList;
+import ivanizki.research.model.ModelUtil;
+import ivanizki.research.model.Model;
 
 /**
  * {@link AbstractCommandHandler} to export the entire database.
@@ -61,8 +63,8 @@ public class DataExportHandler extends AbstractCommandHandler {
 		private Map<TLClass, Wrapper> _singletons;
 
 		public RelevantDataCollector() {
-			_types = DataUtil.getRelevantTypes();
-			_singletons = DataUtil.getRelevantSingletons(_types);
+			_types = ModelUtil.getRelevantTypes();
+			_singletons = ModelUtil.getRelevantSingletons(_types);
 		}
 
 		private Data getData() {
@@ -97,7 +99,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 		private List<TLStructuredTypePart> getOwnAttributes(TLClass type) {
 			List<TLStructuredTypePart> attributes = new ArrayList<>();
 			for (TLStructuredTypePart attribute : type.getAllParts()) {
-				if (DataUtil.isRelevantType((TLClass) attribute.getOwner())) {
+				if (ModelUtil.isRelevantType((TLClass) attribute.getOwner())) {
 					attributes.add(attribute);
 				}
 			}
@@ -115,7 +117,7 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 		private TableRow createHeader(List<? extends TLStructuredTypePart> attributes) {
 			TableRow row = new TableRow();
-			row.add(new TableCell(new TextLine(DataUtil.ID)));
+			row.add(new TableCell(new TextLine(Model.ID)));
 			for (TLStructuredTypePart attribute : attributes) {
 				row.add(new TableCell(new TextLine(attribute.getName())));
 			}

@@ -21,15 +21,16 @@ import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
 
 import ivanizki.research.DummyLogger;
-import ivanizki.research.data.DataUtil;
 import ivanizki.research.data.file.bibtex.BibTeX;
 import ivanizki.research.data.file.bibtex.BibTeX.BibTeXEntryAttribute;
 import ivanizki.research.data.file.bibtex.BibTeX.BibTeXEntryType;
 import ivanizki.research.data.file.bibtex.BibTeXDocument;
 import ivanizki.research.data.file.bibtex.BibTeXEntry;
 import ivanizki.research.data.file.bibtex.BibTeXUtil;
-import ivanizki.research.model.Manuscript;
+import ivanizki.research.model.ModelUtil;
 import ivanizki.research.model.Model;
+import ivanizki.research.model.ModelModule;
+import ivanizki.research.model.ModelType;
 
 /**
  * {@link AbstractCommandHandler} for {@link BibTeX} import.
@@ -37,15 +38,6 @@ import ivanizki.research.model.Model;
  * @author ivanizki
  */
 public class BibTeXImportHandler extends AbstractCommandHandler {
-
-	private static final String ARTWORKS = "Artworks";
-
-	private static final Map<BibTeXEntryType, TLClass> _TYPE_MAP = new MapBuilder<BibTeXEntryType, TLClass>()
-		.put(BibTeXEntryType.ARTICLE, (TLClass) TLModelUtil.findType(ARTWORKS, "Article"))
-		.put(BibTeXEntryType.BOOK, (TLClass) TLModelUtil.findType(ARTWORKS, "Book"))
-		.toMap();
-
-	private static final TLClass AUTHOR_TYPE = (TLClass) TLModelUtil.findType("Humans", "Author");
 
 	/**
 	 * Creates a new {@link BibTeXImportHandler}.
@@ -69,6 +61,13 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 	}
 
 	private static class Importer {
+
+		private static final Map<BibTeXEntryType, TLClass> _TYPE_MAP = new MapBuilder<BibTeXEntryType, TLClass>()
+			.put(BibTeXEntryType.ARTICLE, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.ARTICLE))
+			.put(BibTeXEntryType.BOOK, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.BOOK))
+			.toMap();
+
+		private static final TLClass AUTHOR_TYPE = (TLClass) TLModelUtil.findType(ModelModule.HUMANS, ModelType.AUTHOR);
 
 		private Map<String, Wrapper> _authors;
 
@@ -103,10 +102,10 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 				TLStructuredTypePart attribute = type.getPart(attributeName);
 				String bibAttributeValue = entry.getAttributeValue(bibAttribute);
 				if (BibTeXEntryAttribute.AUTHOR.equals(bibAttribute)) {
-					wrapper.setValue(Manuscript.AUTHORS, importAttributeAuthor(bibAttributeValue));
+					wrapper.setValue(Model.AUTHORS, importAttributeAuthor(bibAttributeValue));
 				} else {
 					if (attribute != null) {
-						wrapper.setValue(attributeName, DataUtil.parse(attribute.getType(), bibAttributeValue));
+						wrapper.setValue(attributeName, ModelUtil.parse(attribute.getType(), bibAttributeValue));
 					}
 				}
 			}
