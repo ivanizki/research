@@ -10,7 +10,6 @@ import java.util.Map;
 import com.top_logic.basic.StringServices;
 import com.top_logic.basic.col.MapUtil;
 import com.top_logic.basic.config.InstantiationContext;
-import com.top_logic.element.meta.TypeSpec;
 import com.top_logic.element.model.DynamicModelService;
 import com.top_logic.knowledge.service.PersistencyLayer;
 import com.top_logic.knowledge.service.Transaction;
@@ -20,7 +19,6 @@ import com.top_logic.mig.html.layout.LayoutComponent;
 import com.top_logic.model.TLClass;
 import com.top_logic.model.TLProperty;
 import com.top_logic.model.TLStructuredTypePart;
-import com.top_logic.model.TLType;
 import com.top_logic.model.impl.generated.TLModuleSingletonsBase;
 import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
@@ -172,29 +170,15 @@ public class DataImportHandler extends AbstractCommandHandler {
 
 		private Object importValue(TLStructuredTypePart attribute, TableCell cell) {
 			if (attribute instanceof TLProperty) {
-				return importPropertyValue(cell, attribute.getType());
+				return importPropertyValue(attribute, cell);
 			}
 			return importReferenceValue(attribute, cell);
 		}
 
-		private Object importPropertyValue(TableCell cell, TLType type) {
+		private Object importPropertyValue(TLStructuredTypePart attribute, TableCell cell) {
 			Data content = cell.getContent();
 			if (content instanceof TextLine) {
-				String string = ((TextLine) content).getString();
-				if (TypeSpec.STRING_TYPE.equals(type.toString())) {
-					return string;
-				}
-				if (!StringServices.isEmpty(string)) {
-					if (TypeSpec.INTEGER_TYPE.equals(type.toString())) {
-						return Integer.parseInt(string);
-					} else if (TypeSpec.LONG_TYPE.equals(type.toString())) {
-						return Long.parseLong(string);
-					} else if (TypeSpec.DOUBLE_TYPE.equals(type.toString())) {
-						return Double.parseDouble(string);
-					} else if (TypeSpec.BOOLEAN_TYPE.equals(type.toString())) {
-						return Boolean.parseBoolean(string);
-					}
-				}
+				return DataUtil.parse(attribute.getType(), ((TextLine) content).getString());
 			}
 			return null;
 		}

@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.top_logic.basic.StringServices;
 import com.top_logic.element.meta.MetaElementUtil;
+import com.top_logic.element.meta.TypeSpec;
 import com.top_logic.knowledge.wrap.Wrapper;
 import com.top_logic.model.TLClass;
 import com.top_logic.model.TLModuleSingleton;
+import com.top_logic.model.TLType;
 import com.top_logic.model.util.TLModelUtil;
 
 /**
@@ -53,5 +56,27 @@ public class DataUtil {
 			}
 		}
 		return singletons;
+	}
+
+	/**
+	 * @return The value parsed from the given {@link String} according to the given {@link TLType}
+	 *         of value.
+	 */
+	public static Object parse(TLType type, String string) {
+		if (TypeSpec.STRING_TYPE.equals(type.toString())) {
+			return string;
+		}
+		if (!StringServices.isEmpty(string)) {
+			if (TypeSpec.INTEGER_TYPE.equals(type.toString())) {
+				return Integer.parseInt(string);
+			} else if (TypeSpec.LONG_TYPE.equals(type.toString())) {
+				return Long.parseLong(string);
+			} else if (TypeSpec.DOUBLE_TYPE.equals(type.toString())) {
+				return Double.parseDouble(string);
+			} else if (TypeSpec.BOOLEAN_TYPE.equals(type.toString())) {
+				return Boolean.parseBoolean(string);
+			}
+		}
+		return null;
 	}
 }

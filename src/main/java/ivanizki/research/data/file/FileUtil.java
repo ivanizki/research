@@ -3,9 +3,13 @@ package ivanizki.research.data.file;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.top_logic.basic.StringServices;
 
@@ -33,7 +37,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * Reads {@link Text} from the specified file.
+	 * @return {@link Text} from the specified file.
 	 */
 	public static Text readText(String filename) {
 		Text text = new Text();
@@ -50,4 +54,22 @@ public class FileUtil {
 		return text;
 	}
 	
+	/**
+	 * @return All lines from the specified {@link InputStream}.
+	 */
+	public static List<String> readAllLines(InputStream stream) {
+		List<String> lines = new ArrayList<>();
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+			String line = reader.readLine();
+			while (line != null) {
+				lines.add(line);
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			DummyLogger.error(e);
+		}
+		return lines;
+	}
+
 }

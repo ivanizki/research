@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<layout name="BibTeXImportDialog">
+	<dialogInfo
+		defaultI18n="bibtexImportDialog"
+		executability="InViewMode"
+		height="200"
+		image="css:fas fa-file-upload"
+		openerClique="createMenu"
+		openerCommandGroup="Create"
+		width="300"
+	/>
+	<components>
+		<component class="ivanizki.research.layout.bibtex.BibTeXImportDialog"
+			model="null()"
+		>
+			<buttons>
+				<button id="importBibtexFile"
+					class="ivanizki.research.layout.bibtex.BibTeXImportHandler"
+					executability="ivanizki.research.layout.bibtex.BibTeXImportRule"
+					group="Create"
+					resourceKey="importBibtexFile"
+				/>
+			</buttons>
+		</component>
+		<component class="com.top_logic.knowledge.gui.layout.DefaultButtonComponent"/>
+	</components>
+</layout>
