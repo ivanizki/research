@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.top_logic.basic.col.MapBuilder;
-import com.top_logic.basic.col.MapUtil;
 import com.top_logic.basic.config.InstantiationContext;
-import com.top_logic.element.meta.MetaElementUtil;
 import com.top_logic.element.model.DynamicModelService;
 import com.top_logic.knowledge.service.PersistencyLayer;
 import com.top_logic.knowledge.service.Transaction;
@@ -27,10 +25,10 @@ import ivanizki.research.data.file.bibtex.BibTeX.BibTeXEntryType;
 import ivanizki.research.data.file.bibtex.BibTeXDocument;
 import ivanizki.research.data.file.bibtex.BibTeXEntry;
 import ivanizki.research.data.file.bibtex.BibTeXUtil;
-import ivanizki.research.model.ModelUtil;
 import ivanizki.research.model.Model;
 import ivanizki.research.model.ModelModule;
 import ivanizki.research.model.ModelType;
+import ivanizki.research.model.ModelUtil;
 
 /**
  * {@link AbstractCommandHandler} for {@link BibTeX} import.
@@ -68,19 +66,16 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 			.toMap();
 
 		private static final TLClass AUTHOR_TYPE = (TLClass) TLModelUtil.findType(ModelModule.HUMANS, ModelType.AUTHOR);
+		
+		private static final TLClass JOURNAL_TYPE = (TLClass) TLModelUtil.findType(ModelModule.HUMANS, ModelType.JOURNAL);
 
 		private Map<String, Wrapper> _authors;
 
+		private Map<String, Wrapper> _journals;
+
 		public Importer() {
-			_authors = indexAuthorsByName();
-		}
-
-		private Map<String, Wrapper> indexAuthorsByName() {
-			return MapUtil.createValueMap(getAllAuthors(), author -> (String) author.getValue(Model.NAME));
-		}
-
-		private List<Wrapper> getAllAuthors() {
-			return MetaElementUtil.getAllDirectInstancesOf(AUTHOR_TYPE, Wrapper.class);
+			_authors = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(AUTHOR_TYPE), Model.NAME);
+			_journals = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(JOURNAL_TYPE), Model.NAME);
 		}
 
 		private void importDocument(BibTeXDocument document) {
@@ -103,6 +98,8 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 				String bibAttributeValue = entry.getAttributeValue(bibAttribute);
 				if (BibTeXEntryAttribute.AUTHOR.equals(bibAttribute)) {
 					wrapper.setValue(Model.AUTHORS, importAttributeAuthor(bibAttributeValue));
+				} else if (BibTeXEntryAttribute.JOURNAL.equals(bibAttribute)) {
+					wrapper.setValue(Model.JOURNAL, importAttributeJournal(bibAttributeValue));
 				} else {
 					if (attribute != null) {
 						wrapper.setValue(attributeName, ModelUtil.parse(attribute.getType(), bibAttributeValue));
@@ -111,9 +108,9 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 			}
 		}
 		
-		private List<Wrapper> importAttributeAuthor(String string) {
+		private List<Wrapper> importAttributeAuthor(String names) {
 			List<Wrapper> authors = new ArrayList<>();
-			for (String name : string.split(" and ")) {
+			for (String name : names.split(" and ")) {
 				Wrapper author = _authors.get(name);
 				if (author == null) {
 					author = (Wrapper) DynamicModelService.getInstance().createObject(AUTHOR_TYPE);
@@ -123,6 +120,16 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 				authors.add(author);
 			}
 			return authors;
+		}
+
+		private Wrapper importAttributeJournal(String name) {
+			Wrapper journal = _journals.get(name);
+			if (journal == null) {
+				journal = (Wrapper) DynamicModelService.getInstance().createObject(JOURNAL_TYPE);
+				journal.setValue(Model.NAME, name);
+				_journals.put(name, journal);
+			}
+			return journal;
 		}
 
 	}

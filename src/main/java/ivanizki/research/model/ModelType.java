@@ -16,6 +16,8 @@ public interface ModelType {
 
 	public static final String DATA_ITEM = "DataItem";
 
+	public static final String JOURNAL = "Journal";
+
 	public static final String MANUSCRIPT = "Manuscript";
 
 	public static final String TOPIC = "Topic";

@@ -2,11 +2,13 @@ package ivanizki.research.model;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.top_logic.basic.CollectionUtil;
 import com.top_logic.basic.StringServices;
+import com.top_logic.basic.col.MapUtil;
 import com.top_logic.element.meta.MetaElementUtil;
 import com.top_logic.element.meta.TypeSpec;
 import com.top_logic.knowledge.wrap.ValueProvider;
@@ -75,6 +77,20 @@ public class ModelUtil {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @return All {@link Wrapper}s of the given {@link TLClass type};
+	 */
+	public static List<Wrapper> getAllWrappers(TLClass type) {
+		return MetaElementUtil.getAllDirectInstancesOf(type, Wrapper.class);
+	}
+
+	/**
+	 * @return The given {@link ValueProvider}s indexed by values of the specified attribute.
+	 */
+	public static <T extends ValueProvider> Map<String, T> indexByAttribute(Collection<T> wrappers, String attributeName) {
+		return MapUtil.createValueMap(wrappers, wrapper -> (String) wrapper.getValue(attributeName));
 	}
 
 	/**
