@@ -28,12 +28,6 @@
 				<generalization type="Manuscript"/>
 			</generalizations>
 			<attributes>
-				<property name="volume"
-					type="tl.core:String"
-				/>
-				<property name="number"
-					type="tl.core:String"
-				/>
 				<property name="abstract"
 					type="tl.core:String"
 				/>
@@ -45,6 +39,15 @@
 					navigate="true"
 					type="Humans:Journal"
 				/>
+				<property name="number"
+					type="tl.core:String"
+				/>
+				<property name="pages"
+					type="tl.core:String"
+				/>
+				<property name="volume"
+					type="tl.core:String"
+				/>
 			</attributes>
 		</class>
 		<class name="Book">
@@ -52,7 +55,13 @@
 				<generalization type="Manuscript"/>
 			</generalizations>
 			<attributes>
+				<property name="address"
+					type="tl.core:String"
+				/>
 				<property name="edition"
+					type="tl.core:String"
+				/>
+				<property name="publisher"
 					type="tl.core:String"
 				/>
 			</attributes>
