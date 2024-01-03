@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments
+		defaultFor="Artworks:Manuscript"
+		type="Artworks:Manuscript"
+	>
+		<name key="dynamic.9b8505a4-25ba-4c60-8b7a-081f9aa820e4">
+			<en>ManuscriptEditor</en>
+			<de>ManuscriptEditor</de>
+		</name>
+		<forms>
+			<form type="Artworks:Article">
+				<formDefinition>
+					<field
+						attribute="year"
+						fullQualifiedName="Artworks:Manuscript#year"
+						type="tl.core:Integer"
+					/>
+					<field
+						attribute="authors"
+						fullQualifiedName="Artworks:Manuscript#authors"
+						type="Humans:Author"
+					/>
+					<field
+						attribute="title"
+						fullQualifiedName="Artworks:Manuscript#title"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="abstract"
+						fullQualifiedName="Artworks:Article#abstract"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="doi"
+						fullQualifiedName="Artworks:Article#doi"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="journal"
+						fullQualifiedName="Artworks:Article#journal"
+						type="Humans:Journal"
+					/>
+					<field
+						attribute="volume"
+						fullQualifiedName="Artworks:Article#volume"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="number"
+						fullQualifiedName="Artworks:Article#number"
+						type="tl.core:String"
+					/>
+				</formDefinition>
+			</form>
+		</forms>
+	</arguments>
+</config:template-call>
