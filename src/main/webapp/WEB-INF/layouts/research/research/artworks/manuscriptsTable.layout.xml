@@ -6,7 +6,7 @@
 	template="com.top_logic/table.template.xml"
 >
 	<arguments
-		defaultColumns="year,authors,title"
+		defaultColumns="year,authors,manuscript"
 		model="selection(research/research/artworks/topicsTree.layout.xml#Tree)"
 		type="Artworks:Manuscript"
 	>
@@ -21,6 +21,18 @@
 			elements="topic->$topic.get(`Topics:Topic#dataItems`).filter(item->$item.instanceOf(`Artworks:Manuscript`))"
 			supportsElement="element->$element.instanceOf(`Artworks:Manuscript`)"
 		/>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				accessor="x->$x"
+				columnId="manuscript"
+				columnType="Artworks:Manuscript"
+			>
+				<columnLabel key="dynamic.179b1879-7379-47df-bea9-3033866d68da">
+					<en>Manuscript</en>
+					<de>Manuscript</de>
+				</columnLabel>
+			</configurationProvider>
+		</configurationProviders>
 		<buttons>
 			<button id="exportExcel"
 				class="com.top_logic.layout.table.export.ExcelExportHandler"

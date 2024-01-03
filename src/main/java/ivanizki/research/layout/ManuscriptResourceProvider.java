@@ -1,18 +1,18 @@
 package ivanizki.research.layout;
 
-import com.top_logic.layout.AbstractResourceProvider;
+import com.top_logic.knowledge.gui.WrapperResourceProvider;
 
 import ivanizki.research.data.ASCII;
-import ivanizki.research.model.ModelUtil;
 import ivanizki.research.model.Model;
 import ivanizki.research.model.ModelType;
+import ivanizki.research.model.ModelUtil;
 
 /**
- * {@link AbstractResourceProvider} for {@link ModelType#MANUSCRIPT}s.
+ * {@link WrapperResourceProvider} for {@link ModelType#MANUSCRIPT}s.
  *
  * @author ivanizki
  */
-public class ManuscriptResourceProvider extends AbstractResourceProvider {
+public class ManuscriptResourceProvider extends WrapperResourceProvider {
 
 	@Override
 	public String getLabel(Object object) {
