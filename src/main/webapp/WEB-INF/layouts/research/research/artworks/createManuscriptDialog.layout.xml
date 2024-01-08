@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<title>
+			<title key="dynamic.741930dc-af2e-4d5a-a735-9cc47417e089">
+				<en>Create Manuscript</en>
+				<de>Create Manuscript</de>
+			</title>
+		</title>
+		<open-handler id="ID_644899ea_4902_4b40_a745_7a1b66400eb9"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+			targetComponent="research/research/artworks/createManuscriptDialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.741930dc-af2e-4d5a-a735-9cc47417e089">
+				<en>Create Manuscript</en>
+				<de>Create Manuscript</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions type="Artworks:Manuscript"/>
+		<create-handler id="ID_d46f64d7_a75d_419a_9096_988114c414c9"/>
+	</arguments>
+</config:template-call>
