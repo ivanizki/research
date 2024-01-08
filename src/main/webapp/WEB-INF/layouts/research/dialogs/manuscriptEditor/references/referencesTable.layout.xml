@@ -6,7 +6,6 @@
 	template="com.top_logic/table.template.xml"
 >
 	<arguments
-		defaultColumns="year,title,authors"
 		model="model(research/dialogs/manuscriptEditor/details/detailsForm.layout.xml#Form)"
 		type="Artworks:Manuscript"
 	>
@@ -18,6 +17,9 @@
 			elements="model->$model.get(`Artworks:Manuscript#references`)"
 			supportsElement="element->$element.instanceOf(`Artworks:Manuscript`)"
 		/>
+		<configurationProviders>
+			<configurationProvider class="ivanizki.research.layout.ManuscriptTableConfigurationProvider"/>
+		</configurationProviders>
 		<buttons>
 			<button id="exportExcel"
 				class="com.top_logic.layout.table.export.ExcelExportHandler"

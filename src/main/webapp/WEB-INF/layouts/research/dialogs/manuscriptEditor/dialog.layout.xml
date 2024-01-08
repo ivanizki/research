@@ -5,7 +5,10 @@
 	final="true"
 	template="com.top_logic/dialog.template.xml"
 >
-	<arguments helpID="ID_acc0bbb5_6d02_4fbf_a49f_ef28b4a26317">
+	<arguments
+		helpID="ID_acc0bbb5_6d02_4fbf_a49f_ef28b4a26317"
+		width="1100px"
+	>
 		<title>
 			<title key="dynamic.a0aa4569-80f0-4bd6-b0cc-ea8fbd136b87">
 				<en>ManuscriptEditor</en>
