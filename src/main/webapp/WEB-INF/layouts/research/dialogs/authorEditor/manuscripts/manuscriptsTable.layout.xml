@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		model="model(research/dialogs/authorEditor/details/detailsForm.layout.xml#Form)"
+		type="Artworks:Manuscript"
+	>
+		<name key="dynamic.a1939557-3ee7-46fd-9eca-8f3d4be92782">
+			<en>Manuscripts</en>
+			<de>Manuscripts</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.get(`Humans:Author#manuscripts`)"
+			supportsElement="element->$element.instanceOf(`Artworks:Manuscript`)"
+		/>
+		<configurationProviders>
+			<configurationProvider class="ivanizki.research.layout.ManuscriptTableConfigurationProvider"/>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

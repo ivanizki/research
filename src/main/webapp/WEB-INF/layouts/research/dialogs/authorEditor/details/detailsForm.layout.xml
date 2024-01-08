@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments
+		defaultFor="Humans:Author"
+		type="Humans:Author"
+	>
+		<name key="dynamic.64d815ff-8c36-4d15-bc17-7965ee0f22af">
+			<en>Details</en>
+			<de>Details</de>
+		</name>
+		<forms>
+			<form type="Humans:Author">
+				<formDefinition>
+					<field
+						attribute="name"
+						fullQualifiedName="Humans:Authort#name"
+						type="tl.core:String"
+					/>
+					<other-attributes/>
+				</formDefinition>
+			</form>
+		</forms>
+	</arguments>
+</config:template-call>

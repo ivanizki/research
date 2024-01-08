@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments helpID="ID_e70179fe_c1b8_459f_b534_ce5a90b22200">
+		<tabLabel key="dynamic.ee4f401d-041e-4b3b-945f-bb999c364d1f">
+			<en>Manuscripts</en>
+			<de>Manuscripts</de>
+		</tabLabel>
+		<components>
+			<layout-reference resource="research/dialogs/authorEditor/manuscripts/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>
