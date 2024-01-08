@@ -13,9 +13,6 @@
 			<layout-reference resource="research/research/artworks/manuscriptsTable.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
-			<layout-reference resource="research/research/artworks/editorForm.layout.xml">
-				<layoutInfo/>
-			</layout-reference>
 		</components>
 	</arguments>
 </config:template-call>

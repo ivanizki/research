@@ -10,8 +10,8 @@
 		type="Artworks:Manuscript"
 	>
 		<name key="dynamic.9b8505a4-25ba-4c60-8b7a-081f9aa820e4">
-			<en>ManuscriptEditor</en>
-			<de>ManuscriptEditor</de>
+			<en>Details</en>
+			<de>Details</de>
 		</name>
 		<forms>
 			<form type="Artworks:Manuscript">

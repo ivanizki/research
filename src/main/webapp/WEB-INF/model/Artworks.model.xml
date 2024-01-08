@@ -7,12 +7,6 @@
 				<generalization type="research:DataItem"/>
 			</generalizations>
 			<attributes>
-				<property name="year"
-					type="tl.core:Integer"
-				/>
-				<property name="title"
-					type="tl.core:String"
-				/>
 				<reference name="authors"
 					inverse-reference="manuscripts"
 					kind="forwards"
@@ -20,6 +14,19 @@
 					navigate="true"
 					ordered="true"
 					type="Humans:Author"
+				/>
+				<reference name="references"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="Manuscript"
+				/>
+				<property name="title"
+					type="tl.core:String"
+				/>
+				<property name="year"
+					type="tl.core:Integer"
 				/>
 			</attributes>
 		</interface>
