@@ -14,7 +14,7 @@
 			<de>ManuscriptEditor</de>
 		</name>
 		<forms>
-			<form type="Artworks:Article">
+			<form type="Artworks:Manuscript">
 				<formDefinition>
 					<field
 						attribute="year"
@@ -31,31 +31,7 @@
 						fullQualifiedName="Artworks:Manuscript#title"
 						type="tl.core:String"
 					/>
-					<field
-						attribute="abstract"
-						fullQualifiedName="Artworks:Article#abstract"
-						type="tl.core:String"
-					/>
-					<field
-						attribute="doi"
-						fullQualifiedName="Artworks:Article#doi"
-						type="tl.core:String"
-					/>
-					<field
-						attribute="journal"
-						fullQualifiedName="Artworks:Article#journal"
-						type="Humans:Journal"
-					/>
-					<field
-						attribute="volume"
-						fullQualifiedName="Artworks:Article#volume"
-						type="tl.core:String"
-					/>
-					<field
-						attribute="number"
-						fullQualifiedName="Artworks:Article#number"
-						type="tl.core:String"
-					/>
+					<other-attributes/>
 				</formDefinition>
 			</form>
 		</forms>
