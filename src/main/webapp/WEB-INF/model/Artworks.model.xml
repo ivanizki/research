@@ -2,6 +2,21 @@
 
 <model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
 	<module name="Artworks">
+		<interface name="Cite">
+			<generalizations>
+				<generalization type="research:DataItem"/>
+			</generalizations>
+		</interface>
+		<class name="TextCite">
+			<generalizations>
+				<generalization type="Cite"/>
+			</generalizations>
+			<attributes>
+				<property name="text"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</class>
 		<interface name="Manuscript">
 			<generalizations>
 				<generalization type="research:DataItem"/>
@@ -14,6 +29,13 @@
 					navigate="true"
 					ordered="true"
 					type="Humans:Author"
+				/>
+				<reference name="cites"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="Cite"
 				/>
 				<reference name="references"
 					kind="forwards"

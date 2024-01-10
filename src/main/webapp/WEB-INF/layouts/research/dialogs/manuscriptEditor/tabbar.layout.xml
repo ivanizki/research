@@ -8,6 +8,7 @@
 	<arguments>
 		<components>
 			<layout-reference resource="research/dialogs/manuscriptEditor/details/tabLayout.layout.xml"/>
+			<layout-reference resource="research/dialogs/manuscriptEditor/cites/tabLayout.layout.xml"/>
 			<layout-reference resource="research/dialogs/manuscriptEditor/references/tabLayout.layout.xml"/>
 		</components>
 	</arguments>

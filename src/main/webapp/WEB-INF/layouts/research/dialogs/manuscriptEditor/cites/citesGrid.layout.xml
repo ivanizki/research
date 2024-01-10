@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.element/grid.template.xml"
+>
+	<arguments
+		defaultColumns="text,topics"
+		fixedColumns="0"
+		model="model(research/dialogs/manuscriptEditor/details/detailsForm.layout.xml#Form)"
+		type="Artworks:TextCite"
+	>
+		<name key="dynamic.c51418fe-7199-48ac-a73c-b92ae9ab82cb">
+			<en>Cites</en>
+			<de>Cites</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.get(`Artworks:Manuscript#cites`)"
+			supportsElement="element->$element.instanceOf(`Artworks:TextCite`)"
+		/>
+		<buttons>
+			<button id="exportExcelGrid"
+				class="com.top_logic.layout.table.export.StreamingExcelExportHandler"
+			/>
+			<button id="createRow"
+				class="com.top_logic.model.search.providers.GridCreateHandlerByExpression"
+				createType="Artworks:TextCite"
+			>
+				<checkScopeProvider/>
+			</button>
+			<button id="deleteRow"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>
