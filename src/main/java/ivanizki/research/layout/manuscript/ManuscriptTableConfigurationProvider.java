@@ -1,4 +1,4 @@
-package ivanizki.research.layout;
+package ivanizki.research.layout.manuscript;
 
 import java.util.ArrayList;
 import java.util.List;

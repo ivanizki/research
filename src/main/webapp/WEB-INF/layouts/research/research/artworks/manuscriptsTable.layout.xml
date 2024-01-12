@@ -31,7 +31,7 @@
 				</columnLabel>
 				<buttons>
 					<button id="ID_37882d9b_cf93_4035_ba7d_70656522deb1"
-						class="ivanizki.research.layout.ManuscriptFilePathButton"
+						class="ivanizki.research.layout.manuscript.ManuscriptFilePathClipboardHandler"
 						image="/icons/clipboardButtonIcon.png"
 						disabledImage="/icons/clipboardButtonIconDisabled.png"
 					>
@@ -42,7 +42,7 @@
 					</button>
 				</buttons>
 			</configurationProvider>
-			<configurationProvider class="ivanizki.research.layout.ManuscriptTableConfigurationProvider"/>
+			<configurationProvider class="ivanizki.research.layout.manuscript.ManuscriptTableConfigurationProvider"/>
 		</configurationProviders>
 		<buttons>
 			<button id="exportExcel"

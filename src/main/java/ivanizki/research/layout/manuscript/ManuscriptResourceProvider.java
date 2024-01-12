@@ -1,4 +1,4 @@
-package ivanizki.research.layout;
+package ivanizki.research.layout.manuscript;
 
 import com.top_logic.knowledge.gui.WrapperResourceProvider;
 

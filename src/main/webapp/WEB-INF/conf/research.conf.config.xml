@@ -31,7 +31,7 @@
 						kind="MODEL"
 						type="Artworks:Manuscript"
 					>
-						<implementation class="ivanizki.research.layout.ManuscriptResourceProvider"/>
+						<implementation class="ivanizki.research.layout.manuscript.ManuscriptResourceProvider"/>
 					</provider>
 				</resource-providers>
 			</instance>

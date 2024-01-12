@@ -1,4 +1,4 @@
-package ivanizki.research.layout;
+package ivanizki.research.layout.manuscript;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -21,12 +21,12 @@ import ivanizki.research.model.ModelType;
  *
  * @author ivanizki
  */
-public class ManuscriptFilePathButton extends AbstractCommandHandler {
+public class ManuscriptFilePathClipboardHandler extends AbstractCommandHandler {
 
 	/**
-	 * Creates a new {@link ManuscriptFilePathButton}.
+	 * Creates a new {@link ManuscriptFilePathClipboardHandler}.
 	 */
-	public ManuscriptFilePathButton(InstantiationContext context, Config config) {
+	public ManuscriptFilePathClipboardHandler(InstantiationContext context, Config config) {
 		super(context, config);
 	}
 
