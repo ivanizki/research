@@ -37,6 +37,9 @@
 					ordered="true"
 					type="Cite"
 				/>
+				<property name="filePath"
+					type="tl.core:String"
+				/>
 				<reference name="references"
 					kind="forwards"
 					multiple="true"

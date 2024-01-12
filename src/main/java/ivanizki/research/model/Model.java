@@ -12,6 +12,8 @@ public interface Model {
 
 	public static final String CHILDREN = "children";
 
+	public static final String FILE_PATH = "filePath";
+
 	public static final String ID = "id";
 
 	public static final String JOURNAL = "journal";

@@ -24,6 +24,7 @@ public class ManuscriptTableConfigurationProvider extends NoDefaultColumnAdaptio
 	public void adaptConfigurationTo(TableConfiguration table) {
 		List<String> defaultColumns = new ArrayList<>();
 
+		adaptFilePathButtonColumn(table, defaultColumns);
 		adaptYearColumn(table, defaultColumns);
 		adaptAuthorsColumn(table, defaultColumns);
 		adaptManuscriptColumn(table, defaultColumns);
@@ -45,6 +46,14 @@ public class ManuscriptTableConfigurationProvider extends NoDefaultColumnAdaptio
 		ColumnConfiguration column = declareColumn(Model.MANUSCRIPT, table, defaultColumns);
 		column.setDefaultColumnWidth("700px");
 		column.setAccessor(IdentityAccessor.INSTANCE);
+	}
+
+	private void adaptFilePathButtonColumn(TableConfiguration table, List<String> defaultColumns) {
+		ColumnConfiguration column = getDeclaredColumn(Model.FILE_PATH + "Button", table, defaultColumns);
+		column.setDefaultColumnWidth("32px");
+		column.setFilterProvider(null);
+		column.setShowHeader(false);
+		column.setSortable(false);
 	}
 
 	private ColumnConfiguration getDeclaredColumn(String columnName, TableConfiguration table, List<String> defaultColumns) {
