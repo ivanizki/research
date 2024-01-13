@@ -24,22 +24,14 @@
 		<configurationProviders>
 			<configurationProvider class="com.top_logic.layout.table.provider.ButtonColumnProvider"
 				columnId="filePathButton"
+				columnLabel="class.ivanizki.research.layout.manuscript.I18NConstants.MANUSCRIPT_FILE_PATH_CLIPBOARD_HANDLER_LABEL"
 			>
-				<columnLabel key="dynamic.6fde63b9-d89a-49a2-99bf-8d5675549122">
-					<en>filePathButton</en>
-					<de>filePathButton</de>
-				</columnLabel>
 				<buttons>
-					<button id="ID_37882d9b_cf93_4035_ba7d_70656522deb1"
+					<button id="copyFilePathToClipboard"
 						class="ivanizki.research.layout.manuscript.ManuscriptFilePathClipboardHandler"
-						image="/icons/clipboardButtonIcon.png"
-						disabledImage="/icons/clipboardButtonIconDisabled.png"
-					>
-						<resourceKey key="dynamic.086d6464-6c92-4794-8b14-1f7e0680e05b">
-							<en>Copy to Clipboard</en>
-							<de>Copy to Clipboard</de>
-						</resourceKey>
-					</button>
+						image="css:fas fa-clipboard"
+						resourceKey="class.ivanizki.research.layout.manuscript.I18NConstants.MANUSCRIPT_FILE_PATH_CLIPBOARD_HANDLER_LABEL"
+					/>
 				</buttons>
 			</configurationProvider>
 			<configurationProvider class="ivanizki.research.layout.manuscript.ManuscriptTableConfigurationProvider"/>
