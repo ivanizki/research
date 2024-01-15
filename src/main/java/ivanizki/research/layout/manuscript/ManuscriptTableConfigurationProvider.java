@@ -1,13 +1,31 @@
 package ivanizki.research.layout.manuscript;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.top_logic.basic.StringServices;
+import com.top_logic.basic.xml.TagWriter;
+import com.top_logic.knowledge.wrap.Wrapper;
+import com.top_logic.layout.Control;
+import com.top_logic.layout.DisplayContext;
 import com.top_logic.layout.IdentityAccessor;
+import com.top_logic.layout.basic.Command;
+import com.top_logic.layout.basic.CommandModel;
+import com.top_logic.layout.basic.CommandModelFactory;
+import com.top_logic.layout.form.control.ButtonControl;
+import com.top_logic.layout.form.control.ButtonRenderer;
+import com.top_logic.layout.table.CellRenderer;
+import com.top_logic.layout.table.TableRenderer.Cell;
 import com.top_logic.layout.table.model.ColumnConfiguration;
+import com.top_logic.layout.table.model.ColumnConfiguration.DisplayMode;
 import com.top_logic.layout.table.model.NoDefaultColumnAdaption;
 import com.top_logic.layout.table.model.TableConfiguration;
+import com.top_logic.tool.boundsec.HandlerResult;
+import com.top_logic.util.Resources;
 
 import ivanizki.research.model.Model;
 import ivanizki.research.model.ModelType;
@@ -18,7 +36,6 @@ import ivanizki.research.model.ModelType;
  * @author ivanizki
  */
 public class ManuscriptTableConfigurationProvider extends NoDefaultColumnAdaption {
-
 
 	@Override
 	public void adaptConfigurationTo(TableConfiguration table) {
@@ -48,12 +65,47 @@ public class ManuscriptTableConfigurationProvider extends NoDefaultColumnAdaptio
 		column.setAccessor(IdentityAccessor.INSTANCE);
 	}
 
+	/**
+	 * Column with buttons to copy the {@link Model#FILE_PATH} of {@link ModelType#MANUSCRIPT} to
+	 * the {@link Clipboard}.
+	 */
 	private void adaptFilePathButtonColumn(TableConfiguration table, List<String> defaultColumns) {
-		ColumnConfiguration column = getDeclaredColumn(Model.FILE_PATH + "Button", table, defaultColumns);
+		ColumnConfiguration column = declareColumn(Model.FILE_PATH + "Button", table, defaultColumns);
+		column.setAccessor(IdentityAccessor.INSTANCE);
+		column.setCellRenderer(new CellRenderer() {
+
+			@Override
+			public void writeCell(DisplayContext context, TagWriter out, Cell cell) throws IOException {
+				Control control = createControl(cell);
+				if (control != null) {
+					control.write(context, out);
+				}
+			}
+
+			private Control createControl(Cell cell) {
+				Object manuscript = cell.getRowObject();
+				CommandModel commandModel = CommandModelFactory.commandModel(new Command() {
+					@Override
+					public HandlerResult executeCommand(DisplayContext context) {
+						if (manuscript instanceof Wrapper) {
+							String filePath = (String) ((Wrapper) manuscript).getValue(Model.FILE_PATH);
+							Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+							clipboard.setContents(new StringSelection(filePath), null);
+						}
+						return HandlerResult.DEFAULT_RESULT;
+					}
+				});
+				commandModel.setLabel(Resources.getInstance().getString(I18NConstants.COPY_FILE_PATH_TO_CLIPBOARD));
+				commandModel.setImage(Icons.CLIPBOARD);
+				return new ButtonControl(commandModel, ButtonRenderer.INSTANCE);
+			}
+		});
+		column.setColumnLabelKey(I18NConstants.COPY_FILE_PATH_TO_CLIPBOARD);
 		column.setDefaultColumnWidth("32px");
 		column.setFilterProvider(null);
 		column.setShowHeader(false);
 		column.setSortable(false);
+		column.setVisibility(DisplayMode.visible);
 	}
 
 	private ColumnConfiguration getDeclaredColumn(String columnName, TableConfiguration table, List<String> defaultColumns) {

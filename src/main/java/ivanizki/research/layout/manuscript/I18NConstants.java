@@ -11,7 +11,7 @@ import com.top_logic.layout.I18NConstantsBase;
 @SuppressWarnings("javadoc")
 public class I18NConstants extends I18NConstantsBase {
 
-	public static ResKey MANUSCRIPT_FILE_PATH_CLIPBOARD_HANDLER_LABEL;
+	public static ResKey COPY_FILE_PATH_TO_CLIPBOARD;
 
 	static {
 		initConstants(I18NConstants.class);

@@ -22,18 +22,6 @@
 			supportsElement="element->$element.instanceOf(`Artworks:Manuscript`)"
 		/>
 		<configurationProviders>
-			<configurationProvider class="com.top_logic.layout.table.provider.ButtonColumnProvider"
-				columnId="filePathButton"
-				columnLabel="class.ivanizki.research.layout.manuscript.I18NConstants.MANUSCRIPT_FILE_PATH_CLIPBOARD_HANDLER_LABEL"
-			>
-				<buttons>
-					<button id="copyFilePathToClipboard"
-						class="ivanizki.research.layout.manuscript.ManuscriptFilePathClipboardHandler"
-						image="css:fas fa-clipboard"
-						resourceKey="class.ivanizki.research.layout.manuscript.I18NConstants.MANUSCRIPT_FILE_PATH_CLIPBOARD_HANDLER_LABEL"
-					/>
-				</buttons>
-			</configurationProvider>
 			<configurationProvider class="ivanizki.research.layout.manuscript.ManuscriptTableConfigurationProvider"/>
 		</configurationProviders>
 		<buttons>

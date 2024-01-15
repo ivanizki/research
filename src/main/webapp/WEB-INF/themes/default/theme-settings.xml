@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<settings>
+	<icon name="ivanizki.research.layout.manuscript.Icons.CLIPBOARD"
+		value="css:fas fa-clipboard"
+	/>
+</settings>
