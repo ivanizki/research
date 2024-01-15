@@ -9,8 +9,6 @@ import java.util.List;
 
 import com.top_logic.basic.StringServices;
 import com.top_logic.basic.xml.TagWriter;
-import com.top_logic.knowledge.wrap.Wrapper;
-import com.top_logic.layout.Control;
 import com.top_logic.layout.DisplayContext;
 import com.top_logic.layout.IdentityAccessor;
 import com.top_logic.layout.basic.Command;
@@ -29,6 +27,7 @@ import com.top_logic.util.Resources;
 
 import ivanizki.research.model.Model;
 import ivanizki.research.model.ModelType;
+import ivanizki.research.model.ModelUtil;
 
 /**
  * {@link NoDefaultColumnAdaption} for the table of {@link ModelType#MANUSCRIPT}s.
@@ -76,27 +75,26 @@ public class ManuscriptTableConfigurationProvider extends NoDefaultColumnAdaptio
 
 			@Override
 			public void writeCell(DisplayContext context, TagWriter out, Cell cell) throws IOException {
-				Control control = createControl(cell);
-				if (control != null) {
-					control.write(context, out);
+				String filePath = (String) ModelUtil.getValue(cell.getRowObject(), Model.FILE_PATH);
+				if (!StringServices.isEmpty(filePath)) {
+					ButtonControl button = createCopyButton(filePath);
+					if (button != null) {
+						button.write(context, out);
+					}
 				}
 			}
 
-			private Control createControl(Cell cell) {
-				Object manuscript = cell.getRowObject();
+			private ButtonControl createCopyButton(String filePath) {
 				CommandModel commandModel = CommandModelFactory.commandModel(new Command() {
 					@Override
 					public HandlerResult executeCommand(DisplayContext context) {
-						if (manuscript instanceof Wrapper) {
-							String filePath = (String) ((Wrapper) manuscript).getValue(Model.FILE_PATH);
-							Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-							clipboard.setContents(new StringSelection(filePath), null);
-						}
+						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+						clipboard.setContents(new StringSelection(filePath), null);
 						return HandlerResult.DEFAULT_RESULT;
 					}
 				});
-				commandModel.setLabel(Resources.getInstance().getString(I18NConstants.COPY_FILE_PATH_TO_CLIPBOARD));
 				commandModel.setImage(Icons.CLIPBOARD);
+				commandModel.setLabel(Resources.getInstance().getString(I18NConstants.COPY_FILE_PATH_TO_CLIPBOARD));
 				return new ButtonControl(commandModel, ButtonRenderer.INSTANCE);
 			}
 		});
