@@ -3,5 +3,6 @@
 <!-- Main configuration file -->
 <root>
 	<alias>
+		<entry name="%LIBRARY_PATH%" value="${env:research_library_path}"/>
 	</alias>
 </root>

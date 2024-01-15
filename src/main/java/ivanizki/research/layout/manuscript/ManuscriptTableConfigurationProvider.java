@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.top_logic.basic.AliasManager;
 import com.top_logic.basic.StringServices;
 import com.top_logic.basic.xml.TagWriter;
 import com.top_logic.layout.DisplayContext;
@@ -88,8 +89,9 @@ public class ManuscriptTableConfigurationProvider extends NoDefaultColumnAdaptio
 				CommandModel commandModel = CommandModelFactory.commandModel(new Command() {
 					@Override
 					public HandlerResult executeCommand(DisplayContext context) {
+						String libraryPath = AliasManager.getInstance().getAlias("%LIBRARY_PATH%");
 						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-						clipboard.setContents(new StringSelection(filePath), null);
+						clipboard.setContents(new StringSelection(libraryPath + filePath), null);
 						return HandlerResult.DEFAULT_RESULT;
 					}
 				});
