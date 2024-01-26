@@ -1,5 +1,6 @@
 package ivanizki.research.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.top_logic.knowledge.wrap.ValueProvider;
 import com.top_logic.knowledge.wrap.Wrapper;
 import com.top_logic.model.TLClass;
 import com.top_logic.model.TLModuleSingleton;
+import com.top_logic.model.TLStructuredTypePart;
 import com.top_logic.model.TLType;
 import com.top_logic.model.util.TLModelUtil;
 
@@ -32,6 +34,20 @@ public class ModelUtil {
 	public static Set<TLClass> getRelevantTypes() {
 		TLClass generalType = (TLClass) TLModelUtil.findType(ModelModule.RESEARCH, ModelType.DATA_ITEM);
 		return TLModelUtil.getConcreteSpecializations(generalType);
+	}
+
+	/**
+	 * @return All {@link TLStructuredTypePart attributes} of the given {@link TLClass type} that
+	 *         are {@link #isRelevantType(TLClass) relevant}.
+	 */
+	public static List<TLStructuredTypePart> getOwnAttributes(TLClass type) {
+		List<TLStructuredTypePart> attributes = new ArrayList<>();
+		for (TLStructuredTypePart attribute : type.getAllParts()) {
+			if (ModelUtil.isRelevantType((TLClass) attribute.getOwner())) {
+				attributes.add(attribute);
+			}
+		}
+		return attributes;
 	}
 
 	/**

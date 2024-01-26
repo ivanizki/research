@@ -1,6 +1,5 @@
 package ivanizki.research.data;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,8 +30,8 @@ import ivanizki.research.data.types.TableCell;
 import ivanizki.research.data.types.TableRow;
 import ivanizki.research.data.types.TextLine;
 import ivanizki.research.data.types.UnorderedList;
-import ivanizki.research.model.ModelUtil;
 import ivanizki.research.model.Model;
+import ivanizki.research.model.ModelUtil;
 
 /**
  * {@link AbstractCommandHandler} to export the entire database.
@@ -91,18 +90,8 @@ public class DataExportHandler extends AbstractCommandHandler {
 		}
 
 		private List<TLStructuredTypePart> getRelevantAttributes(TLClass type) {
-			List<TLStructuredTypePart> attributes = getOwnAttributes(type);
+			List<TLStructuredTypePart> attributes = ModelUtil.getOwnAttributes(type);
 			attributes.removeIf(attribute -> !isRelevantAttribute(attribute));
-			return attributes;
-		}
-
-		private List<TLStructuredTypePart> getOwnAttributes(TLClass type) {
-			List<TLStructuredTypePart> attributes = new ArrayList<>();
-			for (TLStructuredTypePart attribute : type.getAllParts()) {
-				if (ModelUtil.isRelevantType((TLClass) attribute.getOwner())) {
-					attributes.add(attribute);
-				}
-			}
 			return attributes;
 		}
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<layout name="ArticleCreateDialog">
+	<dialogInfo
+		defaultI18n="ArticleCreateDialog"
+		executability="InViewMode"
+		height="800"
+		image="theme:ICONS_ADD_BUTTON"
+		openerClique="createMenu"
+		openerCommandGroup="Create"
+		width="1200"
+	/>
+	<components>
+		<component class="ivanizki.research.layout.manuscript.ArticleFormComponent"
+			model="null()"
+			page="/jsp/article.jsp"
+			resetInvisible="true"
+		>
+			<buttons>
+				<button id="createArticle"
+					class="ivanizki.research.layout.manuscript.dialogs.create.ArticleCreateHandler"
+					executability="ivanizki.research.layout.manuscript.dialogs.create.ArticleCreateRule"
+					group="Create"
+					resourceKey="createArticle"
+				/>
+			</buttons>
+		</component>
+		<component class="com.top_logic.knowledge.gui.layout.DefaultButtonComponent"/>
+	</components>
+</layout>
