@@ -3,6 +3,7 @@ package ivanizki.research.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,13 +28,15 @@ import com.top_logic.model.util.TLModelUtil;
  */
 public class ModelUtil {
 
+	@SuppressWarnings("javadoc")
+	public static final TLClass DATA_ITEM_TYPE = (TLClass) TLModelUtil.findType(ModelModule.RESEARCH, ModelType.DATA_ITEM);
+	
 	/**
 	 * @return All {@link TLClass type}s in the database that are {@link #isRelevantType(TLClass)
 	 *         relevant}.
 	 */
 	public static Set<TLClass> getRelevantTypes() {
-		TLClass generalType = (TLClass) TLModelUtil.findType(ModelModule.RESEARCH, ModelType.DATA_ITEM);
-		return TLModelUtil.getConcreteSpecializations(generalType);
+		return TLModelUtil.getConcreteSpecializations(DATA_ITEM_TYPE);
 	}
 
 	/**
@@ -128,5 +131,21 @@ public class ModelUtil {
 	 */
 	public static Collection<ValueProvider> getValueProviders(Object valueProvider, String attributeName) {
 		return CollectionUtil.dynamicCastView(ValueProvider.class, getValues(valueProvider, attributeName));
+	}
+
+	/**
+	 * @return The {@link Model#CHILDREN} as a collection of {@link ValueProvider}s.
+	 */
+	public static Set<ValueProvider> getChildrenRecursively(Object valueProvider) {
+		Set<ValueProvider> topics = new HashSet<>();
+		collectChildrenRecursively((ValueProvider) valueProvider, topics);
+		return topics;
+	}
+
+	private static void collectChildrenRecursively(ValueProvider parent, Set<ValueProvider> children) {
+		children.add(parent);
+		for (ValueProvider child : ModelUtil.getValueProviders(parent, Model.CHILDREN)) {
+			collectChildrenRecursively(child, children);
+		}
 	}
 }

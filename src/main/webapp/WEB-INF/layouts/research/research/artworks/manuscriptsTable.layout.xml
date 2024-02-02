@@ -7,6 +7,7 @@
 >
 	<arguments
 		model="selection(research/research/artworks/topicsTree.layout.xml#Tree)"
+		modelBuilder="ivanizki.research.layout.manuscript.ManuscriptTableByTopicBuilder"
 		type="Artworks:Manuscript"
 	>
 		<dialogs>
@@ -18,10 +19,6 @@
 			<en>Manuscripts</en>
 			<de>Manuscripts</de>
 		</name>
-		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
-			elements="topic->$topic.get(`Topics:Topic#dataItems`).filter(item->$item.instanceOf(`Artworks:Manuscript`))"
-			supportsElement="element->$element.instanceOf(`Artworks:Manuscript`)"
-		/>
 		<configurationProviders>
 			<configurationProvider class="ivanizki.research.layout.manuscript.ManuscriptTableConfigurationProvider"/>
 		</configurationProviders>

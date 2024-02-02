@@ -5,7 +5,7 @@
 	final="true"
 	template="com.top_logic/tree.template.xml"
 >
-	<arguments rootVisible="false">
+	<arguments>
 		<name key="dynamic.d9c5ab7a-f04a-4a85-94b4-dd70937ec2b5">
 			<en>Topics</en>
 			<de>Topics</de>
