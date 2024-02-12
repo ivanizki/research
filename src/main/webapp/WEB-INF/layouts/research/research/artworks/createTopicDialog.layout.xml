@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<forms>
+			<form type="Topics:Topic">
+				<formDefinition>
+					<field
+						attribute="name"
+						fullQualifiedName="Topics:Topic#name"
+						type="tl.core:String"
+					/>
+				</formDefinition>
+			</form>
+		</forms>
+		<title>
+			<title key="dynamic.25dace88-b18b-4f3b-95ec-fd4a9ab5cca5">
+				<en>Create Topic</en>
+				<de>Create Topic</de>
+			</title>
+		</title>
+		<header key="dynamic.56f9a08e-5294-4c2d-81bf-8475f424cf08">
+			<en>Create {0}</en>
+			<de>Create {0}</de>
+		</header>
+		<open-handler id="ID_6c210f9a_c23c_48f3_8332_d7604056197f"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+			targetComponent="research/research/artworks/createTopicDialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.25dace88-b18b-4f3b-95ec-fd4a9ab5cca5">
+				<en>Create Sub-Topic...</en>
+				<de>Create Sub-Topic...</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions type="Topics:Topic"/>
+		<create-handler id="ID_ab202846_45e7_4be1_9f41_3604890ca054"
+			linkOperation="x->topic->selection->$selection.add(`Topics:Topic#children`,$topic)"
+			target="selection(research/research/artworks/topicsTree.layout.xml#Tree)"
+		>
+			<resourceKey key="dynamic.750ee24f-12ae-4a7f-90c6-1df182c445ef">
+				<en>Create</en>
+				<de>Create</de>
+			</resourceKey>
+		</create-handler>
+	</arguments>
+</config:template-call>

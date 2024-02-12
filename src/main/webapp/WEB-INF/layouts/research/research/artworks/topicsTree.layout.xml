@@ -6,6 +6,9 @@
 	template="com.top_logic/tree.template.xml"
 >
 	<arguments>
+		<dialogs>
+			<layout-reference resource="research/research/artworks/createTopicDialog.layout.xml"/>
+		</dialogs>
 		<name key="dynamic.d9c5ab7a-f04a-4a85-94b4-dd70937ec2b5">
 			<en>Topics</en>
 			<de>Topics</de>
