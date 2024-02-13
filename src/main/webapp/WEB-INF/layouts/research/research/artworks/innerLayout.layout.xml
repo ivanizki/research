@@ -8,7 +8,7 @@
 	<arguments>
 		<components>
 			<layout-reference resource="research/research/artworks/topicsTree.layout.xml">
-				<layoutInfo/>
+				<layoutInfo size="20%"/>
 			</layout-reference>
 			<layout-reference resource="research/research/artworks/manuscriptsTable.layout.xml">
 				<layoutInfo/>
