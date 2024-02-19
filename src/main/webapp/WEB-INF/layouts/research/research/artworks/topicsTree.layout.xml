@@ -19,5 +19,14 @@
 			parents="node->$node.referers(`Topics:Topic#children`)"
 			rootNode="`Topics#ROOT`"
 		/>
+		<treeDrop class="com.top_logic.model.search.providers.OntoTreeDropByExpression">
+			<handleDrop><![CDATA[child->newParent->{
+ $child.get(`Topics:Topic#parents`).foreach(parent->{
+  children = $parent.get(`Topics:Topic#children`).filter(topic->!$topic.equals($child));
+  $parent.set(`Topics:Topic#children`,$children);
+ });
+ $newParent.add(`Topics:Topic#children`,$child);
+}]]></handleDrop>
+		</treeDrop>
 	</arguments>
 </config:template-call>
