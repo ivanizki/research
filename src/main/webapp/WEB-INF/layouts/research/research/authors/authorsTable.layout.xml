@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments type="Humans:Author">
+		<dialogs>
+			<layout-reference resource="research/research/authors/createAuthorDialog.layout.xml"/>
+		</dialogs>
+		<name key="dynamic.c4c955bd-43cc-4cab-875c-0c35d7c78396">
+			<en>Authors</en>
+			<de>Authors</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->all(`Humans:Author`)"
+			supportsElement="element->$element.instanceOf(`Humans:Author`)"
+		/>
+		<configurationProviders>
+			<configurationProvider class="ivanizki.research.layout.manuscript.AuthorTableConfigurationProvider"/>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

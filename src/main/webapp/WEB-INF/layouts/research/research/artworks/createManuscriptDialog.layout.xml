@@ -18,8 +18,8 @@
 			targetComponent="research/research/artworks/createManuscriptDialog.layout.xml#Editor"
 		>
 			<resourceKey key="dynamic.741930dc-af2e-4d5a-a735-9cc47417e089">
-				<en>Create Manuscript</en>
-				<de>Create Manuscript</de>
+				<en>Create Manuscript...</en>
+				<de>Create Manuscript...</de>
 			</resourceKey>
 		</open-handler>
 		<typeOptions type="Artworks:Manuscript"/>

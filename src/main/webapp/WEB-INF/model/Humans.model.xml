@@ -24,6 +24,20 @@
 					navigate="true"
 					type="Artworks:Manuscript"
 				/>
+				<reference name="students"
+					inverse-reference="teachers"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="Author"
+				/>
+				<reference name="teachers"
+					inverse-reference="students"
+					kind="backwards"
+					multiple="true"
+					navigate="true"
+					type="Author"
+				/>
 			</attributes>
 		</class>
 		<interface name="Organization">

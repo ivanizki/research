@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<forms>
+			<form type="Humans:Author">
+				<formDefinition>
+					<columnsLayout>
+						<field
+							attribute="name"
+							fullQualifiedName="Humans:Human#name"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="topics"
+							fullQualifiedName="research:DataItem#topics"
+							type="Topics:Topic"
+						/>
+					</columnsLayout>
+				</formDefinition>
+			</form>
+		</forms>
+		<title>
+			<title key="dynamic.a4baaf38-ce78-46dc-9db0-187defb32fd1">
+				<en>Create Author</en>
+				<de>Create Author</de>
+			</title>
+		</title>
+		<open-handler id="ID_cd9f6703_5d28_4a07_b6e1_9b247e57c5ca"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+			targetComponent="research/research/authors/createAuthorDialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.a4baaf38-ce78-46dc-9db0-187defb32fd1">
+				<en>Create Author...</en>
+				<de>Create Author...</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions type="Humans:Author"/>
+		<create-handler id="ID_76cf6529_e02d_4dbe_895c_aa007b4b6572"/>
+	</arguments>
+</config:template-call>

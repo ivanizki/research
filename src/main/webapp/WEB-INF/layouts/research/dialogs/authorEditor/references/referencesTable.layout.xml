@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		model="model(research/dialogs/authorEditor/details/detailsForm.layout.xml#Form)"
+		type="Humans:Author"
+	>
+		<name key="dynamic.81d8afd7-b0e4-4bee-9885-1d47dab5ae7d">
+			<en>References</en>
+			<de>References</de>
+		</name>
+		<configurationProviders>
+			<configurationProvider class="ivanizki.research.layout.manuscript.AuthorTableConfigurationProvider"/>
+		</configurationProviders>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.get(`Humans:Author#manuscripts`).get(`Artworks:Manuscript#references`).flatten().get(`Artworks:Manuscript#authors`).flatten().filter(author->!$model.equals($author))"
+			supportsElement="element->$element.instanceOf(`Humans:Author`)"
+		/>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

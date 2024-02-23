@@ -21,7 +21,16 @@
 						fullQualifiedName="Humans:Authort#name"
 						type="tl.core:String"
 					/>
-					<other-attributes/>
+					<field
+						attribute="teachers"
+						fullQualifiedName="Humans:Author#teachers"
+						type="Humans:Author"
+					/>
+					<field
+						attribute="students"
+						fullQualifiedName="Humans:Author#students"
+						type="Humans:Author"
+					/>
 				</formDefinition>
 			</form>
 		</forms>
