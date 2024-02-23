@@ -11,6 +11,7 @@
 			<layout-reference resource="research/dialogs/authorEditor/manuscripts/tabLayout.layout.xml"/>
 			<layout-reference resource="research/dialogs/authorEditor/coAuthors/tabLayout.layout.xml"/>
 			<layout-reference resource="research/dialogs/authorEditor/references/tabLayout.layout.xml"/>
+			<layout-reference resource="research/dialogs/authorEditor/citations/tabLayout.layout.xml"/>
 		</components>
 	</arguments>
 </config:template-call>

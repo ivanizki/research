@@ -30,6 +30,13 @@
 					ordered="true"
 					type="Humans:Author"
 				/>
+				<reference name="citations"
+					inverse-reference="references"
+					kind="backwards"
+					multiple="true"
+					navigate="true"
+					type="Manuscript"
+				/>
 				<reference name="cites"
 					kind="forwards"
 					multiple="true"
@@ -41,6 +48,7 @@
 					type="tl.core:String"
 				/>
 				<reference name="references"
+					inverse-reference="citations"
 					kind="forwards"
 					multiple="true"
 					navigate="true"

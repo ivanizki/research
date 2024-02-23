@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments helpID="ID_515efe4c_92a1_4826_b6d7_545190d2711e">
+		<tabLabel key="dynamic.3efefc47-2c84-4a6b-833b-82aeac038741">
+			<en>Citations</en>
+			<de>Citations</de>
+		</tabLabel>
+		<components>
+			<layout-reference resource="research/dialogs/manuscriptEditor/citations/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>
