@@ -7,6 +7,7 @@
 >
 	<arguments
 		model="model(research/dialogs/authorEditor/details/detailsForm.layout.xml#Form)"
+		multiSelection="true"
 		type="Artworks:Manuscript"
 	>
 		<name key="dynamic.a1939557-3ee7-46fd-9eca-8f3d4be92782">
