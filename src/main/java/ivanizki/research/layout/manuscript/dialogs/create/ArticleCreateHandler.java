@@ -42,11 +42,13 @@ public class ArticleCreateHandler extends AbstractCommandHandler {
 		try {
 			Wrapper wrapper = (Wrapper) DynamicModelService.getInstance().createObject(type);
 			for (TLStructuredTypePart attribute : ModelUtil.getOwnAttributes(type)) {
-				String attributeName = attribute.getName();
-				FormField field = form.getFormContext().getField(attributeName);
-				Object fieldValue = field.getValue();
-				Object attributeValue = attribute.isMultiple() ? fieldValue : CollectionUtil.getSingleValueFrom(fieldValue);
-				wrapper.setValue(attributeName, attributeValue);
+				if (!attribute.isDerived()) {
+					String attributeName = attribute.getName();
+					FormField field = form.getFormContext().getField(attributeName);
+					Object fieldValue = field.getValue();
+					Object attributeValue = attribute.isMultiple() ? fieldValue : CollectionUtil.getSingleValueFrom(fieldValue);
+					wrapper.setValue(attributeName, attributeValue);
+				}
 			}
 			transaction.commit();
 		} finally {
