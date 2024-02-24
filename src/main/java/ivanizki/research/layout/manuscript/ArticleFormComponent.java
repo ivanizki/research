@@ -91,6 +91,7 @@ public class ArticleFormComponent extends FormComponent {
 		} else if (attribute instanceof TLReference) {
 			SelectField field = FormFactory.newSelectField(attributeName, getSelectFieldOptions(attribute), attribute.isMultiple(), !IMMUTABLE);
 			field.setControlProvider(SelectionControlProvider.INSTANCE);
+			field.setCustomOrder(attribute.isOrdered());
 			return field;
 		}
 		return null;
