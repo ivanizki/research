@@ -106,5 +106,17 @@
 				/>
 			</attributes>
 		</class>
+		<class name="PhDThesis">
+			<generalizations>
+				<generalization type="Manuscript"/>
+			</generalizations>
+			<attributes>
+				<reference name="school"
+					kind="forwards"
+					navigate="true"
+					type="Humans:School"
+				/>
+			</attributes>
+		</class>
 	</module>
 </model>
