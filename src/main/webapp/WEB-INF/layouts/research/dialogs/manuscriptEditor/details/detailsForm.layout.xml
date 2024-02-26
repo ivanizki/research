@@ -17,20 +17,27 @@
 			<form type="Artworks:Manuscript">
 				<formDefinition>
 					<field
-						attribute="year"
-						fullQualifiedName="Artworks:Manuscript#year"
-						type="tl.core:Integer"
+						attribute="title"
+						fullQualifiedName="Artworks:Manuscript#title"
+						type="tl.core:String"
 					/>
 					<field
 						attribute="authors"
 						fullQualifiedName="Artworks:Manuscript#authors"
 						type="Humans:Author"
 					/>
-					<field
-						attribute="title"
-						fullQualifiedName="Artworks:Manuscript#title"
-						type="tl.core:String"
-					/>
+					<columnsLayout>
+						<field
+							attribute="year"
+							fullQualifiedName="Artworks:Manuscript#year"
+							type="tl.core:Integer"
+						/>
+						<field
+							attribute="topics"
+							fullQualifiedName="research:DataItem#topics"
+							type="Topics:Topic"
+						/>
+					</columnsLayout>
 					<field
 						attribute="filePath"
 						fullQualifiedName="Artworks:Manuscript#filePath"
