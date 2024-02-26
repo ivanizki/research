@@ -63,19 +63,25 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 		private static final Map<BibTeXEntryType, TLClass> _TYPE_MAP = new MapBuilder<BibTeXEntryType, TLClass>()
 			.put(BibTeXEntryType.ARTICLE, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.ARTICLE))
 			.put(BibTeXEntryType.BOOK, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.BOOK))
+			.put(BibTeXEntryType.PHDTHESIS, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.PH_D_THESIS))
 			.toMap();
 
 		private static final TLClass AUTHOR_TYPE = (TLClass) TLModelUtil.findType(ModelModule.HUMANS, ModelType.AUTHOR);
 		
 		private static final TLClass JOURNAL_TYPE = (TLClass) TLModelUtil.findType(ModelModule.HUMANS, ModelType.JOURNAL);
 
+		private static final TLClass SCHOOL_TYPE = (TLClass) TLModelUtil.findType(ModelModule.HUMANS, ModelType.SCHOOL);
+
 		private Map<String, Wrapper> _authors;
 
 		private Map<String, Wrapper> _journals;
 
+		private Map<String, Wrapper> _schools;
+
 		public Importer() {
 			_authors = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(AUTHOR_TYPE), Model.NAME);
 			_journals = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(JOURNAL_TYPE), Model.NAME);
+			_schools = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(SCHOOL_TYPE), Model.NAME);
 		}
 
 		private void importDocument(BibTeXDocument document) {
@@ -100,6 +106,8 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 					wrapper.setValue(Model.AUTHORS, importAttributeAuthor(bibAttributeValue));
 				} else if (BibTeXEntryAttribute.JOURNAL.equals(bibAttribute)) {
 					wrapper.setValue(Model.JOURNAL, importAttributeJournal(bibAttributeValue));
+				} else if (BibTeXEntryAttribute.SCHOOL.equals(bibAttribute)) {
+					wrapper.setValue(Model.SCHOOL, importAttributeSchool(bibAttributeValue));
 				} else {
 					if (attribute != null) {
 						wrapper.setValue(attributeName, ModelUtil.parse(attribute.getType(), bibAttributeValue));
@@ -130,6 +138,16 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 				_journals.put(name, journal);
 			}
 			return journal;
+		}
+
+		private Wrapper importAttributeSchool(String name) {
+			Wrapper school = _schools.get(name);
+			if (school == null) {
+				school = (Wrapper) DynamicModelService.getInstance().createObject(SCHOOL_TYPE);
+				school.setValue(Model.NAME, name);
+				_schools.put(name, school);
+			}
+			return school;
 		}
 
 	}

@@ -20,5 +20,9 @@ public interface ModelType {
 
 	public static final String MANUSCRIPT = "Manuscript";
 
+	public static final String PH_D_THESIS = "PhDThesis";
+
+	public static final String SCHOOL = "School";
+
 	public static final String TOPIC = "Topic";
 }

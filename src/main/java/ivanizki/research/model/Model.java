@@ -32,6 +32,8 @@ public interface Model {
 
 	public static final String PARENTS = "parents";
 
+	public static final String SCHOOL = "school";
+
 	public static final String TITLE = "title";
 
 	public static final String TOPICS = "topics";

@@ -15,7 +15,7 @@ public interface BibTeX {
 	 */
 	@SuppressWarnings("javadoc")
 	public enum BibTeXEntryType {
-		ARTICLE, BOOK
+		ARTICLE, BOOK, PHDTHESIS
 	}
 
 	/**
@@ -28,7 +28,9 @@ public interface BibTeX {
 		// {@link BibTeXEntryType#ARTICLE}
 		JOURNAL, VOLUME, NUMBER, PAGES,
 		// {@link BibTeXEntryType#BOOK}
-		PUBLISHER, ADDRESS, EDITION
+		PUBLISHER, ADDRESS, EDITION,
+		// {@link BibTeXEntryType#PHDTHESIS}
+		SCHOOL
 	}
 
 }
