@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments helpID="ID_9b25bc56_445f_48ad_8ec4_946c7cb38728">
+		<tabLabel key="dynamic.3a3d05e4-d1e3-48e0-9ebc-21dec7a4abef">
+			<en>Journals</en>
+			<de>Journals</de>
+		</tabLabel>
+		<components>
+			<layout-reference resource="research/research/journals/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<title>
+			<title key="dynamic.4e571a52-ecd2-4136-83d6-f058b99d05d1">
+				<en>Create Journal</en>
+				<de>Create Journal</de>
+			</title>
+		</title>
+		<header key="dynamic.2ae2affd-52a8-4e08-905a-f36a04058176">
+			<en>Create Journal</en>
+			<de>Create Journal</de>
+		</header>
+		<open-handler id="addRow"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+		>
+			<resourceKey key="dynamic.04f577dd-e513-4070-a30f-99308ce024ef">
+				<en>Create Journal...</en>
+				<de>Create Journal...</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions type="Humans:Journal"/>
+		<create-handler id="createRow">
+			<postCreateActions>
+				<setModel target="selection(research/research/journals/journalsTable.layout.xml#Table)"/>
+			</postCreateActions>
+		</create-handler>
+	</arguments>
+</config:template-call>
