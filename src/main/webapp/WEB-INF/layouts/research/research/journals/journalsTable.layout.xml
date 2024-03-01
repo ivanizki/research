@@ -7,6 +7,7 @@
 >
 	<arguments
 		defaultColumns="_actions,name,topics"
+		multiSelection="true"
 		type="Humans:Journal"
 	>
 		<dialogs>

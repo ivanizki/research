@@ -7,6 +7,7 @@
 >
 	<arguments
 		defaultColumns="_actions,name"
+		multiSelection="true"
 		type="Humans:School"
 	>
 		<dialogs>

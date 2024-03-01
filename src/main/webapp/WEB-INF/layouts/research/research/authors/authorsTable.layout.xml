@@ -5,7 +5,10 @@
 	final="true"
 	template="com.top_logic/table.template.xml"
 >
-	<arguments type="Humans:Author">
+	<arguments
+		multiSelection="true"
+		type="Humans:Author"
+	>
 		<dialogs>
 			<layout-reference resource="research/research/authors/createAuthorDialog.layout.xml"/>
 		</dialogs>
@@ -23,6 +26,10 @@
 		<buttons>
 			<button id="exportExcel"
 				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+			<button id="deleteRow"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
 			/>
 		</buttons>
 	</arguments>

@@ -37,6 +37,10 @@
 				image="css:fas fa-file-upload"
 				resourceKey="class.ivanizki.research.data.I18NConstants.DATA_IMPORT_HANDLER_LABEL"
 			/>
+			<button id="deleteRow"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
 		</buttons>
 	</arguments>
 </config:template-call>

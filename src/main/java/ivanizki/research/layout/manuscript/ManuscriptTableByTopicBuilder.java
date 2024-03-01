@@ -55,11 +55,14 @@ public class ManuscriptTableByTopicBuilder implements ListModelBuilder {
 
 	@Override
 	public boolean supportsListElement(LayoutComponent component, Object candidate) {
-		List<String> typeNames = ((TableComponent.Config) ((TableComponent) component).getConfig()).getObjectType();
-		for (String typeName : typeNames) {
-			String[] typeNameParts = StringServices.split(typeName, TLModelUtil.QUALIFIED_NAME_SEPARATOR);
-			if (MetaElementUtil.isSubtype(typeNameParts[0], typeNameParts[1], (TLClass) ((Wrapper) candidate).tType())) {
-				return true;
+		Wrapper wrapper = (Wrapper) candidate;
+		if (wrapper.tValid()) {
+			List<String> typeNames = ((TableComponent.Config) ((TableComponent) component).getConfig()).getObjectType();
+			for (String typeName : typeNames) {
+				String[] typeNameParts = StringServices.split(typeName, TLModelUtil.QUALIFIED_NAME_SEPARATOR);
+				if (MetaElementUtil.isSubtype(typeNameParts[0], typeNameParts[1], (TLClass) wrapper.tType())) {
+					return true;
+				}
 			}
 		}
 		return false;
