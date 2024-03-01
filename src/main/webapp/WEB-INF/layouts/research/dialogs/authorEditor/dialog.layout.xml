@@ -9,12 +9,9 @@
 		helpID="ID_6c4c9969_0c93_45cd_a3e8_7bab1247ccda"
 		width="1100px"
 	>
-		<title>
-			<title key="dynamic.bfbdea00-536f-4f0b-8e81-7af28671d6ef">
-				<en>AuthorEditor</en>
-				<de>AuthorEditor</de>
-			</title>
-		</title>
+		<title class="com.top_logic.layout.component.title.ModelTitle"
+			model="model(research/dialogs/authorEditor/details/detailsForm.layout.xml#Form)"
+		/>
 		<open-handler id="ID_c5ae174f_79d3_4e94_be6c_b5d4f0326690"
 			config:interface="com.top_logic.layout.editor.config.DialogOpenHandlerConfig"
 		>

@@ -9,12 +9,9 @@
 		helpID="ID_acc0bbb5_6d02_4fbf_a49f_ef28b4a26317"
 		width="1100px"
 	>
-		<title>
-			<title key="dynamic.a0aa4569-80f0-4bd6-b0cc-ea8fbd136b87">
-				<en>ManuscriptEditor</en>
-				<de>ManuscriptEditor</de>
-			</title>
-		</title>
+		<title class="com.top_logic.layout.component.title.ModelTitle"
+			model="model(research/dialogs/manuscriptEditor/details/detailsForm.layout.xml#Form)"
+		/>
 		<open-handler id="ID_a95517c6_a79c_4d77_b66e_032867ab5214"
 			config:interface="com.top_logic.layout.editor.config.DialogOpenHandlerConfig"
 		>
