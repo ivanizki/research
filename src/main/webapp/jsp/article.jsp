@@ -15,16 +15,18 @@
 				<form:inputCell name="<%=Model.TOPICS %>"/>
 			</form:columns>
 			<form:columns count="1">
-				<form:separator/>
 				<form:inputCell name="<%=Model.ABSTRACT %>"/>
+			</form:columns>
+			<form:columns count="2">
+				<form:inputCell name="<%=Model.FILE_PATH %>"/>
+				<form:inputCell name="<%=Model.DOI %>"/>
 			</form:columns>
 			<form:columns count="2">
 				<form:separator/>
 				<form:inputCell name="<%=Model.JOURNAL %>"/>
-				<form:inputCell name="<%=Model.DOI %>"/>
-				<form:inputCell name="<%=Model.NUMBER %>"/>
-				<form:inputCell name="<%=Model.VOLUME %>"/>
 				<form:inputCell name="<%=Model.PAGES %>"/>
+				<form:inputCell name="<%=Model.VOLUME %>"/>
+				<form:inputCell name="<%=Model.NUMBER %>"/>
 			</form:columns>
 		</form:form>
 	</layout:body>

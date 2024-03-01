@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<layout name="ArticleCreateDialog">
+<layout>
 	<dialogInfo
 		defaultI18n="ArticleCreateDialog"
 		executability="InViewMode"
@@ -11,17 +11,19 @@
 		width="1200"
 	/>
 	<components>
-		<component class="ivanizki.research.layout.manuscript.ArticleFormComponent"
+		<component class="ivanizki.framework.TypeBasedCreateComponent"
+			form-context-provider="ivanizki.research.layout.manuscript.ArticleFormContextProvider"
 			model="null()"
 			page="/jsp/article.jsp"
 			resetInvisible="true"
+			type="Artworks:Article"
 		>
 			<buttons>
-				<button id="createArticle"
-					class="ivanizki.research.layout.manuscript.dialogs.create.ArticleCreateHandler"
-					executability="ivanizki.research.layout.manuscript.dialogs.create.ArticleCreateRule"
+				<button id="frameworkCreate"
+					class="ivanizki.framework.WrapperCreateHandler"
+					executability="ivanizki.framework.FormConstraintsCheckingRule"
 					group="Create"
-					resourceKey="createArticle"
+					resourceKey="frameworkCreate"
 				/>
 			</buttons>
 		</component>

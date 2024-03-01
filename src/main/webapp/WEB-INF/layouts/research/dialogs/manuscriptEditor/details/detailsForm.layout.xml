@@ -1,51 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<config:template-call
-	xmlns:config="http://www.top-logic.com/ns/config/6.0"
-	final="true"
-	template="com.top_logic.element/form.template.xml"
->
-	<arguments
-		defaultFor="Artworks:Manuscript"
-		type="Artworks:Manuscript"
-	>
-		<name key="dynamic.9b8505a4-25ba-4c60-8b7a-081f9aa820e4">
-			<en>Details</en>
-			<de>Details</de>
-		</name>
-		<forms>
-			<form type="Artworks:Manuscript">
-				<formDefinition>
-					<field
-						attribute="title"
-						fullQualifiedName="Artworks:Manuscript#title"
-						type="tl.core:String"
-					/>
-					<field
-						attribute="authors"
-						fullQualifiedName="Artworks:Manuscript#authors"
-						type="Humans:Author"
-					/>
-					<columnsLayout>
-						<field
-							attribute="year"
-							fullQualifiedName="Artworks:Manuscript#year"
-							type="tl.core:Integer"
-						/>
-						<field
-							attribute="topics"
-							fullQualifiedName="research:DataItem#topics"
-							type="Topics:Topic"
-						/>
-					</columnsLayout>
-					<field
-						attribute="filePath"
-						fullQualifiedName="Artworks:Manuscript#filePath"
-						type="tl.core:String"
-					/>
-					<other-attributes/>
-				</formDefinition>
-			</form>
-		</forms>
-	</arguments>
-</config:template-call>
+<layout>
+	<components>
+		<component class="com.top_logic.knowledge.gui.layout.DefaultButtonComponent"/>
+		<component class="ivanizki.framework.TypeBasedEditComponent"
+			defaultFor="Artworks:Article"
+			form-context-provider="ivanizki.research.layout.manuscript.ArticleFormContextProvider"
+			model="selection()"
+			name="Form"
+			page="/jsp/article.jsp"
+			resetInvisible="true"
+			titleKey="default.for.title"
+		>
+			<buttons>
+				<button id="frameworkSave"
+					class="ivanizki.framework.WrapperSaveHandler"
+					clique="save"
+					executability="InEditMode"
+					resourceKey="frameworkSave"
+				/>
+				<button id="frameworkApply"
+					class="ivanizki.framework.WrapperApplyHandler"
+					clique="apply"
+					executability="InEditMode"
+					resourceKey="frameworkApply"
+				/>
+				<button id="frameworkEdit"
+					class="com.top_logic.layout.form.component.SwitchEditCommandHandler"
+					clique="edit"
+					executability="SwitchToEditMode"
+					resourceKey="frameworkEdit"
+				/>
+			</buttons>
+		</component>
+	</components>
+</layout>
