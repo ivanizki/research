@@ -18,8 +18,9 @@
 				<formDefinition>
 					<field
 						attribute="name"
-						fullQualifiedName="Humans:Authort#name"
+						fullQualifiedName="Humans:Human#name"
 						type="tl.core:String"
+						visibility="mandatory"
 					/>
 					<field
 						attribute="teachers"
