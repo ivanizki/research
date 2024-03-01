@@ -18,7 +18,7 @@
 			supportsElement="element->$element.instanceOf(`Humans:Author`)"
 		/>
 		<configurationProviders>
-			<configurationProvider class="ivanizki.research.layout.manuscript.AuthorTableConfigurationProvider"/>
+			<configurationProvider class="ivanizki.research.layout.AuthorTableConfigurationProvider"/>
 		</configurationProviders>
 		<buttons>
 			<button id="exportExcel"

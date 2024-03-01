@@ -14,7 +14,7 @@
 			<de>References</de>
 		</name>
 		<configurationProviders>
-			<configurationProvider class="ivanizki.research.layout.manuscript.AuthorTableConfigurationProvider"/>
+			<configurationProvider class="ivanizki.research.layout.AuthorTableConfigurationProvider"/>
 		</configurationProviders>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
 			elements="model->$model.get(`Humans:Author#manuscripts`).get(`Artworks:Manuscript#references`).flatten().get(`Artworks:Manuscript#authors`).flatten().filter(author->!$model.equals($author))"
