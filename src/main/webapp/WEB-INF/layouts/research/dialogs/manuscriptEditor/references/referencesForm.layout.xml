@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments
+		model="model(research/dialogs/manuscriptEditor/details/detailsForm.layout.xml#Form)"
+		saveClosesDialog="false"
+		type="Artworks:Manuscript"
+	>
+		<name key="dynamic.b51d282e-9aec-49ec-8fa4-6030e6018f0f">
+			<en>References</en>
+			<de>References</de>
+		</name>
+		<forms>
+			<form type="Artworks:Manuscript">
+				<formDefinition>
+					<field
+						attribute="references"
+						fullQualifiedName="Artworks:Manuscript#references"
+						type="Artworks:Manuscript"
+					>
+						<annotations>
+							<visible-columns visible-columns="year,authors,title"/>
+							<reference-display value="table"/>
+						</annotations>
+					</field>
+				</formDefinition>
+			</form>
+		</forms>
+	</arguments>
+</config:template-call>

@@ -7,7 +7,7 @@
 >
 	<arguments>
 		<components>
-			<layout-reference resource="research/dialogs/manuscriptEditor/references/referencesTable.layout.xml">
+			<layout-reference resource="research/dialogs/manuscriptEditor/references/referencesForm.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
 		</components>
