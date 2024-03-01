@@ -19,6 +19,7 @@ import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
 
 import ivanizki.research.DummyLogger;
+import ivanizki.research.data.ASCII;
 import ivanizki.research.data.file.bibtex.BibTeX;
 import ivanizki.research.data.file.bibtex.BibTeX.BibTeXEntryAttribute;
 import ivanizki.research.data.file.bibtex.BibTeX.BibTeXEntryType;
@@ -103,7 +104,7 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 				TLStructuredTypePart attribute = type.getPart(attributeName);
 				String bibAttributeValue = entry.getAttributeValue(bibAttribute);
 				if (BibTeXEntryAttribute.AUTHOR.equals(bibAttribute)) {
-					wrapper.setValue(Model.AUTHORS, importAttributeAuthor(bibAttributeValue));
+					wrapper.setValue(Model.AUTHORS, importAttributeAuthors(bibAttributeValue));
 				} else if (BibTeXEntryAttribute.JOURNAL.equals(bibAttribute)) {
 					wrapper.setValue(Model.JOURNAL, importAttributeJournal(bibAttributeValue));
 				} else if (BibTeXEntryAttribute.SCHOOL.equals(bibAttribute)) {
@@ -116,9 +117,9 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 			}
 		}
 		
-		private List<Wrapper> importAttributeAuthor(String names) {
+		private List<Wrapper> importAttributeAuthors(String namesString) {
 			List<Wrapper> authors = new ArrayList<>();
-			for (String name : names.split(" and ")) {
+			for (String name : splitNames(namesString)) {
 				Wrapper author = _authors.get(name);
 				if (author == null) {
 					author = (Wrapper) DynamicModelService.getInstance().createObject(AUTHOR_TYPE);
@@ -128,6 +129,16 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 				authors.add(author);
 			}
 			return authors;
+		}
+
+		private List<String> splitNames(String namesString) {
+			List<String> names = new ArrayList<>();
+			for (String namesSplit : namesString.split(" and ")) {
+				for (String name : namesSplit.split(Character.toString(ASCII.COMMA))) {
+					names.add(name.trim());
+				}
+			}
+			return names;
 		}
 
 		private Wrapper importAttributeJournal(String name) {
