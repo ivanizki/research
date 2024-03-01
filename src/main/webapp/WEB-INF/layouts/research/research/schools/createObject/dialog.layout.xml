@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<title>
+			<title key="dynamic.2955e95e-469a-457a-97e0-d756d15c7b65">
+				<en>Create School</en>
+				<de>Create School</de>
+			</title>
+		</title>
+		<header key="dynamic.e4d77a60-af2b-43b2-ba89-878aa98f096a">
+			<en>Create School</en>
+			<de>Create School</de>
+		</header>
+		<open-handler id="addRow"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+		>
+			<resourceKey key="dynamic.c56722b5-9691-498e-a5f0-9d46abc324e1">
+				<en>Create School...</en>
+				<de>Create School...</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions type="Humans:School"/>
+		<create-handler id="createRow">
+			<postCreateActions>
+				<setModel target="selection(research/research/schools/schoolsTable.layout.xml#Table)"/>
+			</postCreateActions>
+		</create-handler>
+	</arguments>
+</config:template-call>
