@@ -11,6 +11,9 @@
 			<generalizations>
 				<generalization type="research:DataItem"/>
 			</generalizations>
+			<annotations>
+				<main-properties properties="name,children"/>
+			</annotations>
 			<attributes>
 				<reference name="children"
 					inverse-reference="parents"
@@ -19,22 +22,22 @@
 					navigate="true"
 					type="Topic"
 				/>
-				<reference name="parents"
-					inverse-reference="children"
-					kind="backwards"
-					multiple="true"
-					navigate="true"
-					type="Topic"
-				/>
-				<property name="name"
-					type="tl.core:String"
-				/>
 				<reference name="dataItems"
 					inverse-reference="topics"
 					kind="backwards"
 					multiple="true"
 					navigate="true"
 					type="research:DataItem"
+				/>
+				<property name="name"
+					type="tl.core:String"
+				/>
+				<reference name="parents"
+					inverse-reference="children"
+					kind="backwards"
+					multiple="true"
+					navigate="true"
+					type="Topic"
 				/>
 			</attributes>
 		</class>
