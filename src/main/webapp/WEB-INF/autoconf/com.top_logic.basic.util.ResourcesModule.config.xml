@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<application config:interface="com.top_logic.basic.config.ApplicationConfig$Config"
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+>
+	<services>
+		<config service-class="com.top_logic.basic.util.ResourcesModule"
+			config:override="true"
+		>
+			<instance class="com.top_logic.util.resource.analyzer.IDEResources"
+				always-show-keys="false"
+				default-locale="en_EN"
+				disable-fallback-to-default-language="false"
+				disable-system-messages="false"
+				dynamic-storage="./tmp/app-data/var/variants"
+				error-on-missing-key="true"
+				fallback-locale="en"
+				log-deprecated-keys="true"
+				log-missing-keys="true"
+			>
+				<bundles>
+					<bundle name="basicMessages"/>
+					<bundle name="dobMessages"/>
+					<bundle name="Messages"/>
+					<bundle name="tl-layout-codeedit.messages"/>
+					<bundle name="ElementMessages"/>
+					<bundle name="model.tl.model.messages"/>
+					<bundle name="model.tl.imagegallery.messages"/>
+					<bundle name="tl.commentsMessages"/>
+					<bundle name="tl.utilMessages"/>
+					<bundle name="model.tl.core.messages"/>
+					<bundle name="model.Tag.messages"/>
+					<bundle name="model.tl.element.messages"/>
+					<bundle name="model.SecurityStructure.messages"/>
+					<bundle name="tl.accountsMessages"/>
+					<bundle name="tl.folderMessages"/>
+					<bundle name="tl.unitsMessages"/>
+					<bundle name="model.tl.model.i18n.messages"/>
+					<bundle name="commonReportingMessages"/>
+					<bundle name="FlexReportingMessages"/>
+					<bundle name="modelSearchMessages"/>
+					<bundle name="model.SearchExpressionStructure.messages"/>
+					<bundle name="model.tl.model.search.messages"/>
+					<bundle name="tl-chart-chartjs.messages"/>
+					<bundle name="ContactMessages"/>
+					<bundle name="model.tl.contact.external.messages"/>
+					<bundle name="orgStructureMessages"/>
+					<bundle name="layoutWysiwygMessages"/>
+					<bundle name="modelWysiwygMessages"/>
+					<bundle name="model.tl.model.wysiwyg.messages"/>
+					<bundle name="searchBaseMessages"/>
+					<bundle name="searchLuceneMessages"/>
+					<bundle name="tl.doc.messages"/>
+					<bundle name="model.tl.doc.messages"/>
+					<bundle name="tl-themes-dezent.messages"/>
+					<bundle name="MonitoringMessages"/>
+					<bundle name="tl-ajax-server.messages"/>
+					<bundle name="tl.graph.server.messages"/>
+					<bundle name="tl.graph.layouter.messages"/>
+					<bundle name="tl.graph.diagramjs.server.messages"/>
+					<bundle name="tl-layout-themeedit.messages"/>
+					<bundle name="tl-layout-formeditor.messages"/>
+					<bundle name="TemplateMessages"/>
+					<bundle name="scriptingTemplateMessages"/>
+					<bundle name="tlPac4jMessages"/>
+					<bundle name="tl-service-openapi-common.messages"/>
+					<bundle name="tl-service-openapi-server.messages"/>
+					<bundle name="tl-service-openapi-client.messages"/>
+					<bundle name="ReportingMessages"/>
+					<bundle name="tl.xio.messages"/>
+					<bundle name="model.tl.bpe.bpml.messages"/>
+					<bundle name="model.tl.bpe.execution.messages"/>
+					<bundle name="tl-bpe.messages"/>
+					<bundle name="tl-bpe-modeler.messages"/>
+					<bundle name="tl-bpe-app.messages"/>
+					<bundle name="tl.bpe.appMessages"/>
+					<bundle name="research.app-messages"/>
+					<bundle name="model.Artworks.messages"/>
+					<bundle name="model.Humans.messages"/>
+					<bundle name="model.Topics.messages"/>
+					<bundle name="model.research.messages"/>
+				</bundles>
+				<supported-locales>
+					<locale name="en"/>
+				</supported-locales>
+			</instance>
+		</config>
+	</services>
+</application>
