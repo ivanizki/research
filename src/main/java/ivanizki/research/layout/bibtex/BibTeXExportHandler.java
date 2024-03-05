@@ -53,7 +53,7 @@ public class BibTeXExportHandler extends AbstractTableExportHandler {
 
 	@Override
 	protected ResKey getDefaultI18NKey() {
-		return I18NConstants.BIBTEX_EXPORT;
+		return I18NConstants.BIBTEX_EXPORT_HANDLER_LABEL;
 	}
 
 	@Override
