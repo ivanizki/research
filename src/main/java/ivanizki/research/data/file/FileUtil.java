@@ -1,6 +1,7 @@
 package ivanizki.research.data.file;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +12,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.top_logic.basic.Settings;
 import com.top_logic.basic.StringServices;
+import com.top_logic.util.error.TopLogicException;
 
 import ivanizki.research.DummyLogger;
 import ivanizki.research.data.types.Text;
@@ -70,6 +73,17 @@ public class FileUtil {
 			DummyLogger.error(e);
 		}
 		return lines;
+	}
+
+	/**
+	 * @return A new empty temporary {@link File}.
+	 */
+	public static File createTempFile(String fileName, String fileExtension) {
+		try {
+			return File.createTempFile(fileName, fileExtension, Settings.getInstance().getTempDir());
+		} catch (IOException ex) {
+			throw new TopLogicException(I18NConstants.FAILED_TO_CREATE_FILE, ex);
+		}
 	}
 
 }

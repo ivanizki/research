@@ -22,10 +22,45 @@ public class BibTeXEntry {
 	private Map<BibTeXEntryAttribute, String> _attributes = new HashMap<>();
 
 	/**
+	 * Creates a new {@link BibTeXEntry} from the given {@link BibTeXEntryType type} and
+	 * {@link String ID}.
+	 */
+	public BibTeXEntry(BibTeXEntryType type, String id) {
+		_type = type;
+		_id = id;
+	}
+
+	/**
 	 * Creates a new {@link BibTeXEntry} from the given {@link String} representation.
 	 */
 	public BibTeXEntry(String string) {
 		parse(string);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder entry = new StringBuilder();
+		entry.append(getType().name().toLowerCase());
+		entry.append(ASCII.PAR_BEGIN);
+		entry.append(getId());
+		entry.append(ASCII.COMMA);
+		entry.append(ASCII.NEWLINE);
+		for (BibTeXEntryAttribute attribute : getAttributes()) {
+			entry.append(ASCII.TAB);
+			entry.append(attribute.name().toLowerCase());
+			entry.append(ASCII.SPACE);
+			entry.append(ASCII.EQUAL);
+			entry.append(ASCII.SPACE);
+			entry.append(ASCII.QUOTE);
+			entry.append(getAttributeValue(attribute));
+			entry.append(ASCII.QUOTE);
+			entry.append(ASCII.COMMA);
+			entry.append(ASCII.NEWLINE);
+		}
+		entry.append(ASCII.PAR_END);
+		entry.append(ASCII.NEWLINE);
+		entry.append(ASCII.NEWLINE);
+		return entry.toString();
 	}
 
 	private void parse(String entry) {
@@ -87,6 +122,13 @@ public class BibTeXEntry {
 	 */
 	public String getAttributeValue(BibTeXEntryAttribute attribute) {
 		return _attributes.get(attribute);
+	}
+
+	/**
+	 * Sets the value of the specified {@link BibTeXEntryAttribute}.
+	 */
+	public void setAttributeValue(BibTeXEntryAttribute attribute, String value) {
+		_attributes.put(attribute, value);
 	}
 
 }

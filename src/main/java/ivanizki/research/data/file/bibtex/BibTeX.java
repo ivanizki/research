@@ -10,6 +10,9 @@ public interface BibTeX {
 	/** {@link BibTeX} file extensions. */
 	public static final String FILE_EXTENSIONS = ".bib";
 
+	/** Grammatically correct separator before last author. */
+	public static final String LAST_AUTHOR_SEPARATOR = " and ";
+
 	/**
 	 * {@link BibTeXEntry} type.
 	 */

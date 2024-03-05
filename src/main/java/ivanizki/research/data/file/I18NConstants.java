@@ -1,4 +1,4 @@
-package ivanizki.research.layout.bibtex;
+package ivanizki.research.data.file;
 
 import com.top_logic.basic.util.ResKey;
 import com.top_logic.layout.I18NConstantsBase;
@@ -11,9 +11,9 @@ import com.top_logic.layout.I18NConstantsBase;
 @SuppressWarnings("javadoc")
 public class I18NConstants extends I18NConstantsBase {
 
-	public static ResKey BIBTEX_EXPORT_HANDLER_LABEL;
+	public static ResKey FAILED_TO_CREATE_FILE;
 
-	public static ResKey BIBTEX_IMPORT_DISABLED_DUE_NO_FILE_SELECTED;
+	public static ResKey FAILED_TO_FIND_FILE;
 
 	static {
 		initConstants(I18NConstants.class);

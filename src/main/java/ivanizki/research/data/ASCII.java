@@ -6,6 +6,9 @@ package ivanizki.research.data;
 @SuppressWarnings("javadoc")
 public interface ASCII {
 
+	// 9 Horizontal Tabulation
+	public static final char TAB = '\t';
+
 	// 13 Carriage Return
 	public static final char NEWLINE = '\n';
 

@@ -61,7 +61,7 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 
 	private static class Importer {
 
-		private static final Map<BibTeXEntryType, TLClass> _TYPE_MAP = new MapBuilder<BibTeXEntryType, TLClass>()
+		private static final Map<BibTeXEntryType, TLClass> TYPE_MAP = new MapBuilder<BibTeXEntryType, TLClass>()
 			.put(BibTeXEntryType.ARTICLE, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.ARTICLE))
 			.put(BibTeXEntryType.BOOK, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.BOOK))
 			.put(BibTeXEntryType.PHDTHESIS, (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.PH_D_THESIS))
@@ -93,7 +93,7 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 
 		private void importEntry(BibTeXEntry entry) {
 			BibTeXEntryType entryType = entry.getType();
-			TLClass type = _TYPE_MAP.get(entryType);
+			TLClass type = TYPE_MAP.get(entryType);
 			if (type == null) {
 				DummyLogger.error("Cannot import entry type \"" + entryType + "\".");
 				return;
@@ -133,7 +133,7 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 
 		private List<String> splitNames(String namesString) {
 			List<String> names = new ArrayList<>();
-			for (String namesSplit : namesString.split(" and ")) {
+			for (String namesSplit : namesString.split(BibTeX.LAST_AUTHOR_SEPARATOR)) {
 				for (String name : namesSplit.split(Character.toString(ASCII.COMMA))) {
 					names.add(name.trim());
 				}
