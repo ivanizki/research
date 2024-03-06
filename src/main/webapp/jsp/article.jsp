@@ -1,4 +1,6 @@
 <%@page import="ivanizki.research.model.Model"
+%><%@page import="ivanizki.research.layout.manuscript.ArticleFormContextProvider"
+%><%@page import="ivanizki.research.layout.manuscript.DoiLinkRenderer"
 %><%@page language="java" extends="com.top_logic.util.TopLogicJspBase"
 %><%@taglib uri="ajaxform" prefix="form"
 %><%@taglib uri="layout" prefix="layout"
@@ -19,7 +21,19 @@
 			</form:columns>
 			<form:columns count="2">
 				<form:inputCell name="<%=Model.FILE_PATH %>"/>
-				<form:inputCell name="<%=Model.DOI %>"/>
+				<form:ifExists name="<%=ArticleFormContextProvider.DOI_LINK %>">
+					<form:descriptionCell>
+					<form:description>
+					<form:label name="<%=ArticleFormContextProvider.DOI_LINK %>"/>
+					</form:description>
+					<form:custom name="<%=ArticleFormContextProvider.DOI_LINK %>"/>
+					</form:descriptionCell>
+				</form:ifExists>
+				<form:ifExists name="<%=ArticleFormContextProvider.DOI_LINK %>"
+					not="true"
+				>
+					<form:inputCell name="<%=Model.DOI %>"/>
+				</form:ifExists>
 			</form:columns>
 			<form:columns count="2">
 				<form:separator/>
