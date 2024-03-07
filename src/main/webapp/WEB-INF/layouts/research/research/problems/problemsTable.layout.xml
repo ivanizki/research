@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="ID_d93dfc54_5c3f_4086_ad25_5aa70d7754bf,ID_05159658_ab0d_4575_ba81_43a707a9f895"
+		type="research:DataItem"
+	>
+		<name key="dynamic.9ab612ac-53f1-4f34-966a-b0363c3ce97e">
+			<en>Problems</en>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->all(`research:DataItem`).filter(item->!$item.instanceOf(`Topics:Topic`)).filter(item->$item.get(`research:DataItem#topics`).isEmpty())"
+			supportsElement="element->$element.instanceOf(`research:DataItem`) &amp;&amp; !$element.instanceOf(`Topics:Topic`)"
+		/>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				accessor="rowObject->$rowObject"
+				columnId="ID_d93dfc54_5c3f_4086_ad25_5aa70d7754bf"
+				columnType="research:DataItem"
+			>
+				<columnLabel key="dynamic.cc391f79-52ea-4c8c-beb9-4196dcd88445">
+					<en>Data Item</en>
+				</columnLabel>
+			</configurationProvider>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				columnId="ID_05159658_ab0d_4575_ba81_43a707a9f895"
+				columnType="tl.core:String"
+			>
+				<columnLabel key="dynamic.fb19ff15-73d3-4afe-880b-aaee9c88d575">
+					<en>Problem</en>
+				</columnLabel>
+				<accessor>rowObject-&gt; if($rowObject.get(`research:DataItem#topics`).isEmpty(),"No Topics","")</accessor>
+			</configurationProvider>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

@@ -11,6 +11,7 @@
 			<layout-reference resource="research/research/authors/tabLayout.layout.xml"/>
 			<layout-reference resource="research/research/schools/tabLayout.layout.xml"/>
 			<layout-reference resource="research/research/journals/tabLayout.layout.xml"/>
+			<layout-reference resource="research/research/problems/tabLayout.layout.xml"/>
 		</components>
 	</arguments>
 </config:template-call>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments helpID="ID_abeab2fe_1260_4c94_bec3_c857342198d1">
+		<tabLabel key="dynamic.2e98b7df-51ba-4b95-a3a1-dff5fabea79c">
+			<en>Problems</en>
+		</tabLabel>
+		<components>
+			<layout-reference resource="research/research/problems/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>
