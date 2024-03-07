@@ -1,10 +1,13 @@
 package ivanizki.research.layout.bibtex;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.top_logic.basic.StringServices;
 import com.top_logic.basic.col.MapBuilder;
+import com.top_logic.basic.col.MapUtil;
 import com.top_logic.basic.config.InstantiationContext;
 import com.top_logic.element.model.DynamicModelService;
 import com.top_logic.knowledge.service.PersistencyLayer;
@@ -73,6 +76,8 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 
 		private static final TLClass SCHOOL_TYPE = (TLClass) TLModelUtil.findType(ModelModule.HUMANS, ModelType.SCHOOL);
 
+		private Map<String, Wrapper> _manuscripts;
+
 		private Map<String, Wrapper> _authors;
 
 		private Map<String, Wrapper> _journals;
@@ -80,9 +85,29 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 		private Map<String, Wrapper> _schools;
 
 		public Importer() {
+			_manuscripts = indexByTitle(getAllManuscripts());
 			_authors = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(AUTHOR_TYPE), Model.NAME);
 			_journals = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(JOURNAL_TYPE), Model.NAME);
 			_schools = ModelUtil.indexByAttribute(ModelUtil.getAllWrappers(SCHOOL_TYPE), Model.NAME);
+		}
+
+		public Map<String, Wrapper> indexByTitle(Collection<Wrapper> wrappers) {
+			return MapUtil.createValueMap(wrappers, wrapper -> getKey((String) wrapper.getValue(Model.TITLE)));
+		}
+
+		private String getKey(String string) {
+			if (string != null) {
+				return string.toLowerCase();
+			}
+			return StringServices.EMPTY_STRING;
+		}
+
+		private List<Wrapper> getAllManuscripts() {
+			List<Wrapper> manuscripts = new ArrayList<>();
+			for (TLClass type : TYPE_MAP.values()) {
+				manuscripts.addAll(ModelUtil.getAllWrappers(type));
+			}
+			return manuscripts;
 		}
 
 		private void importDocument(BibTeXDocument document) {
@@ -98,7 +123,8 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 				DummyLogger.error("Cannot import entry type \"" + entryType + "\".");
 				return;
 			}
-			Wrapper wrapper = (Wrapper) DynamicModelService.getInstance().createObject(type);
+			Wrapper wrapper = _manuscripts.get(getKey(entry.getAttributeValue(BibTeXEntryAttribute.TITLE)));
+			wrapper = wrapper == null ? (Wrapper) DynamicModelService.getInstance().createObject(type) : wrapper;
 			for (BibTeXEntryAttribute bibAttribute : entry.getAttributes()) {
 				String attributeName = bibAttribute.name().toLowerCase();
 				TLStructuredTypePart attribute = type.getPart(attributeName);
