@@ -60,7 +60,11 @@
 				/>
 				<property name="year"
 					type="tl.core:Integer"
-				/>
+				>
+					<annotations>
+						<format format="0"/>
+					</annotations>
+				</property>
 			</attributes>
 		</interface>
 		<class name="Article">
