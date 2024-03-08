@@ -25,7 +25,7 @@ import ivanizki.research.model.ModelUtil;
 
 /**
  * {@link ListModelBuilder} building the table of {@link ModelType#MANUSCRIPT}s from the given
- * {@link ModelType#TOPIC}.
+ * {@link ModelType#TOPIC}s.
  *
  * @author ivanizki
  */
@@ -33,13 +33,16 @@ public class ManuscriptTableByTopicBuilder implements ListModelBuilder {
 
 	@Override
 	public Collection<?> getModel(Object businessModel, LayoutComponent component) {
-		if (businessModel != null) {
+		Collection<?> topics = businessModel instanceof Collection<?> ? (Collection<?>) businessModel : CollectionUtil.intoSetNotNull(businessModel);
+		if (!topics.isEmpty()) {
 			Set<Object> manuscripts = new HashSet<>();
 			TLReference reference = (TLReference) ModelUtil.DATA_ITEM_TYPE.getPart(Model.TOPICS);
-			for (ValueProvider topic : ModelUtil.getChildrenRecursively(businessModel)) {
-				for (Object referer : ((Wrapper) topic).tReferers(reference)) {
-					if (supportsListElement(component, referer)) {
-						manuscripts.add(referer);
+			for (Object topic : topics) {
+				for (ValueProvider subTopic : ModelUtil.getChildrenRecursively(topic)) {
+					for (Object referer : ((Wrapper) subTopic).tReferers(reference)) {
+						if (supportsListElement(component, referer)) {
+							manuscripts.add(referer);
+						}
 					}
 				}
 			}
