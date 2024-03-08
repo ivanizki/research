@@ -13,7 +13,7 @@
 			<en>Topics</en>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
-			children="node->$node.get(`Topics:Topic#children`)"
+			children="node->$node.get(`Topics:Topic#children`).sort()"
 			nodePredicate="node->$node.instanceOf(`Topics:Topic`)"
 			parents="node->$node.referers(`Topics:Topic#children`)"
 			rootNode="`Topics#ROOT`"
