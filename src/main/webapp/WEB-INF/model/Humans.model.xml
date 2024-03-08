@@ -49,6 +49,25 @@
 			<generalizations>
 				<generalization type="Organization"/>
 			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<columnsLayout>
+							<field
+								attribute="name"
+								fullQualifiedName="Humans:Journal#name"
+								type="tl.core:String"
+								visibility="mandatory"
+							/>
+							<field
+								attribute="topics"
+								fullQualifiedName="research:DataItem#topics"
+								type="Topics:Topic"
+							/>
+						</columnsLayout>
+					</form>
+				</form-definition>
+			</annotations>
 			<attributes>
 				<property name="name"
 					type="tl.core:String"
@@ -59,6 +78,18 @@
 			<generalizations>
 				<generalization type="Organization"/>
 			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<field
+							attribute="name"
+							fullQualifiedName="Humans:School#name"
+							type="tl.core:String"
+							visibility="mandatory"
+						/>
+					</form>
+				</form-definition>
+			</annotations>
 			<attributes>
 				<property name="name"
 					type="tl.core:String"
