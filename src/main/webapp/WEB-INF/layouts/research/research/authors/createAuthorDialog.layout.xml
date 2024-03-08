@@ -28,7 +28,6 @@
 		<title>
 			<title key="dynamic.a4baaf38-ce78-46dc-9db0-187defb32fd1">
 				<en>Create Author</en>
-				<de>Create Author</de>
 			</title>
 		</title>
 		<open-handler id="ID_cd9f6703_5d28_4a07_b6e1_9b247e57c5ca"
@@ -38,7 +37,6 @@
 		>
 			<resourceKey key="dynamic.a4baaf38-ce78-46dc-9db0-187defb32fd1">
 				<en>Create Author...</en>
-				<de>Create Author...</de>
 			</resourceKey>
 		</open-handler>
 		<typeOptions type="Humans:Author"/>

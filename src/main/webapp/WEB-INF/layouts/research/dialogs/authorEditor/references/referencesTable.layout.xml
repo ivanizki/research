@@ -11,7 +11,6 @@
 	>
 		<name key="dynamic.81d8afd7-b0e4-4bee-9885-1d47dab5ae7d">
 			<en>References</en>
-			<de>References</de>
 		</name>
 		<configurationProviders>
 			<configurationProvider class="ivanizki.research.layout.AuthorTableConfigurationProvider"/>

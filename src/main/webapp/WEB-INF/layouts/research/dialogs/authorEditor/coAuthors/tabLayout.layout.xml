@@ -8,7 +8,6 @@
 	<arguments helpID="ID_01649cfe_df52_4e45_a55f_75ef5153f127">
 		<tabLabel key="dynamic.60335a14-7e1e-4885-b2b2-03e2abbba325">
 			<en>Co-Authors</en>
-			<de>Co-Authors</de>
 		</tabLabel>
 		<components>
 			<layout-reference resource="research/dialogs/authorEditor/coAuthors/innerLayout.layout.xml"/>

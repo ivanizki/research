@@ -20,12 +20,10 @@
 		<title>
 			<title key="dynamic.25dace88-b18b-4f3b-95ec-fd4a9ab5cca5">
 				<en>Create Topic</en>
-				<de>Create Topic</de>
 			</title>
 		</title>
 		<header key="dynamic.56f9a08e-5294-4c2d-81bf-8475f424cf08">
 			<en>Create {0}</en>
-			<de>Create {0}</de>
 		</header>
 		<open-handler id="ID_6c210f9a_c23c_48f3_8332_d7604056197f"
 			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
@@ -34,7 +32,6 @@
 		>
 			<resourceKey key="dynamic.25dace88-b18b-4f3b-95ec-fd4a9ab5cca5">
 				<en>Create Sub-Topic...</en>
-				<de>Create Sub-Topic...</de>
 			</resourceKey>
 		</open-handler>
 		<typeOptions type="Topics:Topic"/>
@@ -44,7 +41,6 @@
 		>
 			<resourceKey key="dynamic.750ee24f-12ae-4a7f-90c6-1df182c445ef">
 				<en>Create</en>
-				<de>Create</de>
 			</resourceKey>
 		</create-handler>
 	</arguments>

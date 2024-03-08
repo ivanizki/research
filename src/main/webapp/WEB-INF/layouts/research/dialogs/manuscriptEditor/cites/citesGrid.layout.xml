@@ -13,7 +13,6 @@
 	>
 		<name key="dynamic.c51418fe-7199-48ac-a73c-b92ae9ab82cb">
 			<en>Cites</en>
-			<de>Cites</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
 			elements="model->$model.get(`Artworks:Manuscript#cites`)"

@@ -16,7 +16,6 @@
 		</dialogs>
 		<name key="dynamic.b7c96bd8-a8f9-444d-9569-de9afdea384e">
 			<en>Schools</en>
-			<de>Schools</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
 			elements="model->all(`Humans:School`)"
@@ -29,7 +28,6 @@
 			>
 				<columnLabel key="dynamic.43c868a2-2ae0-4bec-8fa4-faa643e0521a">
 					<en>Commands</en>
-					<de>Commands</de>
 				</columnLabel>
 				<buttons>
 					<button id="openEditDialog"

@@ -11,7 +11,6 @@
 	>
 		<name key="dynamic.76a0e046-c28f-4e82-a808-8d026606a4f0">
 			<en>Co-Authors</en>
-			<de>Co-Authors</de>
 		</name>
 		<configurationProviders>
 			<configurationProvider class="ivanizki.research.layout.AuthorTableConfigurationProvider"/>

@@ -8,7 +8,6 @@
 	<arguments helpID="ID_2bb28d71_280c_4fa2_af48_4541b02e4f13">
 		<tabLabel key="dynamic.36808296-12ad-4b54-9485-fcf38c5fd5bc">
 			<en>Citations</en>
-			<de>Citations</de>
 		</tabLabel>
 		<components>
 			<layout-reference resource="research/dialogs/authorEditor/citations/innerLayout.layout.xml"/>

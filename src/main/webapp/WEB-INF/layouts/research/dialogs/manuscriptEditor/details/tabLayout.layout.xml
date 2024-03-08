@@ -8,7 +8,6 @@
 	<arguments helpID="ID_88b4efb6_a10b_479c_a963_dfbf269a3416">
 		<tabLabel key="dynamic.070a61ba-adde-4417-8c10-b5be080d648f">
 			<en>Details</en>
-			<de>Details</de>
 		</tabLabel>
 		<components>
 			<layout-reference resource="research/dialogs/manuscriptEditor/details/innerLayout.layout.xml"/>

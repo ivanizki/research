@@ -14,7 +14,6 @@
 		</dialogs>
 		<name key="dynamic.c4c955bd-43cc-4cab-875c-0c35d7c78396">
 			<en>Authors</en>
-			<de>Authors</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
 			elements="model->all(`Humans:Author`)"

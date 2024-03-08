@@ -8,7 +8,6 @@
 	<arguments helpID="ID_41daa2cb_9585_4d37_992b_74351619781f">
 		<tabLabel key="dynamic.20929542-f672-4332-b660-6d666ca69982">
 			<en>Schools</en>
-			<de>Schools</de>
 		</tabLabel>
 		<components>
 			<layout-reference resource="research/research/schools/innerLayout.layout.xml"/>

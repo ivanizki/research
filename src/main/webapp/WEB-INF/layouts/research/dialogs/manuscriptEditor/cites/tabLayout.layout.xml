@@ -8,7 +8,6 @@
 	<arguments helpID="ID_9e2fb8b1_5120_48c3_a300_9a867187bb82">
 		<tabLabel key="dynamic.46323e90-d60e-465f-9a78-f8c2bdf3abef">
 			<en>Cites</en>
-			<de>Cites</de>
 		</tabLabel>
 		<components>
 			<layout-reference resource="research/dialogs/manuscriptEditor/cites/innerLayout.layout.xml"/>

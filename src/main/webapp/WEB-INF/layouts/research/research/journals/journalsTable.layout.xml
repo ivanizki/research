@@ -16,7 +16,6 @@
 		</dialogs>
 		<name key="dynamic.36b67d12-3b3a-4bcf-8ef1-e54ef8b11a4d">
 			<en>Journals</en>
-			<de>Journals</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
 			elements="model->all(`Humans:Journal`)"
@@ -29,7 +28,6 @@
 			>
 				<columnLabel key="dynamic.dfcb157b-284c-43e9-893b-54d5794a5d6f">
 					<en>Commands</en>
-					<de>Commands</de>
 				</columnLabel>
 				<buttons>
 					<button id="openEditDialog"
