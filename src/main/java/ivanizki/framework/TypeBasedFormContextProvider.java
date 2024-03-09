@@ -34,8 +34,10 @@ public abstract class TypeBasedFormContextProvider {
 	public FormContext createFormContext(LayoutComponent component) {
 		FormContext formContext = new FormContext(component);
 
-		for (TLStructuredTypePart attribute : ModelUtil.getOwnAttributes(((TypeBased) component).getType())) {
-			addField(component.getModel(), attribute, formContext);
+		Object model = component.getModel();
+		TLClass type = model != null && model instanceof Wrapper ? (TLClass) ((Wrapper) model).tType() : ((TypeBased) component).getType();
+		for (TLStructuredTypePart attribute : ModelUtil.getOwnAttributes(type)) {
+			addField(model, attribute, formContext);
 		}
 
 		return formContext;

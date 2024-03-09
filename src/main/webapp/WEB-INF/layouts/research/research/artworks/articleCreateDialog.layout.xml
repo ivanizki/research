@@ -14,7 +14,7 @@
 		<component class="ivanizki.framework.TypeBasedCreateComponent"
 			form-context-provider="ivanizki.research.layout.manuscript.ArticleFormContextProvider"
 			model="null()"
-			page="/jsp/article.jsp"
+			page="/jsp/manuscript.jsp"
 			resetInvisible="true"
 			type="Artworks:Article"
 		>

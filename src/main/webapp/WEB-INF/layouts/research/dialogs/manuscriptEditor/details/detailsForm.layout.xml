@@ -4,13 +4,13 @@
 	<components>
 		<component class="com.top_logic.knowledge.gui.layout.DefaultButtonComponent"/>
 		<component class="ivanizki.framework.TypeBasedEditComponent"
-			defaultFor="Artworks:Article"
 			form-context-provider="ivanizki.research.layout.manuscript.ArticleFormContextProvider"
 			model="selection()"
 			name="Form"
-			page="/jsp/article.jsp"
+			page="/jsp/manuscript.jsp"
 			resetInvisible="true"
 			titleKey="default.for.title"
+			type="Artworks:Manuscript"
 		>
 			<buttons>
 				<button id="frameworkSave"
