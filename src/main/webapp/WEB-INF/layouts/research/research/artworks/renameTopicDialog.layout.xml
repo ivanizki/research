@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.model.search/transaction.template.xml"
+>
+	<arguments
+		formType="Topics:Topic"
+		height="250px"
+		initialization="form->topic->$form.set(`Topics:Topic#name`,$topic.get(`Topics:Topic#name`))"
+		width="400px"
+	>
+		<title>
+			<title key="dynamic.be78ce9c-3a93-4bf4-95e2-aba0b90d820b">
+				<en>Rename...</en>
+			</title>
+		</title>
+		<open-handler id="ID_903c5e9d_3274_452e_b54d_03fab022d362"
+			config:interface="com.top_logic.layout.editor.config.DialogOpenHandlerConfig"
+			clique="edit"
+			disabledImage="/icons/buttonEditDisabled.png"
+			group="Write"
+			image="/icons/buttonEdit.png"
+			target="selection(research/research/artworks/topicsTree.layout.xml#Tree)"
+			targetComponent="research/research/artworks/renameTopicDialog.layout.xml#Form"
+		>
+			<resourceKey key="dynamic.be78ce9c-3a93-4bf4-95e2-aba0b90d820b">
+				<en>Rename...</en>
+			</resourceKey>
+			<executability>
+				<rule-by-expression decision="topic->!$topic.get(`Topics:Topic#parents`).isEmpty()"/>
+			</executability>
+		</open-handler>
+		<forms>
+			<form type="Topics:Topic">
+				<formDefinition>
+					<field
+						attribute="name"
+						fullQualifiedName="Topics:Topic#name"
+						type="tl.core:String"
+						visibility="mandatory"
+					/>
+				</formDefinition>
+			</form>
+		</forms>
+		<transactionHandler id="perform"
+			class="com.top_logic.model.search.providers.TransactionHandlerByExpression"
+			clique="apply"
+			closeDialog="true"
+			confirm="false"
+			confirmMessage=""
+			executability=""
+			group="Write"
+			image="theme:ICONS_BUTTON_OK"
+			operation="form->topic->$topic.set(`Topics:Topic#name`,$form.get(`Topics:Topic#name`))"
+			target=""
+		>
+			<resourceKey key="dynamic.be78ce9c-3a93-4bf4-95e2-aba0b90d820b">
+				<en>Rename...</en>
+			</resourceKey>
+			<postCreateActions/>
+		</transactionHandler>
+	</arguments>
+</config:template-call>
