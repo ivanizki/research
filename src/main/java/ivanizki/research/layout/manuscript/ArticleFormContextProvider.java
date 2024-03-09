@@ -1,5 +1,6 @@
 package ivanizki.research.layout.manuscript;
 
+import com.top_logic.basic.StringServices;
 import com.top_logic.knowledge.wrap.Wrapper;
 import com.top_logic.layout.Control;
 import com.top_logic.layout.form.FormField;
@@ -52,7 +53,8 @@ public class ArticleFormContextProvider extends TypeBasedFormContextProvider {
 	}
 
 	private FormMember createDoiLinkField(Wrapper article) {
-		Object link = DOI_HOST + article.getValue(Model.DOI);
+		String doi = (String) article.getValue(Model.DOI);
+		Object link = StringServices.isEmpty(doi) ? StringServices.EMPTY_STRING : DOI_HOST + doi;
 		FormMember field = ConstantFieldProvider.INSTANCE.createField(DOI_LINK, link);
 		field.setLabel(MetaLabelProvider.INSTANCE.getLabel(article.tType().getPart(Model.DOI)));
 		field.setControlProvider(new SelectionControlProvider() {
