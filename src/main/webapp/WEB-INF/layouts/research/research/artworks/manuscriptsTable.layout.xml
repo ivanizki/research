@@ -23,21 +23,21 @@
 			<configurationProvider class="ivanizki.research.layout.manuscript.ManuscriptTableConfigurationProvider"/>
 		</configurationProviders>
 		<buttons>
-			<button id="exportExcel"
-				class="com.top_logic.layout.table.export.ExcelExportHandler"
-			/>
 			<button id="exportBibtexFile"
 				class="ivanizki.research.layout.bibtex.BibTeXExportHandler"
 				clique="exportButtons"
+				image="css:fas fa-file-download"
 				resourceKey="class.ivanizki.research.layout.bibtex.I18NConstants.BIBTEX_EXPORT_HANDLER_LABEL"
 			/>
 			<button id="exportData"
 				class="ivanizki.research.data.DataExportHandler"
+				clique="exportButtons"
 				image="css:fas fa-file-download"
 				resourceKey="class.ivanizki.research.data.I18NConstants.DATA_EXPORT_HANDLER_LABEL"
 			/>
 			<button id="importData"
 				class="ivanizki.research.data.DataImportHandler"
+				clique="importButtons"
 				image="css:fas fa-file-upload"
 				resourceKey="class.ivanizki.research.data.I18NConstants.DATA_IMPORT_HANDLER_LABEL"
 			/>

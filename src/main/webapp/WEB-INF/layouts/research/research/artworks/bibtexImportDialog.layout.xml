@@ -6,7 +6,7 @@
 		executability="InViewMode"
 		height="200"
 		image="css:fas fa-file-upload"
-		openerClique="createMenu"
+		openerClique="importButtons"
 		openerCommandGroup="Create"
 		width="300"
 	/>
