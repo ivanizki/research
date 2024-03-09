@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <settings>
-	<icon name="ivanizki.research.layout.manuscript.Icons.CLIPBOARD"
+	<icon name="ivanizki.research.layout.manuscript.Icons.COPY_FILE_PATH_TO_CLIPBOARD"
 		value="css:fas fa-clipboard"
 	/>
 </settings>

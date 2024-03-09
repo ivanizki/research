@@ -95,7 +95,7 @@ public class ManuscriptTableConfigurationProvider extends NoDefaultColumnAdaptio
 						return HandlerResult.DEFAULT_RESULT;
 					}
 				});
-				commandModel.setImage(Icons.CLIPBOARD);
+				commandModel.setImage(Icons.COPY_FILE_PATH_TO_CLIPBOARD);
 				commandModel.setLabel(Resources.getInstance().getString(I18NConstants.COPY_FILE_PATH_TO_CLIPBOARD));
 				return new ButtonControl(commandModel, ButtonRenderer.INSTANCE);
 			}

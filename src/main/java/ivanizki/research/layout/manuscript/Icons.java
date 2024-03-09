@@ -11,5 +11,5 @@ import com.top_logic.layout.basic.ThemeImage;
 @SuppressWarnings("javadoc")
 public class Icons extends IconsBase {
 
-	public static ThemeImage CLIPBOARD;
+	public static ThemeImage COPY_FILE_PATH_TO_CLIPBOARD;
 }
