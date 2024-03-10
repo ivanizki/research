@@ -7,8 +7,8 @@
 >
 	<arguments>
 		<dialogs>
-			<layout-reference resource="research/research/artworks/createTopicDialog.layout.xml"/>
-			<layout-reference resource="research/research/artworks/renameTopicDialog.layout.xml"/>
+			<layout-reference resource="research/research/artworks/topicsTree/createTopicDialog.layout.xml"/>
+			<layout-reference resource="research/research/artworks/topicsTree/topicEditor/dialog.layout.xml"/>
 		</dialogs>
 		<name key="dynamic.d9c5ab7a-f04a-4a85-94b4-dd70937ec2b5">
 			<en>Topics</en>

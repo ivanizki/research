@@ -6,7 +6,7 @@
 	template="com.top_logic/table.template.xml"
 >
 	<arguments
-		model="selection(research/research/artworks/topicsTree.layout.xml#Tree)"
+		model="selection(research/research/artworks/topicsTree/topicsTree.layout.xml#Tree)"
 		modelBuilder="ivanizki.research.layout.manuscript.ManuscriptTableByTopicBuilder"
 		multiSelection="true"
 		type="Artworks:Manuscript"

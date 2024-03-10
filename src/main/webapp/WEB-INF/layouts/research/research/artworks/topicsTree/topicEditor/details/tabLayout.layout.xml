@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments helpID="ID_88d7f2b0_9919_462b_a820_1f8de00ea0ca">
+		<tabLabel key="dynamic.9a94a5d9-95e7-48c6-af17-588987da1ef6">
+			<en>Details</en>
+		</tabLabel>
+		<components>
+			<layout-reference resource="research/research/artworks/topicsTree/topicEditor/details/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

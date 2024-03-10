@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/dialog.template.xml"
+>
+	<arguments helpID="ID_d8422bd9_e11e_446d_9b0e_87150f025357">
+		<title class="com.top_logic.layout.component.title.ModelTitle"
+			model="selection(research/research/artworks/topicsTree/topicsTree.layout.xml#Tree)"
+		/>
+		<open-handler id="ID_cc59fd4b_62f4_45cd_bc54_4796fa7f5019"
+			config:interface="com.top_logic.layout.editor.config.DialogOpenHandlerConfig"
+			clique="edit"
+			disabledImage="/icons/buttonEditDisabled.png"
+			group="Write"
+			image="/icons/buttonEdit.png"
+			target="selection(research/research/artworks/topicsTree/topicsTree.layout.xml#Tree)"
+		>
+			<resourceKey key="dynamic.823479b9-dc7c-4486-9c8f-530861681bcf">
+				<en>Edit...</en>
+			</resourceKey>
+			<executability>
+				<rule-by-expression decision="topic->!$topic.get(`Topics:Topic#parents`).isEmpty()"/>
+			</executability>
+		</open-handler>
+		<components>
+			<layout-reference resource="research/research/artworks/topicsTree/topicEditor/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

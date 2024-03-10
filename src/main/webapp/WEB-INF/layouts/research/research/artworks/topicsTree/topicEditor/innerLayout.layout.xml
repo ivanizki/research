@@ -7,10 +7,7 @@
 >
 	<arguments>
 		<components>
-			<layout-reference resource="research/research/artworks/topicsTree/topicsTree.layout.xml">
-				<layoutInfo size="20%"/>
-			</layout-reference>
-			<layout-reference resource="research/research/artworks/manuscriptsTable.layout.xml">
+			<layout-reference resource="research/research/artworks/topicsTree/topicEditor/tabbar.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
 		</components>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments
+		model="selection(research/research/artworks/topicsTree/topicsTree.layout.xml#Tree)"
+		type="Topics:Topic"
+	>
+		<name key="dynamic.46ec338f-5673-4b6f-aaed-d5e9e475b766">
+			<en>Details</en>
+		</name>
+		<forms>
+			<form type="Topics:Topic">
+				<formDefinition>
+					<columnsLayout>
+						<field
+							attribute="name"
+							fullQualifiedName="Topics:Topic#name"
+							type="tl.core:String"
+							visibility="mandatory"
+						/>
+						<field
+							attribute="topics"
+							fullQualifiedName="research:DataItem#topics"
+							type="Topics:Topic"
+						/>
+					</columnsLayout>
+				</formDefinition>
+			</form>
+		</forms>
+	</arguments>
+</config:template-call>
