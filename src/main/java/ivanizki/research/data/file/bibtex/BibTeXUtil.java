@@ -14,7 +14,6 @@ import com.top_logic.basic.io.binary.BinaryData;
 import com.top_logic.basic.io.binary.BinaryDataFactory;
 import com.top_logic.util.error.TopLogicException;
 
-import ivanizki.research.DummyLogger;
 import ivanizki.research.data.ASCII;
 import ivanizki.research.data.file.FileUtil;
 
@@ -39,8 +38,8 @@ public class BibTeXUtil implements BibTeX {
 			return BinaryDataFactory.createBinaryDataWithName(tempFile, "bibtex-file" + BibTeX.FILE_EXTENSIONS);
 		} catch (FileNotFoundException ex) {
 			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_FIND_FILE, ex);
-		} catch (IOException ex) {
-			throw new TopLogicException(I18NConstants.FAILED_TO_WRITE_TO_BIBTEX_FILE, ex);
+		} catch (IOException e) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_WRITE_TO_FILE, e);
 		}
 	}
 
@@ -50,10 +49,9 @@ public class BibTeXUtil implements BibTeX {
 	public static BibTeXDocument readFromBibTeX(BinaryData data) {
 		try {
 			return BibTeXUtil.readFromBibTeX(data.getStream());
-		} catch (IOException ex) {
-			DummyLogger.error(ex);
+		} catch (IOException e) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_READ_FROM_FILE, e);
 		}
-		return null;
 	}
 
 	/**

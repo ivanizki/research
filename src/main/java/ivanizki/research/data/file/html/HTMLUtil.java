@@ -7,7 +7,8 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import ivanizki.research.DummyLogger;
+import com.top_logic.util.error.TopLogicException;
+
 import ivanizki.research.data.ASCII;
 import ivanizki.research.data.types.Composition;
 import ivanizki.research.data.types.Data;
@@ -103,7 +104,7 @@ public class HTMLUtil implements HTML {
 			data.writeToHTML(writer);
 			writer.close();
 		} catch (IOException e) {
-			DummyLogger.error(e);
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_WRITE_TO_FILE, e);
 		}
 	}
 
@@ -116,7 +117,7 @@ public class HTMLUtil implements HTML {
 			data.readFromHTML(reader);
 			reader.close();
 		} catch (IOException e) {
-			DummyLogger.error(e);
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_READ_FROM_FILE, e);
 		}
 		return Composition.getSimplifiedData(data);
 	}

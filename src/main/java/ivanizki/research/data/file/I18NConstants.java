@@ -15,6 +15,10 @@ public class I18NConstants extends I18NConstantsBase {
 
 	public static ResKey FAILED_TO_FIND_FILE;
 
+	public static ResKey FAILED_TO_READ_FROM_FILE;
+
+	public static ResKey FAILED_TO_WRITE_TO_FILE;
+
 	static {
 		initConstants(I18NConstants.class);
 	}

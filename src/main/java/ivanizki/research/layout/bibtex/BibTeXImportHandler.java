@@ -20,8 +20,8 @@ import com.top_logic.model.TLStructuredTypePart;
 import com.top_logic.model.util.TLModelUtil;
 import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
+import com.top_logic.util.error.TopLogicException;
 
-import ivanizki.research.DummyLogger;
 import ivanizki.research.data.ASCII;
 import ivanizki.research.data.file.bibtex.BibTeX;
 import ivanizki.research.data.file.bibtex.BibTeX.BibTeXEntryAttribute;
@@ -120,8 +120,7 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 			BibTeXEntryType entryType = entry.getType();
 			TLClass type = TYPE_MAP.get(entryType);
 			if (type == null) {
-				DummyLogger.error("Cannot import entry type \"" + entryType + "\".");
-				return;
+				throw new TopLogicException(I18NConstants.BIBTEX_IMPORT_UNSUPPORTED__ENTRY_TYPE.fill(entryType.toString()));
 			}
 			Wrapper wrapper = _manuscripts.get(getKey(entry.getAttributeValue(BibTeXEntryAttribute.TITLE)));
 			wrapper = wrapper == null ? (Wrapper) DynamicModelService.getInstance().createObject(type) : wrapper;

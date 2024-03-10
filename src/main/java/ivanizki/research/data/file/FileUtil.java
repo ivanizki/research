@@ -16,7 +16,6 @@ import com.top_logic.basic.Settings;
 import com.top_logic.basic.StringServices;
 import com.top_logic.util.error.TopLogicException;
 
-import ivanizki.research.DummyLogger;
 import ivanizki.research.data.types.Text;
 import ivanizki.research.data.types.TextLine;
 
@@ -34,9 +33,8 @@ public class FileUtil {
 		try {
 			return StringServices.join(Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8), "");
 		} catch (IOException e) {
-			DummyLogger.error(e);
+			throw new TopLogicException(I18NConstants.FAILED_TO_READ_FROM_FILE, e);
 		}
-		return StringServices.EMPTY_STRING;
 	}
 
 	/**
@@ -52,7 +50,7 @@ public class FileUtil {
 			}
 			reader.close();
 		} catch (IOException e) {
-			DummyLogger.error(e);
+			throw new TopLogicException(I18NConstants.FAILED_TO_READ_FROM_FILE, e);
 		}
 		return text;
 	}
@@ -70,7 +68,7 @@ public class FileUtil {
 			}
 			reader.close();
 		} catch (IOException e) {
-			DummyLogger.error(e);
+			throw new TopLogicException(I18NConstants.FAILED_TO_READ_FROM_FILE, e);
 		}
 		return lines;
 	}
@@ -81,8 +79,8 @@ public class FileUtil {
 	public static File createTempFile(String fileName, String fileExtension) {
 		try {
 			return File.createTempFile(fileName, fileExtension, Settings.getInstance().getTempDir());
-		} catch (IOException ex) {
-			throw new TopLogicException(I18NConstants.FAILED_TO_CREATE_FILE, ex);
+		} catch (IOException e) {
+			throw new TopLogicException(I18NConstants.FAILED_TO_CREATE_FILE, e);
 		}
 	}
 
