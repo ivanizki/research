@@ -5,7 +5,7 @@
 	final="true"
 	template="com.top_logic/tree.template.xml"
 >
-	<arguments>
+	<arguments multiSelection="true">
 		<dialogs>
 			<layout-reference resource="research/research/artworks/topicsTree/createTopicDialog.layout.xml"/>
 			<layout-reference resource="research/research/artworks/topicsTree/topicEditor/dialog.layout.xml"/>

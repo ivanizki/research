@@ -53,7 +53,18 @@ public class ManuscriptTableByTopicBuilder implements ListModelBuilder {
 
 	@Override
 	public boolean supportsModel(Object model, LayoutComponent component) {
-		return model instanceof Wrapper && MetaElementUtil.isSubtype(ModelModule.TOPICS, ModelType.TOPIC, (TLClass) ((Wrapper) model).tType());
+		if (model instanceof Collection<?>) {
+			return supportsMultipleSelection((Collection<?>) model);
+		}
+		return supportsSingleSelection(model);
+	}
+
+	private boolean supportsMultipleSelection(Collection<?> objects) {
+		return objects.isEmpty() || supportsSingleSelection(CollectionUtil.getFirst(objects));
+	}
+
+	private boolean supportsSingleSelection(Object object) {
+		return object instanceof Wrapper && MetaElementUtil.isSubtype(ModelModule.TOPICS, ModelType.TOPIC, (TLClass) ((Wrapper) object).tType());
 	}
 
 	@Override
