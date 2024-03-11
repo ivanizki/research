@@ -13,6 +13,8 @@ public class I18NConstants extends I18NConstantsBase {
 
 	public static ResKey COPY_FILE_PATH_TO_CLIPBOARD;
 
+	public static ResKey MANUSCRIPT_TITLE_NOT_UNIQUE;
+
 	static {
 		initConstants(I18NConstants.class);
 	}

@@ -72,6 +72,7 @@ public class ArticleFormContextProvider extends TypeBasedFormContextProvider {
 	protected void initField(FormField field) {
 		if (Model.TITLE.equals(field.getName())) {
 			field.setMandatory(FormFactory.MANDATORY);
+			field.addWarningConstraint(new ManuscriptTitleUniquenessConstraint());
 		} else if (Model.ABSTRACT.equals(field.getName())) {
 			field.setControlProvider(MultiLineText.INSTANCE);
 		}

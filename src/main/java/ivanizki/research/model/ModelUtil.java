@@ -99,9 +99,20 @@ public class ModelUtil {
 	}
 
 	/**
-	 * @return All {@link Wrapper}s of the given {@link TLClass type};
+	 * @return All {@link Wrapper}s of the given {@link TLClass type}.
 	 */
 	public static List<Wrapper> getAllWrappers(TLClass type) {
+		return getAllWrappers(type, false);
+	}
+
+	/**
+	 * @return All {@link Wrapper}s of the given {@link TLClass type}, eventually including
+	 *         sub-types.
+	 */
+	public static List<Wrapper> getAllWrappers(TLClass type, boolean includeSubTypes) {
+		if (includeSubTypes) {
+			return MetaElementUtil.getAllInstancesOf(type, Wrapper.class);
+		}
 		return MetaElementUtil.getAllDirectInstancesOf(type, Wrapper.class);
 	}
 
