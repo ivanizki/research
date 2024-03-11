@@ -8,6 +8,7 @@
 	<arguments>
 		<components>
 			<layout-reference resource="research/research/artworks/topicsTree/topicEditor/details/tabLayout.layout.xml"/>
+			<layout-reference resource="research/research/artworks/topicsTree/topicEditor/manuscripts/tabLayout.layout.xml"/>
 		</components>
 	</arguments>
 </config:template-call>

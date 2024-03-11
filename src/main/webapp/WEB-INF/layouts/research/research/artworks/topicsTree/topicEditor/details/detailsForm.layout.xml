@@ -6,12 +6,15 @@
 	template="com.top_logic.element/form.template.xml"
 >
 	<arguments
-		model="selection(research/research/artworks/topicsTree/topicsTree.layout.xml#Tree)"
 		type="Topics:Topic"
 	>
 		<name key="dynamic.46ec338f-5673-4b6f-aaed-d5e9e475b766">
 			<en>Details</en>
 		</name>
+		<model class="com.top_logic.model.search.providers.TransformLinkingByExpression"
+			function="newModel->oldModel->$newModel.elementAt(0)"
+			input="selection(research/research/artworks/topicsTree/topicsTree.layout.xml#Tree)"
+		/>
 		<forms>
 			<form type="Topics:Topic">
 				<formDefinition>

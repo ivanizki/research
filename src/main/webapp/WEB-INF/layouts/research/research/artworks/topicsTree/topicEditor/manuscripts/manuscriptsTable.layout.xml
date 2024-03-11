@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	final="true"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		model="model(research/research/artworks/topicsTree/topicEditor/details/detailsForm.layout.xml#Form)"
+		multiSelection="true"
+		type="Artworks:Manuscript"
+	>
+		<name key="dynamic.9d32796b-d8a4-4670-9cb9-49bb2995a2de">
+			<en>Manuscripts</en>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.referers(`research:DataItem#topics`)"
+			supportsElement="element->$element.instanceOf(`Artworks:Manuscript`)"
+		/>
+		<configurationProviders>
+			<configurationProvider class="ivanizki.research.layout.manuscript.ManuscriptTableConfigurationProvider"/>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>
