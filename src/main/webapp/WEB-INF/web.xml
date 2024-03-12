@@ -89,7 +89,7 @@
 <!-- ======================================================================= -->
 
     <listener>
-         <listener-class>com.top_logic.element.ElementStartStop</listener-class>
+         <listener-class>ivanizki.research.ResearchStartStop</listener-class>
     </listener>
 
 <!-- ======================================================================= -->
