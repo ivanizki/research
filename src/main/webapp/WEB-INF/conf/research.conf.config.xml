@@ -29,6 +29,12 @@
 					</provider>
 					<provider
 						kind="MODEL"
+						type="Artworks:Cite"
+					>
+						<implementation class="ivanizki.research.layout.CiteResourceProvider"/>
+					</provider>
+					<provider
+						kind="MODEL"
 						type="Artworks:Manuscript"
 					>
 						<implementation class="ivanizki.research.layout.manuscript.ManuscriptResourceProvider"/>

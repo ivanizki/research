@@ -40,6 +40,8 @@ public interface Model {
 
 	public static final String SCHOOL = "school";
 
+	public static final String TEXT = "text";
+
 	public static final String TITLE = "title";
 
 	public static final String TOPICS = "topics";
