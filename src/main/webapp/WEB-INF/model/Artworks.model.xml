@@ -14,7 +14,12 @@
 			<attributes>
 				<property name="text"
 					type="tl.core:String"
-				/>
+				>
+					<annotations>
+						<size-constraint upper-bound="10000"/>
+						<multi-line/>
+					</annotations>
+				</property>
 			</attributes>
 		</class>
 		<interface name="Manuscript">
