@@ -15,7 +15,7 @@
 			<en>Cites</en>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
-			elements="model->$model.get(`Artworks:Manuscript#cites`)"
+			elements="manuscript->$manuscript.get(`Artworks:Manuscript#cites`)"
 			supportsElement="element->$element.instanceOf(`Artworks:TextCite`)"
 		/>
 		<buttons>
@@ -24,9 +24,10 @@
 			/>
 			<button id="createRow"
 				class="com.top_logic.model.search.providers.GridCreateHandlerByExpression"
+				initOperation="manuscript->cite->target->$manuscript.add(`Artworks:Manuscript#cites`,$cite)"
 			>
 				<checkScopeProvider/>
-				<type-options class="com.top_logic.element.layout.create.ConstantCreateTypeOptions"
+				<type-options
 					include-subtypes="false"
 					type="Artworks:TextCite"
 				/>
