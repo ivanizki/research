@@ -36,6 +36,13 @@
 				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
 				target="selection(self())"
 			/>
+			<button id="citeTextToTopics"
+				class="ivanizki.research.layout.CiteTextToTopicsHandler"
+				clique="create"
+				executability="InEditMode"
+				image="css:far fa-lightbulb"
+				resourceKey="class.ivanizki.research.layout.I18NConstants.CITE_TEXT_TO_TOPICS_HANDLER_LABEL"
+			/>
 		</buttons>
 	</arguments>
 </config:template-call>
