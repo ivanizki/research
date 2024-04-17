@@ -16,6 +16,8 @@ public interface Model {
 
 	public static final String CHILDREN = "children";
 
+	public static final String CITES = "cites";
+
 	public static final String DOI = "doi";
 
 	public static final String EDITION = "edition";

@@ -31,17 +31,27 @@ import ivanizki.research.model.ModelUtil;
  */
 public class ManuscriptTableByTopicBuilder implements ListModelBuilder {
 
+	private static final TLClass MANUSCRIPT_TYPE = (TLClass) TLModelUtil.findType(ModelModule.ARTWORKS, ModelType.MANUSCRIPT);
+
 	@Override
 	public Collection<?> getModel(Object businessModel, LayoutComponent component) {
 		Collection<?> topics = businessModel instanceof Collection<?> ? (Collection<?>) businessModel : CollectionUtil.intoSetNotNull(businessModel);
 		if (!topics.isEmpty()) {
 			Set<Object> manuscripts = new HashSet<>();
-			TLReference reference = (TLReference) ModelUtil.DATA_ITEM_TYPE.getPart(Model.TOPICS);
+			TLReference topicsReference = (TLReference) ModelUtil.DATA_ITEM_TYPE.getPart(Model.TOPICS);
+			TLReference citesReference = (TLReference) MANUSCRIPT_TYPE.getPart(Model.CITES);
 			for (Object topic : topics) {
 				for (ValueProvider subTopic : ModelUtil.getChildrenRecursively(topic)) {
-					for (Object referer : ((Wrapper) subTopic).tReferers(reference)) {
+					for (Object referer : ((Wrapper) subTopic).tReferers(topicsReference)) {
 						if (supportsListElement(component, referer)) {
 							manuscripts.add(referer);
+						}
+						if (isCite(referer)) {
+							for (Object manuscript : ((Wrapper) referer).tReferers(citesReference)) {
+								if (supportsListElement(component, manuscript)) {
+									manuscripts.add(manuscript);
+								}
+							}
 						}
 					}
 				}
@@ -49,6 +59,11 @@ public class ManuscriptTableByTopicBuilder implements ListModelBuilder {
 			return CollectionUtil.toList(manuscripts);
 		}
 		return Collections.emptyList();
+	}
+
+	private boolean isCite(Object object) {
+		return object instanceof Wrapper
+			&& MetaElementUtil.isSubtype(ModelModule.ARTWORKS, ModelType.CITE, (TLClass) ((Wrapper) object).tType());
 	}
 
 	@Override
