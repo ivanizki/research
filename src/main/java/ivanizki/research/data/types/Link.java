@@ -78,7 +78,7 @@ public class Link extends Container<String> implements Data {
 			writer.write(HTMLUtil.tag(HTML.A, HTMLUtil.attribute(HTML.NAME, uid)));
 		} else {
 			writer.write(HTMLUtil.begin(HTML.A, HTMLUtil.attribute(HTML.HREF, new StringBuilder().append(ASCII.SHARP).append(uid).toString())));
-			writer.write(_label);
+			writer.write(HTMLUtil.transformToHTML(_label));
 			writer.write(HTMLUtil.end(HTML.A));
 		}
 	}

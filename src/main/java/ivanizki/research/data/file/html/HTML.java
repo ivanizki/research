@@ -30,4 +30,7 @@ public interface HTML {
 
 	public static final String UL = "ul";
 
+	public static final String CODE_GT = "&gt;";
+
+	public static final String CODE_LT = "&lt;";
 }

@@ -38,7 +38,7 @@ public class TextLine extends Container<String> implements Data {
 
 	@Override
 	public void writeToHTML(Writer writer) throws IOException {
-		writer.write(getContent());
+		writer.write(HTMLUtil.transformToHTML(getString()));
 	}
 
 	@Override

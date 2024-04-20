@@ -5,8 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 
+import com.top_logic.basic.CollectionUtil;
+import com.top_logic.basic.col.TupleFactory;
+import com.top_logic.basic.col.TupleFactory.Pair;
 import com.top_logic.util.error.TopLogicException;
 
 import ivanizki.research.data.ASCII;
@@ -27,6 +31,10 @@ import ivanizki.research.data.types.UnorderedList;
  * @author ivanizki
  */
 public class HTMLUtil implements HTML {
+
+	private static final List<Pair<String, String>> TRANSFORMATIONS = CollectionUtil.list(
+		TupleFactory.pair(Character.toString(HTML.BEGIN_TAG), HTML.CODE_LT),
+		TupleFactory.pair(Character.toString(HTML.END_TAG), HTML.CODE_GT));
 
 	private static final String END_OF_FILE = "End of file.";
 
@@ -137,7 +145,7 @@ public class HTMLUtil implements HTML {
 			c = reader.read();
 		}
 		String string = plainContent.toString();
-		dataPointer.setObject(isEmpty(string) ? null : new TextLine(string.trim()));
+		dataPointer.setObject(isEmpty(string) ? null : new TextLine(HTMLUtil.transformFromHTML(string.trim())));
 		return c;
 	}
 
@@ -266,4 +274,25 @@ public class HTMLUtil implements HTML {
 		}
 	}
 
+	/**
+	 * @return {@link HTML}-representation transformed from the given {@link String}.
+	 */
+	public static String transformToHTML(String string) {
+		String html = string;
+		for (Pair<String, String> transformation : TRANSFORMATIONS) {
+			html = html.replace(transformation.getFirst(), transformation.getSecond());
+		}
+		return html;
+	}
+
+	/**
+	 * @return {@link String} transformed from the given {@link HTML}-representation.
+	 */
+	public static String transformFromHTML(String html) {
+		String string = html;
+		for (Pair<String, String> transformation : TRANSFORMATIONS) {
+			string = string.replace(transformation.getSecond(), transformation.getFirst());
+		}
+		return string;
+	}
 }
