@@ -1,5 +1,6 @@
 package ivanizki.research.data;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import com.top_logic.model.TLStructuredTypePart;
 import com.top_logic.model.impl.generated.TLModuleSingletonsBase;
 import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
+import com.top_logic.util.error.TopLogicException;
 
 import ivanizki.research.data.file.html.HTMLUtil;
 import ivanizki.research.data.types.Composition;
@@ -33,8 +35,8 @@ import ivanizki.research.data.types.TableCell;
 import ivanizki.research.data.types.TableRow;
 import ivanizki.research.data.types.TextLine;
 import ivanizki.research.data.types.UnorderedList;
-import ivanizki.research.model.ModelUtil;
 import ivanizki.research.model.Model;
+import ivanizki.research.model.ModelUtil;
 
 /**
  * {@link AbstractCommandHandler} to import the entire database.
@@ -52,7 +54,7 @@ public class DataImportHandler extends AbstractCommandHandler {
 
 	@Override
 	public HandlerResult handleCommand(DisplayContext context, LayoutComponent component, Object model, Map<String, Object> someArguments) {
-		Data data = HTMLUtil.readFromHTML("tmp\\data.htm");
+		Data data = readFromHTML("tmp\\data.htm");
 		Transaction transaction = PersistencyLayer.getKnowledgeBase().beginTransaction();
 		try {
 			new Importer().importData(data);
@@ -61,6 +63,14 @@ public class DataImportHandler extends AbstractCommandHandler {
 			transaction.rollback();
 		}
 		return HandlerResult.DEFAULT_RESULT;
+	}
+
+	private static Data readFromHTML(String filename) {
+		try {
+			return HTMLUtil.readFromHTML(filename);
+		} catch (IOException e) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_READ_FROM_FILE, e);
+		}
 	}
 
 	private static class Importer {

@@ -1,8 +1,7 @@
 package ivanizki.research.data.file.latex;
 
-import com.top_logic.basic.StringServices;
-
 import ivanizki.research.data.ASCII;
+import ivanizki.research.data.StringUtil;
 
 /**
  * Utilities to work with {@link Latex}.
@@ -98,7 +97,7 @@ public class LatexUtil implements Latex {
 
 	public static String arguments(String[] args) {
 		if (args == null) {
-			return StringServices.EMPTY_STRING;
+			return StringUtil.EMPTY;
 		}
 		StringBuilder sb = new StringBuilder();
 		for (String arg : args) {
@@ -117,7 +116,7 @@ public class LatexUtil implements Latex {
 
 	public static String parameters(String[] params) {
 		if (params == null) {
-			return StringServices.EMPTY_STRING;
+			return StringUtil.EMPTY;
 		}
 		StringBuilder sb = new StringBuilder();
 		for (String param : params) {

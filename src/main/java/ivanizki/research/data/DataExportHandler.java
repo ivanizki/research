@@ -1,5 +1,6 @@
 package ivanizki.research.data;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +20,7 @@ import com.top_logic.model.TLStructuredTypePart;
 import com.top_logic.model.impl.generated.TLModuleSingletonsBase;
 import com.top_logic.tool.boundsec.AbstractCommandHandler;
 import com.top_logic.tool.boundsec.HandlerResult;
+import com.top_logic.util.error.TopLogicException;
 
 import ivanizki.research.data.file.html.HTMLUtil;
 import ivanizki.research.data.types.Composition;
@@ -49,7 +51,11 @@ public class DataExportHandler extends AbstractCommandHandler {
 
 	@Override
 	public HandlerResult handleCommand(DisplayContext context, LayoutComponent component, Object model, Map<String, Object> someArguments) {
-		HTMLUtil.writeToHTML("tmp\\data.htm", new RelevantDataCollector().getData());
+		try {
+			HTMLUtil.writeToHTML("tmp\\data.htm", new RelevantDataCollector().getData());
+		} catch (IOException e) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_WRITE_TO_FILE, e);
+		}
 		return HandlerResult.DEFAULT_RESULT;
 	}
 

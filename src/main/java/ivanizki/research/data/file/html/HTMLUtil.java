@@ -5,13 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-
-import com.top_logic.basic.CollectionUtil;
-import com.top_logic.basic.col.TupleFactory;
-import com.top_logic.basic.col.TupleFactory.Pair;
-import com.top_logic.util.error.TopLogicException;
+import java.util.Map.Entry;
 
 import ivanizki.research.data.ASCII;
 import ivanizki.research.data.types.Composition;
@@ -32,9 +28,7 @@ import ivanizki.research.data.types.UnorderedList;
  */
 public class HTMLUtil implements HTML {
 
-	private static final List<Pair<String, String>> TRANSFORMATIONS = CollectionUtil.list(
-		TupleFactory.pair(Character.toString(HTML.BEGIN_TAG), HTML.CODE_LT),
-		TupleFactory.pair(Character.toString(HTML.END_TAG), HTML.CODE_GT));
+	private static final Map<String, String> TRANSFORMATIONS = initTransformations();
 
 	private static final String END_OF_FILE = "End of file.";
 
@@ -45,6 +39,13 @@ public class HTMLUtil implements HTML {
 	private static final String FAILED_TO_READ_TAG_NAME = "Failed to read tag name.";
 
 	private static final String UNKNOWN_TAG = "Unknown tag";
+
+	private static Map<String, String> initTransformations() {
+		Map<String, String> map = new HashMap<>();
+		map.put(Character.toString(HTML.BEGIN_TAG), HTML.CODE_LT);
+		map.put(Character.toString(HTML.END_TAG), HTML.CODE_GT);
+		return map;
+	}
 
 	/**
 	 * @return The beginning tag with the given name.
@@ -107,25 +108,25 @@ public class HTMLUtil implements HTML {
 	/**
 	 * Writes the given {@link Data} to the specified file.
 	 */
-	public static void writeToHTML(String filename, Data data) {
+	public static void writeToHTML(String filename, Data data) throws IOException {
 		try (FileWriter writer = new FileWriter(filename, StandardCharsets.UTF_8)) {
 			data.writeToHTML(writer);
 			writer.close();
 		} catch (IOException e) {
-			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_WRITE_TO_FILE, e);
+			throw e;
 		}
 	}
 
 	/**
 	 * Reads all {@link Data} from the specified file.
 	 */
-	public static Data readFromHTML(String filename) {
+	public static Data readFromHTML(String filename) throws IOException {
 		Composition<Data> data = new Composition<>();
 		try (FileReader reader = new FileReader(filename, StandardCharsets.UTF_8)) {
 			data.readFromHTML(reader);
 			reader.close();
 		} catch (IOException e) {
-			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_READ_FROM_FILE, e);
+			throw e;
 		}
 		return Composition.getSimplifiedData(data);
 	}
@@ -279,8 +280,8 @@ public class HTMLUtil implements HTML {
 	 */
 	public static String transformToHTML(String string) {
 		String html = string;
-		for (Pair<String, String> transformation : TRANSFORMATIONS) {
-			html = html.replace(transformation.getFirst(), transformation.getSecond());
+		for (Entry<String, String> transformation : TRANSFORMATIONS.entrySet()) {
+			html = html.replace(transformation.getKey(), transformation.getValue());
 		}
 		return html;
 	}
@@ -290,8 +291,8 @@ public class HTMLUtil implements HTML {
 	 */
 	public static String transformFromHTML(String html) {
 		String string = html;
-		for (Pair<String, String> transformation : TRANSFORMATIONS) {
-			string = string.replace(transformation.getSecond(), transformation.getFirst());
+		for (Entry<String, String> transformation : TRANSFORMATIONS.entrySet()) {
+			string = string.replace(transformation.getValue(), transformation.getKey());
 		}
 		return string;
 	}

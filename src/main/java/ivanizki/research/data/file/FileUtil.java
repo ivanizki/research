@@ -1,7 +1,6 @@
 package ivanizki.research.data.file;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,10 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.top_logic.basic.Settings;
-import com.top_logic.basic.StringServices;
-import com.top_logic.util.error.TopLogicException;
-
+import ivanizki.research.data.StringUtil;
 import ivanizki.research.data.types.Text;
 import ivanizki.research.data.types.TextLine;
 
@@ -29,18 +25,14 @@ public class FileUtil {
 	/**
 	 * @return The {@link String} containing the specified file.
 	 */
-	public static String readFileToString(String filename) {
-		try {
-			return StringServices.join(Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8), "");
-		} catch (IOException e) {
-			throw new TopLogicException(I18NConstants.FAILED_TO_READ_FROM_FILE, e);
-		}
+	public static String readFileToString(String filename) throws IOException {
+		return StringUtil.join(Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8), StringUtil.EMPTY);
 	}
 
 	/**
 	 * @return {@link Text} from the specified file.
 	 */
-	public static Text readText(String filename) {
+	public static Text readText(String filename) throws IOException {
 		Text text = new Text();
 		try (BufferedReader reader = new BufferedReader(new FileReader(filename, StandardCharsets.UTF_8))) {
 			String line = reader.readLine();
@@ -50,7 +42,7 @@ public class FileUtil {
 			}
 			reader.close();
 		} catch (IOException e) {
-			throw new TopLogicException(I18NConstants.FAILED_TO_READ_FROM_FILE, e);
+			throw e;
 		}
 		return text;
 	}
@@ -58,7 +50,7 @@ public class FileUtil {
 	/**
 	 * @return All lines from the specified {@link InputStream}.
 	 */
-	public static List<String> readAllLines(InputStream stream) {
+	public static List<String> readAllLines(InputStream stream) throws IOException {
 		List<String> lines = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
 			String line = reader.readLine();
@@ -68,20 +60,9 @@ public class FileUtil {
 			}
 			reader.close();
 		} catch (IOException e) {
-			throw new TopLogicException(I18NConstants.FAILED_TO_READ_FROM_FILE, e);
+			throw e;
 		}
 		return lines;
-	}
-
-	/**
-	 * @return A new empty temporary {@link File}.
-	 */
-	public static File createTempFile(String fileName, String fileExtension) {
-		try {
-			return File.createTempFile(fileName, fileExtension, Settings.getInstance().getTempDir());
-		} catch (IOException e) {
-			throw new TopLogicException(I18NConstants.FAILED_TO_CREATE_FILE, e);
-		}
 	}
 
 }

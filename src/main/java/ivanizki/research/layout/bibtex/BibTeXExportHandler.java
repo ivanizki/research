@@ -1,14 +1,19 @@
 package ivanizki.research.layout.bibtex;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
 import com.top_logic.basic.CollectionUtil;
+import com.top_logic.basic.Settings;
 import com.top_logic.basic.StringServices;
 import com.top_logic.basic.col.MapBuilder;
 import com.top_logic.basic.config.InstantiationContext;
 import com.top_logic.basic.i18n.log.I18NLog;
 import com.top_logic.basic.io.binary.BinaryData;
+import com.top_logic.basic.io.binary.BinaryDataFactory;
 import com.top_logic.basic.util.ResKey;
 import com.top_logic.knowledge.wrap.ValueProvider;
 import com.top_logic.knowledge.wrap.Wrapper;
@@ -18,6 +23,7 @@ import com.top_logic.mig.html.layout.LayoutComponent;
 import com.top_logic.model.TLClass;
 import com.top_logic.model.TLStructuredType;
 import com.top_logic.model.util.TLModelUtil;
+import com.top_logic.util.error.TopLogicException;
 
 import ivanizki.research.data.ASCII;
 import ivanizki.research.data.file.bibtex.BibTeX;
@@ -67,7 +73,33 @@ public class BibTeXExportHandler extends AbstractTableExportHandler {
 		BibTeXDocument document = exportDocument(manuscripts);
 
 		log.info(com.top_logic.layout.table.export.I18NConstants.PREPARING_DOWNLOAD);
-		return BibTeXUtil.writeToBibTeX(document);
+		return writeToBibTeX(document);
+	}
+
+	/**
+	 * Writes the given {@link BibTeXDocument} to {@link BinaryData}.
+	 */
+	public static BinaryData writeToBibTeX(BibTeXDocument document) {
+		try {
+			File tempFile = BibTeXUtil.writeToBibTeX(document,
+				createTempFile("bibtex-file", BibTeX.FILE_EXTENSIONS, Settings.getInstance().getTempDir()));
+			return BinaryDataFactory.createBinaryDataWithName(tempFile, "bibtex-file" + BibTeX.FILE_EXTENSIONS);
+		} catch (FileNotFoundException ex) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_FIND_FILE, ex);
+		} catch (IOException e) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_WRITE_TO_FILE, e);
+		}
+	}
+
+	/**
+	 * @return A new empty temporary {@link File}.
+	 */
+	public static File createTempFile(String fileName, String fileExtension, File directory) {
+		try {
+			return File.createTempFile(fileName, fileExtension, directory);
+		} catch (IOException e) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_CREATE_FILE, e);
+		}
 	}
 
 	private Collection<Wrapper> collectManuscripts(LayoutComponent component) {

@@ -6,8 +6,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.top_logic.basic.CollectionUtil;
-
 import ivanizki.research.data.Addable;
 import ivanizki.research.data.Composite;
 import ivanizki.research.data.Container;
@@ -75,7 +73,7 @@ public class Composition<T extends Data> extends Container<List<T>> implements A
 			return null;
 		}
 		if (composition.size() == 1) {
-			return CollectionUtil.getFirst(composition.getParts());
+			return composition.getParts().get(0);
 		}
 		return composition;
 	}

@@ -6,8 +6,6 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.top_logic.basic.StringServices;
-
 import ivanizki.research.data.ASCII;
 import ivanizki.research.data.Container;
 import ivanizki.research.data.file.html.HTML;
@@ -73,7 +71,7 @@ public class Link extends Container<String> implements Data {
 
 	@Override
 	public void writeToHTML(Writer writer) throws IOException {
-		String uid = StringServices.replace(getUid(), ASCII.COLON, Character.toString(ASCII.UNDERSCORE));
+		String uid = getUid().replace(Character.toString(ASCII.COLON), Character.toString(ASCII.UNDERSCORE));
 		if (_label == null) {
 			writer.write(HTMLUtil.tag(HTML.A, HTMLUtil.attribute(HTML.NAME, uid)));
 		} else {

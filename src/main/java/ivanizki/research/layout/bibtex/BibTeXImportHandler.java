@@ -1,5 +1,6 @@
 package ivanizki.research.layout.bibtex;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +10,7 @@ import com.top_logic.basic.StringServices;
 import com.top_logic.basic.col.MapBuilder;
 import com.top_logic.basic.col.MapUtil;
 import com.top_logic.basic.config.InstantiationContext;
+import com.top_logic.basic.io.binary.BinaryData;
 import com.top_logic.element.model.DynamicModelService;
 import com.top_logic.knowledge.service.PersistencyLayer;
 import com.top_logic.knowledge.service.Transaction;
@@ -50,7 +52,7 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 
 	@Override
 	public HandlerResult handleCommand(DisplayContext context, LayoutComponent component, Object model,	Map<String, Object> someArguments) {
-		BibTeXDocument document = BibTeXUtil.readFromBibTeX(((BibTeXImportDialog) component).getData());
+		BibTeXDocument document = readFromBibTeX(((BibTeXImportDialog) component).getData());
 		Transaction transaction = PersistencyLayer.getKnowledgeBase().beginTransaction();
 		try {
 			new Importer().importDocument(document);
@@ -60,6 +62,17 @@ public class BibTeXImportHandler extends AbstractCommandHandler {
 		}
 		component.closeDialog();
 		return HandlerResult.DEFAULT_RESULT;
+	}
+
+	/**
+	 * Reads the {@link BibTeXDocument} from the specified {@link BinaryData}.
+	 */
+	public static BibTeXDocument readFromBibTeX(BinaryData data) {
+		try {
+			return BibTeXUtil.readFromBibTeX(data.getStream());
+		} catch (IOException e) {
+			throw new TopLogicException(ivanizki.research.data.file.I18NConstants.FAILED_TO_READ_FROM_FILE, e);
+		}
 	}
 
 	private static class Importer {
